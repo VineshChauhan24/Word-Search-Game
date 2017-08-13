@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Word Search Classic</string>
+    <string name="new_game_loading_text">Generating game data…</string>
+    <string name="summary_about">Word search game is a puzzle game, where the player try to find words in a grid of letters in horizontal, vertical and diagonal direction.</string>
+    <string name="finished">Finished!</string>
+
+    <!-- prefs -->
+    <string name="pref_showGridLine">showGridLine</string>
+    <string name="pref_snapToGrid">snapToGrid</string>
+    <string name="pref_enableSound">enableSound</string>
+    <string name="pref_deleteAfterFinish">deleteAfterFinish</string>
+    <string name="pref_enableFullscreen">enableFullscreen</string>
+    <string name="pref_autoScaleGrid">autoScaleGrid</string>
+    <string name="snap_to_grid_def_val">ALWAYS_SNAP</string>
+    <string name="show_grid_line">Show Grid Line</string>
+    <string name="snap_to_grid">Snap To Grid</string>
+    <string name="about">About</string>
+    <string name="saved_game">Saved game data</string>
+    <string name="enable_sound">Enable Sound</string>
+    <string name="about_credit">Developer: Abdul Aris R.</string>
+    <string name="delete_finish">Delete Finish</string>
+    <string name="enable_fullscreen">Fullscreen</string>
+    <string name="auto_scale_grid">Auto Scale Grid</string>
+    <string name="finish_text">You have just finished :gridSize grid with :uwCount words in :duration</string>
+    <string name="version">Version</string>
+    <string name="version_num">1.0</string>
+    <string name="settings">Settings</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="new_game">NEW GAME</string>
+    <string name="auto_scale_grid_summary">Automatically scale grid based on the screen width</string>
+    <string name="pref_reverseMatching">reverseMatching</string>
+    <string name="reverse_matching">Reverse matching</string>
+    <string name="pref_grayscale">grayscale</string>
+    <string name="grayscale">Grayscale</string>
+
+</resources>

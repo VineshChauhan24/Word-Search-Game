@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<declare-styleable name="GridBehavior">
+        <attr name="gridWidth" format="dimension"/>
+        <attr name="gridHeight" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="GridLine">
+        <attr name="lineColor" format="color"/>
+        <attr name="lineWidth" format="dimension"/>
+        <attr name="gridColumnCount" format="integer"/>
+        <attr name="gridRowCount" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="LetterGrid">
+        <attr name="letterSize" format="dimension"/>
+        <attr name="letterColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="StreakView">
+        <attr name="streakColor" format="color"/>
+        <attr name="streakWidth" format="dimension"/>
+        <attr name="strekGrid" format="reference"/>
+        <attr name="rememberStreakLine" format="boolean"/>
+        <attr name="interactive" format="boolean"/>
+        <attr name="snapToGrid" format="enum">
+            <enum name="NONE" value="0"/>
+            <enum name="START_END" value="1"/>
+            <enum name="ALWAYS_SNAP" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <attr name="horizontalSpacing" format="dimension"/>
+        <attr name="verticalSpacing" format="dimension"/>
+    </declare-styleable>
+
+    <!--
+        LetterBoard merupakan Compound View
+        jadi reuse attr yang sudah didefinisikan diatas
+    -->
+    <declare-styleable name="LetterBoard">
+        <attr name="gridLineVisibility" format="boolean"/>
+
+    	<attr name="gridWidth"/>
+        <attr name="gridHeight"/>
+
+        <attr name="gridColumnCount"/>
+        <attr name="gridRowCount"/>
+        
+        <attr name="lineColor"/>
+        <attr name="lineWidth"/>
+        
+        <attr name="letterSize"/>
+        <attr name="letterColor"/>
+
+        <attr name="streakWidth"/>
+        <attr name="snapToGrid"/>
+    </declare-styleable>
+
+</resources>

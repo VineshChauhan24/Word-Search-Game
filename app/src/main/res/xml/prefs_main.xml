@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="General">
+
+        <CheckBoxPreference
+            android:title="@string/enable_sound"
+            android:icon="@drawable/ic_sound"
+            android:key="@string/pref_enableSound"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:title="@string/enable_fullscreen"
+            android:icon="@drawable/ic_fullscreen"
+            android:key="@string/pref_enableFullscreen"
+            android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Game Play">
+
+        <CheckBoxPreference
+            android:title="@string/auto_scale_grid"
+            android:summary="@string/auto_scale_grid_summary"
+            android:icon="@drawable/ic_auto_scale"
+            android:key="@string/pref_autoScaleGrid"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:title="@string/delete_finish"
+            android:summary="Delete game data when it finished"
+            android:icon="@drawable/ic_delete_after_finish"
+            android:key="@string/pref_deleteAfterFinish"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:title="@string/grayscale"
+            android:summary="Disable colors"
+            android:icon="@drawable/ic_grayscale"
+            android:key="@string/pref_grayscale"
+            android:defaultValue="false"/>
+
+        <CheckBoxPreference
+            android:title="@string/reverse_matching"
+            android:summary="Allow reverse word selection"
+            android:icon="@drawable/ic_reverse_match"
+            android:key="@string/pref_reverseMatching"
+            android:defaultValue="true"/>
+
+        <CheckBoxPreference
+            android:title="@string/show_grid_line"
+            android:icon="@drawable/ic_grid"
+            android:key="@string/pref_showGridLine"
+            android:defaultValue="false"/>
+
+        <ListPreference
+            android:title="@string/snap_to_grid"
+            android:icon="@drawable/ic_snap_grid"
+            android:key="@string/pref_snapToGrid"
+            android:entries="@array/snap_to_grid_type_prefs"
+            android:entryValues="@array/snap_to_grid_type_prefs_val"
+            android:defaultValue="@string/snap_to_grid_def_val"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/about">
+
+        <Preference
+            android:selectable="false"
+            android:summary="@string/summary_about"/>
+
+        <Preference
+            android:title="@string/version"
+            android:summary="@string/version_num"/>
+
+        <Preference
+            android:selectable="false"
+            android:summary="@string/about_credit"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>
