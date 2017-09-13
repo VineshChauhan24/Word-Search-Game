@@ -3,6 +3,7 @@ package com.paperplanes.wordsearch.data.sqlite;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.paperplanes.wordsearch.domain.data.entity.GameRoundEntity;
 import com.paperplanes.wordsearch.domain.data.source.GameRoundDataSource;
@@ -139,6 +140,8 @@ public class GameRoundSQLiteDataSource implements GameRoundDataSource {
             values.clear();
             values.put(DbContract.UsedWord.COL_GAME_ROUND_ID, gid);
             values.put(DbContract.UsedWord.COL_WORD_STRING, usedWord.getString());
+            values.put(DbContract.UsedWord.COL_IS_MYSTERY, usedWord.isMystery() ? "true" : "false");
+            values.put(DbContract.UsedWord.COL_REVEAL_COUNT, usedWord.getRevealCount());
             if (usedWord.getAnswerLine() != null) {
                 values.put(DbContract.UsedWord.COL_ANSWER_LINE_DATA, usedWord.getAnswerLine().toString());
                 values.put(DbContract.UsedWord.COL_LINE_COLOR, usedWord.getAnswerLine().color);
@@ -200,7 +203,9 @@ public class GameRoundSQLiteDataSource implements GameRoundDataSource {
                 DbContract.UsedWord._ID,
                 DbContract.UsedWord.COL_WORD_STRING,
                 DbContract.UsedWord.COL_ANSWER_LINE_DATA,
-                DbContract.UsedWord.COL_LINE_COLOR
+                DbContract.UsedWord.COL_LINE_COLOR,
+                DbContract.UsedWord.COL_IS_MYSTERY,
+                DbContract.UsedWord.COL_REVEAL_COUNT
         };
         String sel = DbContract.UsedWord.COL_GAME_ROUND_ID + "=?";
         String selArgs[] = {String.valueOf(gid)};
@@ -227,6 +232,8 @@ public class GameRoundSQLiteDataSource implements GameRoundDataSource {
                 usedWord.setString(str);
                 usedWord.setAnswered(lineData != null);
                 usedWord.setAnswerLine(answerLine);
+                usedWord.setMystery(Boolean.valueOf(c.getString(4)));
+                usedWord.setRevealCount(c.getInt(5));
 
                 usedWordList.add(usedWord);
 

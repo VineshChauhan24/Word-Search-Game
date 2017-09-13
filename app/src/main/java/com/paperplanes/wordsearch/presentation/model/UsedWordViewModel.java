@@ -46,8 +46,5 @@ public class UsedWordViewModel {
         return mUsedWord.isAnswered();
     }
 
-    public void setAnswered(boolean answered) {
-        mUsedWord.setAnswered(answered);
-    }
-
+    public boolean isMystery() { return mUsedWord.isMystery(); }
 }

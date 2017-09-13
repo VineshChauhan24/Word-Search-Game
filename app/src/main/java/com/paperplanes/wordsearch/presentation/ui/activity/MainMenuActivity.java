@@ -1,8 +1,11 @@
 package com.paperplanes.wordsearch.presentation.ui.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -123,19 +126,43 @@ public class MainMenuActivity extends FullscreenActivity implements MainMenuView
         Intent intent = new Intent(this, GamePlayActivity.class);
         intent.putExtra(GamePlayActivity.EXTRA_GAME_ROUND_ID, gid);
         startActivity(intent);
+
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
     public void clearInfoList() {
-        mInfoAdapter.clear();
-        mLayoutSavedGame.setVisibility(View.INVISIBLE);
+        final float initXPos = mLayoutSavedGame.getX();
+        mLayoutSavedGame.animate()
+                .alpha(0.0f)
+                .translationX(-mLayoutSavedGame.getWidth())
+                .setInterpolator(new AccelerateInterpolator(2.0f))
+                .setDuration(250)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mLayoutSavedGame.setVisibility(View.INVISIBLE);
+                        mLayoutSavedGame.setX(initXPos);
+                        mLayoutSavedGame.setAlpha(1.0f);
+                        mInfoAdapter.clear();
+                    }
+                });
     }
 
     @Override
     public void deleteInfo(GameRound.Info info) {
         mInfoAdapter.remove(info);
         if (mInfoAdapter.getCount() <= 0) {
-            mLayoutSavedGame.setVisibility(View.INVISIBLE);
+            mLayoutSavedGame.animate()
+                    .alpha(0.0f)
+                    .setDuration(150)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mLayoutSavedGame.setVisibility(View.INVISIBLE);
+                            mLayoutSavedGame.setAlpha(1.0f);
+                        }
+                    });
         }
     }
 

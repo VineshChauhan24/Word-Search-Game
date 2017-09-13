@@ -10,12 +10,16 @@ public class UsedWord {
     private String mString;
     private AnswerLine mAnswerLine;
     private boolean mAnswered;
+    private boolean mMystery;
+    private int mRevealCount;
 
     public UsedWord() {
         mId = -1;
         mString = "";
         mAnswerLine = null;
         mAnswered = false;
+        mMystery = false;
+        mRevealCount = 0;
     }
 
     public int getId() {
@@ -48,6 +52,22 @@ public class UsedWord {
 
     public void setAnswered(boolean answered) {
         mAnswered = answered;
+    }
+
+    public boolean isMystery() {
+        return mMystery;
+    }
+
+    public void setMystery(boolean mystery) {
+        mMystery = mystery;
+    }
+
+    public int getRevealCount() {
+        return mRevealCount;
+    }
+
+    public void setRevealCount(int revealCount) {
+        mRevealCount = revealCount;
     }
 
     public static final class AnswerLine {

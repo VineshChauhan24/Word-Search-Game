@@ -65,6 +65,8 @@ public class FinishActivity extends FullscreenActivity implements GameOverView {
         }
         NavUtils.navigateUpTo(this, new Intent());
         finish();
+
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
     @Override

@@ -144,6 +144,13 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
         mPresenter.stopGame();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+    }
+
     private void tryScale() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -218,6 +225,8 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
         intent.putExtra(FinishActivity.EXTRA_GAME_ROUND_ID, mGameId);
         startActivity(intent);
         finish();
+
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @Override
@@ -271,7 +280,22 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
             mLetterBoard.addStreakLine(uw.getStreakLine());
         }
         else {
-            tv.setText(uw.getString());
+            String str = uw.getString();
+            if (uw.isMystery()) {
+                int revealCount = uw.getUsedWord().getRevealCount();
+                String uwString = uw.getString();
+                str = "";
+                for (int i = 0; i < uwString.length(); i++) {
+                    if (revealCount > 0) {
+                        str += uwString.charAt(i);
+                        revealCount--;
+                    }
+                    else {
+                        str += " ?";
+                    }
+                }
+            }
+            tv.setText(str);
         }
 
         tv.setTag(uw);

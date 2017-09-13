@@ -31,5 +31,7 @@ abstract class DbContract {
         static final String COL_WORD_STRING = "word_id";
         static final String COL_ANSWER_LINE_DATA = "answer_line_data";
         static final String COL_LINE_COLOR = "line_color";
+        static final String COL_IS_MYSTERY = "mystery";
+        static final String COL_REVEAL_COUNT = "reveal_count";
     }
 }

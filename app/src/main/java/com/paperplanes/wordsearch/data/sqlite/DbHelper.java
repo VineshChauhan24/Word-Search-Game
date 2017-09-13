@@ -20,7 +20,9 @@ public class DbHelper extends SQLiteOpenHelper {
                     DbContract.UsedWord.COL_GAME_ROUND_ID + " INTEGER," +
                     DbContract.UsedWord.COL_WORD_STRING + " TEXT," +
                     DbContract.UsedWord.COL_ANSWER_LINE_DATA + " TEXT," +
-                    DbContract.UsedWord.COL_LINE_COLOR + " INTEGER)";
+                    DbContract.UsedWord.COL_LINE_COLOR + " INTEGER," +
+                    DbContract.UsedWord.COL_IS_MYSTERY + " TEXT," +
+                    DbContract.UsedWord.COL_REVEAL_COUNT + " INTEGER)";
 
     private static final String SQL_CREATE_TABLE_GAME_ROUND =
             "CREATE TABLE " + DbContract.GameRound.TABLE_NAME + " (" +

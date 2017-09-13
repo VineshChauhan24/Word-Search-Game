@@ -1,5 +1,6 @@
 package com.paperplanes.wordsearch.domain.usecases;
 
+
 import com.paperplanes.wordsearch.commons.Util;
 import com.paperplanes.wordsearch.commons.generator.StringListGridGenerator;
 import com.paperplanes.wordsearch.domain.data.mapper.GameRoundMapper;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -70,15 +72,24 @@ public class BuildGameRoundUseCase extends UseCase<BuildGameRoundUseCase.Params,
     }
 
     private List<UsedWord> buildUsedWordFromString(List<String> strings) {
+        int mysteryWordCount = Util.getRandomIntRange(strings.size() / 2, strings.size());
         List<UsedWord> usedWords = new ArrayList<>();
         for (int i = 0; i < strings.size(); i++) {
+            String str = strings.get(i);
+
             UsedWord uw = new UsedWord();
-            uw.setString(strings.get(i));
+            uw.setString(str);
             uw.setAnswered(false);
+            if (mysteryWordCount > 0) {
+                uw.setMystery(true);
+                uw.setRevealCount(Util.getRandomIntRange(0, str.length() - 1));
+                mysteryWordCount--;
+            }
 
             usedWords.add(uw);
         }
 
+        Util.randomizeList(usedWords);
         return usedWords;
     }
 
