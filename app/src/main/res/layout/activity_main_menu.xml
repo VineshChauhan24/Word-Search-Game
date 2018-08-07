@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    tools:context="com.aar.app.wordsearch.presentation.mainmenu.MainMenuActivity">
+    tools:context=".mainmenu.presentation.MainMenuActivity">
 
     <ImageButton
         android:id="@+id/settings_button"

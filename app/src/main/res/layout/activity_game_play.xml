@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.aar.app.wordsearch.presentation.gameplay.GamePlayActivity">
+    tools:context=".gameplay.presentation.GamePlayActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -107,7 +107,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.aar.app.wordsearch.presentation.custom.LetterBoard
+            <com.aar.app.wordsearch.custom.LetterBoard
                 android:id="@+id/letter_board"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp">
 
-                <com.aar.app.wordsearch.presentation.custom.layout.FlowLayout
+                <com.aar.app.wordsearch.custom.layout.FlowLayout
                     android:id="@+id/flow_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
                         <!--android:text="test... comp"/>-->
 
 
-                </com.aar.app.wordsearch.presentation.custom.layout.FlowLayout>
+                </com.aar.app.wordsearch.custom.layout.FlowLayout>
 
             </ScrollView>
 

@@ -9,19 +9,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="com.aar.app.wordsearch.presentation.settings.SettingsActivity"
+        <activity android:name=".settings.SettingsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name="com.aar.app.wordsearch.presentation.gameplay.GamePlayActivity">
+        <activity android:name=".gameplay.presentation.GamePlayActivity">
         </activity>
-        <activity android:name="com.aar.app.wordsearch.presentation.mainmenu.MainMenuActivity">
+        <activity android:name=".mainmenu.presentation.MainMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.aar.app.wordsearch.presentation.gameover.GameOverActivity">
+        <activity android:name=".gameover.presentation.GameOverActivity">
         </activity>
     </application>
 

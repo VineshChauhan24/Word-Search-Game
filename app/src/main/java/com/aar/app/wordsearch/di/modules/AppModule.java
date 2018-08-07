@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.aar.app.wordsearch.domain.usecases.UseCaseExecutor;
-import com.aar.app.wordsearch.presentation.AndroidUseCaseExecutor;
+import com.aar.app.wordsearch.domain.UseCaseExecutor;
+import com.aar.app.wordsearch.AndroidUseCaseExecutor;
 
 import javax.inject.Singleton;
 
