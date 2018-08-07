@@ -17,9 +17,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FinishActivity extends FullscreenActivity implements GameOverView {
+public class GameOverActivity extends FullscreenActivity implements GameOverView {
     public static final String EXTRA_GAME_ROUND_ID =
-            "com.paperplanes.wordsearch.presentation.ui.activity.FinishActivity";
+            "com.paperplanes.wordsearch.presentation.ui.activity.GameOverActivity";
 
     @Inject
     GameOverPresenter mPresenter;
@@ -32,7 +32,7 @@ public class FinishActivity extends FullscreenActivity implements GameOverView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_finish);
+        setContentView(R.layout.activity_game_over);
 
         ButterKnife.bind(this);
         ((WordSearchApp) getApplication()).getAppComponent().inject(this);

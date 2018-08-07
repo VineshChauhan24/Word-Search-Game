@@ -20,7 +20,7 @@ import com.aar.app.wordsearch.config.SoundManager;
 import com.aar.app.wordsearch.presentation.custom.LetterBoard;
 import com.aar.app.wordsearch.presentation.custom.StreakView;
 import com.aar.app.wordsearch.presentation.custom.layout.FlowLayout;
-import com.aar.app.wordsearch.presentation.gameover.FinishActivity;
+import com.aar.app.wordsearch.presentation.gameover.GameOverActivity;
 import com.aar.app.wordsearch.presentation.FullscreenActivity;
 
 import java.util.List;
@@ -217,8 +217,8 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
 
     @Override
     public void showFinishGame() {
-        Intent intent = new Intent(this, FinishActivity.class);
-        intent.putExtra(FinishActivity.EXTRA_GAME_ROUND_ID, mGameId);
+        Intent intent = new Intent(this, GameOverActivity.class);
+        intent.putExtra(GameOverActivity.EXTRA_GAME_ROUND_ID, mGameId);
         startActivity(intent);
         finish();
 

@@ -3,7 +3,7 @@ package com.aar.app.wordsearch.di.component;
 import com.aar.app.wordsearch.di.modules.AppModule;
 import com.aar.app.wordsearch.di.modules.DataSourceModule;
 import com.aar.app.wordsearch.presentation.FullscreenActivity;
-import com.aar.app.wordsearch.presentation.gameover.FinishActivity;
+import com.aar.app.wordsearch.presentation.gameover.GameOverActivity;
 import com.aar.app.wordsearch.presentation.gameplay.GamePlayActivity;
 import com.aar.app.wordsearch.presentation.mainmenu.MainMenuActivity;
 
@@ -23,7 +23,7 @@ public interface AppComponent {
 
     void inject(MainMenuActivity activity);
 
-    void inject(FinishActivity activity);
+    void inject(GameOverActivity activity);
 
     void inject(FullscreenActivity activity);
 
