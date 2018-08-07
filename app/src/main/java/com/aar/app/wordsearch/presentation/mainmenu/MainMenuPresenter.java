@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.presenters;
+package com.aar.app.wordsearch.presentation.mainmenu;
 
 import com.aar.app.wordsearch.config.Preferences;
 import com.aar.app.wordsearch.domain.model.GameRound;
@@ -8,7 +8,6 @@ import com.aar.app.wordsearch.domain.usecases.DeleteGameRoundUseCase;
 import com.aar.app.wordsearch.domain.usecases.GetGameRoundInfosUseCase;
 import com.aar.app.wordsearch.domain.usecases.UseCase;
 import com.aar.app.wordsearch.domain.usecases.UseCaseExecutor;
-import com.aar.app.wordsearch.presentation.views.MainMenuView;
 
 import java.util.List;
 

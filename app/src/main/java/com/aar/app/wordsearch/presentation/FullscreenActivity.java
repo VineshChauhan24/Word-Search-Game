@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.ui.activity;
+package com.aar.app.wordsearch.presentation;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -22,7 +22,7 @@ import javax.inject.Inject;
 public class FullscreenActivity extends AppCompatActivity {
 
     @Inject
-    Preferences mPreferences;
+    protected Preferences mPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.ui.activity;
+package com.aar.app.wordsearch.presentation.settings;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

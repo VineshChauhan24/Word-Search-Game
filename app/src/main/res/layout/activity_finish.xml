@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aar.app.wordsearch.presentation.ui.activity.FinishActivity">
+    tools:context="com.aar.app.wordsearch.presentation.gameover.FinishActivity">
 
     <Button
         android:id="@+id/main_menu_btn"

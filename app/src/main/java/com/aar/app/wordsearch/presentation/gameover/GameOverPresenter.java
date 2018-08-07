@@ -1,10 +1,9 @@
-package com.aar.app.wordsearch.presentation.presenters;
+package com.aar.app.wordsearch.presentation.gameover;
 
 import com.aar.app.wordsearch.domain.usecases.DeleteGameRoundUseCase;
 import com.aar.app.wordsearch.domain.usecases.GetGameRoundStatUseCase;
 import com.aar.app.wordsearch.domain.usecases.UseCase;
 import com.aar.app.wordsearch.domain.usecases.UseCaseExecutor;
-import com.aar.app.wordsearch.presentation.views.GameOverView;
 
 import javax.inject.Inject;
 

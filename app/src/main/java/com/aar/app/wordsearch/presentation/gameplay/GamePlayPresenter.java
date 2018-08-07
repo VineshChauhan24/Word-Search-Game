@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.presenters;
+package com.aar.app.wordsearch.presentation.gameplay;
 
 import android.os.Handler;
 
@@ -10,9 +10,8 @@ import com.aar.app.wordsearch.domain.usecases.SaveDurationUseCase;
 import com.aar.app.wordsearch.domain.usecases.UseCase;
 import com.aar.app.wordsearch.domain.usecases.UseCaseExecutor;
 import com.aar.app.wordsearch.presentation.custom.StreakView;
-import com.aar.app.wordsearch.presentation.model.mapper.StreakLineMapper;
-import com.aar.app.wordsearch.presentation.model.mapper.UsedWordMapper;
-import com.aar.app.wordsearch.presentation.views.GamePlayView;
+import com.aar.app.wordsearch.presentation.gameplay.mapper.StreakLineMapper;
+import com.aar.app.wordsearch.presentation.gameplay.mapper.UsedWordMapper;
 
 import java.util.List;
 

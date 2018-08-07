@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.ui.activity;
+package com.aar.app.wordsearch.presentation.mainmenu;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -13,9 +13,9 @@ import android.widget.Spinner;
 import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.domain.model.GameRound;
-import com.aar.app.wordsearch.presentation.presenters.MainMenuPresenter;
-import com.aar.app.wordsearch.presentation.ui.adapter.GameRoundInfoAdapter;
-import com.aar.app.wordsearch.presentation.views.MainMenuView;
+import com.aar.app.wordsearch.presentation.FullscreenActivity;
+import com.aar.app.wordsearch.presentation.gameplay.GamePlayActivity;
+import com.aar.app.wordsearch.presentation.settings.SettingsActivity;
 
 import java.util.List;
 

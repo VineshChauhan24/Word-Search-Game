@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.ui.adapter;
+package com.aar.app.wordsearch.presentation.gameplay;
 
 import com.aar.app.wordsearch.presentation.custom.LetterGridDataAdapter;
 

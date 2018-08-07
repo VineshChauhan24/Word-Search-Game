@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.ui.activity;
+package com.aar.app.wordsearch.presentation.gameover;
 
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
@@ -9,8 +9,7 @@ import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.domain.model.GameRoundStat;
-import com.aar.app.wordsearch.presentation.presenters.GameOverPresenter;
-import com.aar.app.wordsearch.presentation.views.GameOverView;
+import com.aar.app.wordsearch.presentation.FullscreenActivity;
 
 import javax.inject.Inject;
 

@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.views;
+package com.aar.app.wordsearch.presentation.mainmenu;
 
 import com.aar.app.wordsearch.domain.model.GameRound;
 

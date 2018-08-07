@@ -1,6 +1,4 @@
-package com.aar.app.wordsearch.presentation.views;
-
-import com.aar.app.wordsearch.presentation.model.UsedWordViewModel;
+package com.aar.app.wordsearch.presentation.gameplay;
 
 import java.util.List;
 

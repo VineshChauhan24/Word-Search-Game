@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.presentation.ui.activity;
+package com.aar.app.wordsearch.presentation.gameplay;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -20,10 +20,8 @@ import com.aar.app.wordsearch.config.SoundManager;
 import com.aar.app.wordsearch.presentation.custom.LetterBoard;
 import com.aar.app.wordsearch.presentation.custom.StreakView;
 import com.aar.app.wordsearch.presentation.custom.layout.FlowLayout;
-import com.aar.app.wordsearch.presentation.model.UsedWordViewModel;
-import com.aar.app.wordsearch.presentation.presenters.GamePlayPresenter;
-import com.aar.app.wordsearch.presentation.ui.adapter.ArrayLetterGridDataAdapter;
-import com.aar.app.wordsearch.presentation.views.GamePlayView;
+import com.aar.app.wordsearch.presentation.gameover.FinishActivity;
+import com.aar.app.wordsearch.presentation.FullscreenActivity;
 
 import java.util.List;
 
