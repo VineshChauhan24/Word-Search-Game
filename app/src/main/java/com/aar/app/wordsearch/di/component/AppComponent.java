@@ -3,7 +3,7 @@ package com.aar.app.wordsearch.di.component;
 import com.aar.app.wordsearch.di.modules.AppModule;
 import com.aar.app.wordsearch.di.modules.DataSourceModule;
 import com.aar.app.wordsearch.FullscreenActivity;
-import com.aar.app.wordsearch.gameover.presentation.GameOverActivity;
+import com.aar.app.wordsearch.gameover.GameOverActivity;
 import com.aar.app.wordsearch.gameplay.presentation.GamePlayActivity;
 import com.aar.app.wordsearch.mainmenu.presentation.MainMenuActivity;
 

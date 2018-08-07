@@ -20,7 +20,7 @@ import com.aar.app.wordsearch.SoundManager;
 import com.aar.app.wordsearch.custom.LetterBoard;
 import com.aar.app.wordsearch.custom.StreakView;
 import com.aar.app.wordsearch.custom.layout.FlowLayout;
-import com.aar.app.wordsearch.gameover.presentation.GameOverActivity;
+import com.aar.app.wordsearch.gameover.GameOverActivity;
 import com.aar.app.wordsearch.FullscreenActivity;
 
 import java.util.List;

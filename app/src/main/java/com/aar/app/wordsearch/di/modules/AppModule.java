@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.domain.UseCaseExecutor;
 import com.aar.app.wordsearch.AndroidUseCaseExecutor;
+import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
+import com.aar.app.wordsearch.gameover.GameOverViewModel;
 
 import javax.inject.Singleton;
 
@@ -44,4 +47,11 @@ public class AppModule {
         return new AndroidUseCaseExecutor();
     }
 
+    @Provides
+    @Singleton
+    ViewModelFactory provideViewModelFactory(GameRoundDataSource gameRoundDataSource) {
+        return new ViewModelFactory(
+                new GameOverViewModel(gameRoundDataSource)
+        );
+    }
 }
