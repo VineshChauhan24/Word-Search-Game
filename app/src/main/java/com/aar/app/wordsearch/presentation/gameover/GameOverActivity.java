@@ -57,7 +57,7 @@ public class GameOverActivity extends FullscreenActivity implements GameOverView
     }
 
     private void goToMainMenu() {
-        if (mPreferences.deleteAfterFinish()) {
+        if (getPreferences().deleteAfterFinish()) {
             mPresenter.deleteGameRound(mGameId);
         }
         NavUtils.navigateUpTo(this, new Intent());

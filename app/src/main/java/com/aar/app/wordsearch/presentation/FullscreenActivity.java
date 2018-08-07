@@ -22,7 +22,7 @@ import javax.inject.Inject;
 public class FullscreenActivity extends AppCompatActivity {
 
     @Inject
-    protected Preferences mPreferences;
+    Preferences mPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,5 +35,9 @@ public class FullscreenActivity extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
+    }
+
+    protected Preferences getPreferences() {
+        return mPreferences;
     }
 }

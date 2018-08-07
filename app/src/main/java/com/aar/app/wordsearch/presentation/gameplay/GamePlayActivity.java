@@ -118,13 +118,13 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
             mPresenter.loadGameRound(mGameId);
         }
 
-        if (!mPreferences.showGridLine()) {
+        if (!getPreferences().showGridLine()) {
             mLetterBoard.getGridLineBackground().setVisibility(View.INVISIBLE);
         } else {
             mLetterBoard.getGridLineBackground().setVisibility(View.VISIBLE);
         }
 
-        mLetterBoard.getStreakView().setSnapToGrid(mPreferences.getSnapToGrid());
+        mLetterBoard.getStreakView().setSnapToGrid(getPreferences().getSnapToGrid());
         mFinishedText.setVisibility(View.GONE);
     }
 
