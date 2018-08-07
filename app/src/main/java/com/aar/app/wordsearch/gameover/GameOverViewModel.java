@@ -17,12 +17,7 @@ public class GameOverViewModel extends ViewModel {
     }
 
     public void loadData(int gid) {
-        mGameRoundDataSource.getGameRoundStat(gid, new GameRoundDataSource.StatCallback() {
-            @Override
-            public void onLoaded(GameRoundStat stat) {
-                mOnGameRoundStatLoaded.setValue(stat);
-            }
-        });
+        mGameRoundDataSource.getGameRoundStat(gid, mOnGameRoundStatLoaded::setValue);
     }
 
     public void deleteGameRound(int gid) {

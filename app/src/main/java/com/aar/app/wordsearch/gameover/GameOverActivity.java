@@ -43,13 +43,7 @@ public class GameOverActivity extends FullscreenActivity {
         ((WordSearchApp) getApplication()).getAppComponent().inject(this);
 
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(GameOverViewModel.class);
-        mViewModel.getOnGameRoundStatLoaded()
-                .observe(this, new Observer<GameRoundStat>() {
-                    @Override
-                    public void onChanged(@Nullable GameRoundStat gameRoundStat) {
-                        showGameStat(gameRoundStat);
-                    }
-                });
+        mViewModel.getOnGameRoundStatLoaded().observe(this, this::showGameStat);
 
         if (getIntent().getExtras() != null) {
             mGameId = getIntent().getExtras().getInt(EXTRA_GAME_ROUND_ID);
