@@ -14,7 +14,7 @@ import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.domain.model.GameRound;
 import com.aar.app.wordsearch.FullscreenActivity;
-import com.aar.app.wordsearch.gameplay.presentation.GamePlayActivity;
+import com.aar.app.wordsearch.gameplay.GamePlayActivity;
 import com.aar.app.wordsearch.settings.SettingsActivity;
 
 import java.util.List;

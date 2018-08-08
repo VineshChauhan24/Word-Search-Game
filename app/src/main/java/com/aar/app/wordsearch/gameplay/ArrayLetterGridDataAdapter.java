@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.gameplay.presentation;
+package com.aar.app.wordsearch.gameplay;
 
 import com.aar.app.wordsearch.custom.LetterGridDataAdapter;
 
@@ -10,7 +10,7 @@ public class ArrayLetterGridDataAdapter extends LetterGridDataAdapter {
 
     private char mGrid[][];
 
-    public ArrayLetterGridDataAdapter(char grid[][]) {
+    ArrayLetterGridDataAdapter(char grid[][]) {
         mGrid = grid;
     }
 

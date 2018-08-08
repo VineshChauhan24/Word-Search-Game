@@ -12,7 +12,7 @@
         <activity android:name=".settings.SettingsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".gameplay.presentation.GamePlayActivity">
+        <activity android:name=".gameplay.GamePlayActivity">
         </activity>
         <activity android:name=".mainmenu.presentation.MainMenuActivity">
             <intent-filter>

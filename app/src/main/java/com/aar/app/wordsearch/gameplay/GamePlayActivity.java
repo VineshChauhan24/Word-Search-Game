@@ -1,7 +1,8 @@
-package com.aar.app.wordsearch.gameplay.presentation;
+package com.aar.app.wordsearch.gameplay;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,10 +13,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aar.app.wordsearch.R;
+import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.commons.Util;
-import com.aar.app.wordsearch.settings.Preferences;
+import com.aar.app.wordsearch.domain.model.GameRound;
+import com.aar.app.wordsearch.gameplay.mapper.StreakLineMapper;
+import com.aar.app.wordsearch.gameplay.mapper.UsedWordMapper;
 import com.aar.app.wordsearch.SoundManager;
 import com.aar.app.wordsearch.custom.LetterBoard;
 import com.aar.app.wordsearch.custom.StreakView;
@@ -31,46 +35,34 @@ import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GamePlayActivity extends FullscreenActivity implements GamePlayView {
+public class GamePlayActivity extends FullscreenActivity {
+
     public static final String EXTRA_GAME_ROUND_ID =
-            "com.paperplanes.wordsearchsim.presentation.ui.activity.GamePlayActivity";
+            "com.aar.app.wordsearch.gameplay.GamePlayActivity.ID";
 
-    @Inject
-    Preferences mPref;
+    private static final StreakLineMapper STREAK_LINE_MAPPER = new StreakLineMapper();
 
-    @Inject
-    GamePlayPresenter mPresenter;
+    @Inject SoundManager mSoundManager;
 
-    @Inject
-    SoundManager mSoundManager;
+    @Inject ViewModelFactory mViewModelFactory;
+    private GamePlayViewModel mViewModel;
 
-    @BindView(R.id.text_duration)
-    TextView mTextDuration;
-    @BindView(R.id.letter_board)
-    LetterBoard mLetterBoard;
-    @BindView(R.id.flow_layout)
-    FlowLayout mFlowLayout;
+    @BindView(R.id.text_duration) TextView mTextDuration;
+    @BindView(R.id.letter_board) LetterBoard mLetterBoard;
+    @BindView(R.id.flow_layout) FlowLayout mFlowLayout;
 
-    @BindView(R.id.text_sel_layout)
-    View mTextSelLayout;
-    @BindView(R.id.text_selection)
-    TextView mTextSelection;
+    @BindView(R.id.text_sel_layout) View mTextSelLayout;
+    @BindView(R.id.text_selection) TextView mTextSelection;
 
-    @BindView(R.id.answered_text_count)
-    TextView mAnsweredTextCount;
-    @BindView(R.id.words_count)
-    TextView mWordsCount;
+    @BindView(R.id.answered_text_count) TextView mAnsweredTextCount;
+    @BindView(R.id.words_count) TextView mWordsCount;
 
-    @BindView(R.id.finished_text)
-    TextView mFinishedText;
+    @BindView(R.id.finished_text) TextView mFinishedText;
 
-    @BindView(R.id.loading)
-    View mLoading;
-    @BindView(R.id.content_layout)
-    View mContentLayout;
+    @BindView(R.id.loading) View mLoading;
+    @BindView(R.id.content_layout) View mContentLayout;
 
-    @BindColor(R.color.gray)
-    int mGrayColor;
+    @BindColor(R.color.gray) int mGrayColor;
 
     private int mGameId;
 
@@ -84,7 +76,7 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
         ButterKnife.bind(this);
         ((WordSearchApp) getApplication()).getAppComponent().inject(this);
 
-        mLetterBoard.getStreakView().setEnableOverrideStreakLineColor(mPref.grayscale());
+        mLetterBoard.getStreakView().setEnableOverrideStreakLineColor(getPreferences().grayscale());
         mLetterBoard.getStreakView().setOverrideStreakLineColor(mGrayColor);
         mLetterBoard.setOnLetterSelectionListener(new LetterBoard.OnLetterSelectionListener() {
             @Override
@@ -105,17 +97,21 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
 
             @Override
             public void onSelectionEnd(StreakView.StreakLine streakLine, String str) {
-                mPresenter.answerWord(str, streakLine, mPref.reverseMatching());
+                mViewModel.answerWord(str, STREAK_LINE_MAPPER.revMap(streakLine), getPreferences().reverseMatching());
                 mTextSelLayout.setVisibility(View.GONE);
                 mTextSelection.setText(str);
             }
         });
 
+        mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(GamePlayViewModel.class);
+        mViewModel.getOnTimer().observe(this, this::showDuration);
+        mViewModel.getOnGameState().observe(this, this::onGameStateChanged);
+        mViewModel.getOnGameRoundLoaded().observe(this, this::onGameRoundLoaded);
+        mViewModel.getOnAnswerResult().observe(this, this::onAnswerResult);
 
-        mPresenter.setView(this);
         if (getIntent().getExtras() != null) {
             mGameId = getIntent().getExtras().getInt(EXTRA_GAME_ROUND_ID);
-            mPresenter.loadGameRound(mGameId);
+            mViewModel.loadGameRound(mGameId);
         }
 
         if (!getPreferences().showGridLine()) {
@@ -131,13 +127,13 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.resumeGame();
+        mViewModel.resumeGame();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mPresenter.stopGame();
+        mViewModel.stopGame();
     }
 
     @Override
@@ -147,98 +143,13 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    private void tryScale() {
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
-        int boardWidth = mLetterBoard.getWidth();
-        int screenWidth = metrics.widthPixels;
-
-        if (mPref.autoScaleGrid() || boardWidth > screenWidth) {
-            float scale = (float)screenWidth / (float)boardWidth;
-            mLetterBoard.scale(scale, scale);
-        }
-    }
-
-    @Override
-    public void doneLoadingContent() {
-        // call tryScale() on the next render frame
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                tryScale();
-            }
-        });
-    }
-
-    @Override
-    public void showLoading(boolean enable) {
-        if (enable) {
-            mLoading.setVisibility(View.VISIBLE);
-            mContentLayout.setVisibility(View.GONE);
-        } else {
-            mLoading.setVisibility(View.GONE);
-            mContentLayout.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void showLetterGrid(char[][] grid) {
-        if (mLetterAdapter == null) {
-            mLetterAdapter = new ArrayLetterGridDataAdapter(grid);
-            mLetterBoard.setDataAdapter(mLetterAdapter);
-        }
-        else {
-            mLetterAdapter.setGrid(grid);
-        }
-    }
-
-    @Override
-    public void showDuration(int duration) {
-        mTextDuration.setText(DurationFormatter.fromInteger(duration));
-    }
-
-    @Override
-    public void showUsedWords(List<UsedWordViewModel> usedWords) {
-        for (UsedWordViewModel uw : usedWords) {
-            mFlowLayout.addView( createUsedWordTextView(uw) );
-        }
-    }
-
-    @Override
-    public void showAnsweredWordsCount(int count) {
-        mAnsweredTextCount.setText(String.valueOf(count));
-    }
-
-    @Override
-    public void showWordsCount(int count) {
-        mWordsCount.setText(String.valueOf(count));
-    }
-
-    @Override
-    public void showFinishGame() {
-        Intent intent = new Intent(this, GameOverActivity.class);
-        intent.putExtra(GameOverActivity.EXTRA_GAME_ROUND_ID, mGameId);
-        startActivity(intent);
-        finish();
-
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    }
-
-    @Override
-    public void setGameAsAlreadyFinished() {
-        mLetterBoard.getStreakView().setInteractive(false);
-        mFinishedText.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void wordAnswered(boolean correct, int usedWordId) {
-        if (correct) {
-            TextView textView = findUsedWordTextViewByUsedWordId(usedWordId);
+    private void onAnswerResult(GamePlayViewModel.AnswerResult answerResult) {
+        if (answerResult.correct) {
+            TextView textView = findUsedWordTextViewByUsedWordId(answerResult.usedWordId);
             if (textView != null) {
                 UsedWordViewModel uw = (UsedWordViewModel) textView.getTag();
 
-                if (mPref.grayscale()) {
+                if (getPreferences().grayscale()) {
                     uw.getUsedWord().getAnswerLine().color = mGrayColor;
                 }
                 textView.setBackgroundColor(uw.getStreakLine().getColor());
@@ -260,12 +171,106 @@ public class GamePlayActivity extends FullscreenActivity implements GamePlayView
         }
     }
 
+    private void onGameStateChanged(GamePlayViewModel.GameState gameState) {
+        showLoading(false);
+        if (gameState == GamePlayViewModel.GameState.GENERATING) {
+            showLoading(true);
+        } else if (gameState == GamePlayViewModel.GameState.FINISHED) {
+            showFinishGame();
+        } else if (gameState == GamePlayViewModel.GameState.ALREADY_FINISHED) {
+            setGameAsAlreadyFinished();
+        } else if (gameState == GamePlayViewModel.GameState.PAUSED) {
+
+        } else if (gameState == GamePlayViewModel.GameState.PLAYING) {
+
+        }
+    }
+
+    private void onGameRoundLoaded(GameRound gameRound) {
+        showLetterGrid(gameRound.getGrid().getArray());
+        showDuration(gameRound.getInfo().getDuration());
+        showUsedWords(new UsedWordMapper().map(gameRound.getUsedWords()));
+        showWordsCount(gameRound.getUsedWords().size());
+        showAnsweredWordsCount(gameRound.getAnsweredWordsCount());
+        doneLoadingContent();
+    }
+
+    private void tryScale() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        int boardWidth = mLetterBoard.getWidth();
+        int screenWidth = metrics.widthPixels;
+
+        if (getPreferences().autoScaleGrid() || boardWidth > screenWidth) {
+            float scale = (float)screenWidth / (float)boardWidth;
+            mLetterBoard.scale(scale, scale);
+        }
+    }
+
+    private void doneLoadingContent() {
+        // call tryScale() on the next render frame
+        new Handler().post(this::tryScale);
+    }
+
+    private void showLoading(boolean enable) {
+        if (enable) {
+            mLoading.setVisibility(View.VISIBLE);
+            mContentLayout.setVisibility(View.GONE);
+        } else {
+            mLoading.setVisibility(View.GONE);
+            mContentLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void showLetterGrid(char[][] grid) {
+        if (mLetterAdapter == null) {
+            mLetterAdapter = new ArrayLetterGridDataAdapter(grid);
+            mLetterBoard.setDataAdapter(mLetterAdapter);
+        }
+        else {
+            mLetterAdapter.setGrid(grid);
+        }
+    }
+
+    private void showDuration(int duration) {
+        mTextDuration.setText(DurationFormatter.fromInteger(duration));
+    }
+
+    private void showUsedWords(List<UsedWordViewModel> usedWords) {
+        for (UsedWordViewModel uw : usedWords) {
+            mFlowLayout.addView( createUsedWordTextView(uw) );
+        }
+    }
+
+    private void showAnsweredWordsCount(int count) {
+        mAnsweredTextCount.setText(String.valueOf(count));
+    }
+
+    private void showWordsCount(int count) {
+        mWordsCount.setText(String.valueOf(count));
+    }
+
+    private void showFinishGame() {
+        Intent intent = new Intent(this, GameOverActivity.class);
+        intent.putExtra(GameOverActivity.EXTRA_GAME_ROUND_ID, mGameId);
+        startActivity(intent);
+        finish();
+
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+
+    private void setGameAsAlreadyFinished() {
+        mLetterBoard.getStreakView().setInteractive(false);
+        mFinishedText.setVisibility(View.VISIBLE);
+    }
+
     //
     private TextView createUsedWordTextView(UsedWordViewModel uw) {
         TextView tv = new TextView(this);
         tv.setPadding(10, 5, 10, 5);
         if (uw.isAnswered()) {
-            if (mPref.grayscale()) {
+            if (getPreferences().grayscale()) {
                 uw.getUsedWord().getAnswerLine().color = mGrayColor;
             }
             tv.setBackgroundColor(uw.getStreakLine().getColor());
