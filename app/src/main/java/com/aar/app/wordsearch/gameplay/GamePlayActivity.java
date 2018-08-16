@@ -133,7 +133,7 @@ public class GamePlayActivity extends FullscreenActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mViewModel.stopGame();
+        mViewModel.pauseGame();
     }
 
     @Override
@@ -177,8 +177,6 @@ public class GamePlayActivity extends FullscreenActivity {
             showLoading(true);
         } else if (gameState == GamePlayViewModel.GameState.FINISHED) {
             showFinishGame();
-        } else if (gameState == GamePlayViewModel.GameState.ALREADY_FINISHED) {
-            setGameAsAlreadyFinished();
         } else if (gameState == GamePlayViewModel.GameState.PAUSED) {
 
         } else if (gameState == GamePlayViewModel.GameState.PLAYING) {
@@ -187,6 +185,10 @@ public class GamePlayActivity extends FullscreenActivity {
     }
 
     private void onGameRoundLoaded(GameRound gameRound) {
+        if (gameRound.isFinished()) {
+            setGameAsAlreadyFinished();
+        }
+
         showLetterGrid(gameRound.getGrid().getArray());
         showDuration(gameRound.getInfo().getDuration());
         showUsedWords(new UsedWordMapper().map(gameRound.getUsedWords()));

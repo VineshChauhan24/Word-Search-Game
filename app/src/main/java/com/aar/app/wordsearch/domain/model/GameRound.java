@@ -1,5 +1,7 @@
 package com.aar.app.wordsearch.domain.model;
 
+import com.aar.app.wordsearch.commons.Util;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +16,11 @@ public class GameRound {
     private List<UsedWord> mUsedWords;
 
     public GameRound() {
-        this(new Info(), null, new ArrayList<UsedWord>());
+        this(new Info(), null, new ArrayList<>());
     }
 
     public GameRound(Info info) {
-        this(info, null, new ArrayList<UsedWord>());
+        this(info, null, new ArrayList<>());
     }
 
     public GameRound(Info info, Grid grid, List<UsedWord> usedWords) {
@@ -47,15 +49,34 @@ public class GameRound {
         return mUsedWords;
     }
 
+    public UsedWord markWordAsAnswered(String word, UsedWord.AnswerLine answerLine, boolean enableReverse) {
+        String answerStrRev = Util.getReverseString(word);
+        for (UsedWord usedWord : mUsedWords) {
+
+            if (usedWord.isAnswered()) continue;
+
+            String currUsedWord = usedWord.getString();
+            if (currUsedWord.equalsIgnoreCase(word) ||
+                    (currUsedWord.equalsIgnoreCase( answerStrRev ) && enableReverse)) {
+
+                usedWord.setAnswered(true);
+                usedWord.setAnswerLine(answerLine);
+                return usedWord;
+            }
+        }
+        return null;
+    }
+
     public int getAnsweredWordsCount() {
         int count = 0;
         for (UsedWord uw : mUsedWords) {
-            if (uw.isAnswered()) {
-                count++;
-            }
+            if (uw.isAnswered()) count++;
         }
-
         return count;
+    }
+
+    public boolean isFinished() {
+        return getAnsweredWordsCount() == mUsedWords.size();
     }
 
     public void addUsedWord(UsedWord usedWord) {

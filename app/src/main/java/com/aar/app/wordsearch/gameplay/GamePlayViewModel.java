@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModel;
 
 import com.aar.app.wordsearch.commons.SingleLiveEvent;
 import com.aar.app.wordsearch.commons.Timer;
-import com.aar.app.wordsearch.commons.Util;
 import com.aar.app.wordsearch.domain.data.mapper.GameRoundMapper;
 import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
 import com.aar.app.wordsearch.domain.model.GameRound;
@@ -21,7 +20,6 @@ public class GamePlayViewModel extends ViewModel {
         NONE,
         GENERATING,
         FINISHED,
-        ALREADY_FINISHED,
         PAUSED,
         PLAYING
     }
@@ -29,7 +27,7 @@ public class GamePlayViewModel extends ViewModel {
     public static class AnswerResult {
         public boolean correct;
         public int usedWordId;
-        public AnswerResult(boolean correct, int usedWordId) {
+        AnswerResult(boolean correct, int usedWordId) {
             this.correct = correct;
             this.usedWordId = usedWordId;
         }
@@ -39,7 +37,6 @@ public class GamePlayViewModel extends ViewModel {
     private GameRound mCurrentGameRound;
     private Timer mTimer;
     private int mCurrentDuration;
-    private int mAnsweredWordsCount;
 
     private GameState mCurrentState = GameState.NONE;
     private MutableLiveData<Integer> mOnTimer = new MutableLiveData<>();
@@ -51,75 +48,49 @@ public class GamePlayViewModel extends ViewModel {
         mGameRoundDataSource = gameRoundDataSource;
 
         mTimer = new Timer(TIMER_TIMEOUT);
-        mTimer.addOnTimeoutListener(ellapsedTime -> {
+        mTimer.addOnTimeoutListener(elapsedTime -> {
             mOnTimer.setValue(mCurrentDuration++);
             mGameRoundDataSource.saveGameRoundDuration(mCurrentGameRound.getInfo().getId(), mCurrentDuration);
         });
     }
 
-    public void stopGame() {
-        mCurrentState = GameState.PAUSED;
+    public void pauseGame() {
         mTimer.stop();
-        mOnGameState.setValue(mCurrentState);
+        setGameState(GameState.PAUSED);
     }
 
     public void resumeGame() {
         if (mCurrentState == GameState.PAUSED) {
             mTimer.start();
-            mCurrentState = GameState.PLAYING;
-            mOnGameState.setValue(mCurrentState);
+            setGameState(GameState.PLAYING);
         }
     }
 
     public void loadGameRound(int gid) {
         if (mCurrentState != GameState.GENERATING) {
-            mCurrentState = GameState.GENERATING;
+            setGameState(GameState.GENERATING);
+
             mGameRoundDataSource.getGameRound(gid, gameRound -> {
                 mCurrentGameRound = new GameRoundMapper().map(gameRound);
 
-                mAnsweredWordsCount = mCurrentGameRound.getAnsweredWordsCount();
-                if (mAnsweredWordsCount >= gameRound.getUsedWords().size()) {
-                    mCurrentState = GameState.ALREADY_FINISHED;
-                } else {
-                    mCurrentState = GameState.PLAYING;
-                    mTimer.start();
-                }
-                mCurrentDuration = gameRound.getInfo().getDuration();
-                mOnGameState.setValue(mCurrentState);
+                mCurrentDuration = mCurrentGameRound.getInfo().getDuration();
                 mOnGameRoundLoaded.setValue(mCurrentGameRound);
+                if (!mCurrentGameRound.isFinished())
+                    mTimer.start();
+                setGameState(GameState.PLAYING);
             });
         }
     }
 
     public void answerWord(String answerStr, UsedWord.AnswerLine answerLine, boolean reverseMatching) {
-        boolean correct = false;
-        UsedWord correctWord = null;
+        UsedWord correctWord = mCurrentGameRound.markWordAsAnswered(answerStr, answerLine, reverseMatching);
 
-        String answerStrRev = Util.getReverseString(answerStr);
-        for (UsedWord word : mCurrentGameRound.getUsedWords()) {
-
-            if (word.isAnswered()) continue;
-
-            String wordStr = word.getString();
-            if (wordStr.equalsIgnoreCase(answerStr) ||
-                    (wordStr.equalsIgnoreCase( answerStrRev ) && reverseMatching)) {
-
-                correct = true;
-                correctWord = word;
-
-                correctWord.setAnswered(true);
-                correctWord.setAnswerLine(answerLine);
-                break;
-            }
-        }
-
+        boolean correct = correctWord != null;
         mOnAnswerResult.setValue(new AnswerResult(correct, correctWord != null ? correctWord.getId() : -1));
         if (correct) {
             mGameRoundDataSource.markWordAsAnswered(correctWord);
-            mAnsweredWordsCount++;
-            if (mAnsweredWordsCount >= mCurrentGameRound.getUsedWords().size()) {
-                mCurrentState = GameState.FINISHED;
-                mOnGameState.setValue(mCurrentState);
+            if (mCurrentGameRound.isFinished()) {
+                setGameState(GameState.FINISHED);
             }
         }
     }
@@ -138,5 +109,10 @@ public class GamePlayViewModel extends ViewModel {
 
     public LiveData<AnswerResult> getOnAnswerResult() {
         return mOnAnswerResult;
+    }
+
+    private void setGameState(GameState state) {
+        mCurrentState = state;
+        mOnGameState.setValue(mCurrentState);
     }
 }
