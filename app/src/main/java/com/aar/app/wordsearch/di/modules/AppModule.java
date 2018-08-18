@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.aar.app.wordsearch.ViewModelFactory;
-import com.aar.app.wordsearch.domain.UseCaseExecutor;
-import com.aar.app.wordsearch.AndroidUseCaseExecutor;
 import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
 import com.aar.app.wordsearch.domain.data.source.WordDataSource;
 import com.aar.app.wordsearch.gameover.GameOverViewModel;
@@ -42,12 +40,6 @@ public class AppModule {
     @Singleton
     SharedPreferences provideSharedPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
-    }
-
-    @Provides
-    @Singleton
-    UseCaseExecutor provideUseCaseExecutor() {
-        return new AndroidUseCaseExecutor();
     }
 
     @Provides
