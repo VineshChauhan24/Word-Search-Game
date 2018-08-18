@@ -40,65 +40,35 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/play_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="6dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="visible"
         android:layout_centerInParent="true">
 
-        <LinearLayout
-            android:id="@+id/new_game_loading_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="6dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="invisible">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:text="@string/new_game_loading_text"/>
-
-            <ProgressBar
-                android:id="@+id/new_game_progress"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/new_game_content_layout"
+        <Button
+            android:id="@+id/new_game_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="6dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:layout_margin="10dp"
+            android:background="@drawable/selector_btn"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/new_game"
+            android:textColor="@android:color/white"/>
 
-            <Button
-                android:id="@+id/new_game_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/selector_btn"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="@string/new_game"
-                android:textColor="@android:color/white"/>
+        <Spinner
+            android:id="@+id/game_template_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/game_round_dimensions"/>
 
-            <Spinner
-                android:id="@+id/game_template_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/game_round_dimensions"/>
-
-        </LinearLayout>
-
-    </FrameLayout>
+    </LinearLayout>
 
     <ImageView
         android:layout_width="240dp"

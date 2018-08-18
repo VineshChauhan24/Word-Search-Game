@@ -12,6 +12,7 @@ import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
 import com.aar.app.wordsearch.domain.data.source.WordDataSource;
 import com.aar.app.wordsearch.gameover.GameOverViewModel;
 import com.aar.app.wordsearch.gameplay.GamePlayViewModel;
+import com.aar.app.wordsearch.mainmenu.MainMenuViewModel;
 
 import javax.inject.Singleton;
 
@@ -51,10 +52,12 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ViewModelFactory provideViewModelFactory(GameRoundDataSource gameRoundDataSource, WordDataSource wordDataSource) {
+    ViewModelFactory provideViewModelFactory(GameRoundDataSource gameRoundDataSource,
+                                             WordDataSource wordDataSource) {
         return new ViewModelFactory(
                 new GameOverViewModel(gameRoundDataSource),
-                new GamePlayViewModel(gameRoundDataSource, wordDataSource)
+                new GamePlayViewModel(gameRoundDataSource, wordDataSource),
+                new MainMenuViewModel(gameRoundDataSource)
         );
     }
 }

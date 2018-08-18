@@ -6,16 +6,20 @@ import android.support.annotation.NonNull;
 
 import com.aar.app.wordsearch.gameover.GameOverViewModel;
 import com.aar.app.wordsearch.gameplay.GamePlayViewModel;
+import com.aar.app.wordsearch.mainmenu.MainMenuViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
     private GameOverViewModel mGameOverViewModel;
     private GamePlayViewModel mGamePlayViewModel;
+    private MainMenuViewModel mMainMenuViewModel;
 
     public ViewModelFactory(GameOverViewModel gameOverViewModel,
-                            GamePlayViewModel gamePlayViewModel) {
+                            GamePlayViewModel gamePlayViewModel,
+                            MainMenuViewModel mainMenuViewModel) {
         mGameOverViewModel = gameOverViewModel;
         mGamePlayViewModel = gamePlayViewModel;
+        mMainMenuViewModel = mainMenuViewModel;
     }
 
     @NonNull
@@ -25,6 +29,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) mGameOverViewModel;
         } else if (modelClass.isAssignableFrom(GamePlayViewModel.class)) {
             return (T) mGamePlayViewModel;
+        } else if (modelClass.isAssignableFrom(MainMenuViewModel.class)) {
+            return (T) mMainMenuViewModel;
         }
         throw new IllegalArgumentException("Unknown view model");
     }

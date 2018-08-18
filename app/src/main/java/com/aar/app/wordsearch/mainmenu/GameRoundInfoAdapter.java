@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.mainmenu.presentation;
+package com.aar.app.wordsearch.mainmenu;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
