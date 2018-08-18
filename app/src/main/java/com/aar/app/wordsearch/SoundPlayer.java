@@ -14,10 +14,11 @@ import javax.inject.Inject;
  * Created by abdularis on 22/07/17.
  */
 
-public class SoundManager {
+public class SoundPlayer {
 
-    public static final int SOUND_CORRECT = 0;
-    public static final int SOUND_WRONG = 1;
+    public enum Sound {
+        Correct, Wrong
+    }
 
     private Preferences mPreferences;
 
@@ -25,15 +26,16 @@ public class SoundManager {
     private SparseIntArray mSoundPoolMap;
 
     @Inject
-    public SoundManager(Context context, Preferences preferences) {
+    public SoundPlayer(Context context, Preferences preferences) {
         mPreferences = preferences;
 
         init(context);
     }
 
-    public void play(int sound) {
+    public void play(Sound sound) {
         if (mPreferences.enableSound()) {
-            mSoundPool.play(mSoundPoolMap.get(sound), 1.0f, 1.0f, 0, 0, 1.0f);
+            mSoundPool.play(mSoundPoolMap.get(sound.ordinal()),
+                    1.0f, 1.0f, 0, 0, 1.0f);
         }
     }
 
@@ -41,9 +43,9 @@ public class SoundManager {
         mSoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         mSoundPoolMap = new SparseIntArray();
 
-        mSoundPoolMap.put(SOUND_CORRECT,
+        mSoundPoolMap.put(Sound.Correct.ordinal(),
                 mSoundPool.load(context, R.raw.correct, 1));
-        mSoundPoolMap.put(SOUND_WRONG,
+        mSoundPoolMap.put(Sound.Wrong.ordinal(),
                 mSoundPool.load(context, R.raw.wrong, 1));
     }
 
