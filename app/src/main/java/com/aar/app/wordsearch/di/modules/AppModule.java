@@ -9,6 +9,7 @@ import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.domain.UseCaseExecutor;
 import com.aar.app.wordsearch.AndroidUseCaseExecutor;
 import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
+import com.aar.app.wordsearch.domain.data.source.WordDataSource;
 import com.aar.app.wordsearch.gameover.GameOverViewModel;
 import com.aar.app.wordsearch.gameplay.GamePlayViewModel;
 
@@ -50,10 +51,10 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ViewModelFactory provideViewModelFactory(GameRoundDataSource gameRoundDataSource) {
+    ViewModelFactory provideViewModelFactory(GameRoundDataSource gameRoundDataSource, WordDataSource wordDataSource) {
         return new ViewModelFactory(
                 new GameOverViewModel(gameRoundDataSource),
-                new GamePlayViewModel(gameRoundDataSource)
+                new GamePlayViewModel(gameRoundDataSource, wordDataSource)
         );
     }
 }

@@ -14,7 +14,7 @@
         </activity>
         <activity android:name=".gameplay.GamePlayActivity">
         </activity>
-        <activity android:name=".mainmenu.presentation.MainMenuActivity">
+        <activity android:name=".mainmenu.MainMenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

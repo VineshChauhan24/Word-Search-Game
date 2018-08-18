@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.mainmenu.presentation;
+package com.aar.app.wordsearch.mainmenu;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -15,6 +15,9 @@ import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.domain.model.GameRound;
 import com.aar.app.wordsearch.FullscreenActivity;
 import com.aar.app.wordsearch.gameplay.GamePlayActivity;
+import com.aar.app.wordsearch.mainmenu.presentation.GameRoundInfoAdapter;
+import com.aar.app.wordsearch.mainmenu.presentation.MainMenuPresenter;
+import com.aar.app.wordsearch.mainmenu.presentation.MainMenuView;
 import com.aar.app.wordsearch.settings.SettingsActivity;
 
 import java.util.List;
@@ -84,8 +87,13 @@ public class MainMenuActivity extends FullscreenActivity implements MainMenuView
     @OnClick(R.id.new_game_btn)
     public void onNewGameClick() {
         int dim = mGameRoundDimVals[ mGameTempSpinner.getSelectedItemPosition() ];
-
-        mPresenter.newGameRound(dim, dim);
+//
+//        mPresenter.newGameRound(dim, dim);
+        Intent intent = new Intent(this, GamePlayActivity.class);
+        intent.putExtra(GamePlayActivity.EXTRA_ROW_COUNT, dim);
+        intent.putExtra(GamePlayActivity.EXTRA_COL_COUNT, dim);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     @OnClick(R.id.clear_all_btn)

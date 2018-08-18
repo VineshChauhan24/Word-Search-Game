@@ -39,6 +39,10 @@ public class GamePlayActivity extends FullscreenActivity {
 
     public static final String EXTRA_GAME_ROUND_ID =
             "com.aar.app.wordsearch.gameplay.GamePlayActivity.ID";
+    public static final String EXTRA_ROW_COUNT =
+            "com.aar.app.wordsearch.gameplay.GamePlayActivity.ROW";
+    public static final String EXTRA_COL_COUNT =
+            "com.aar.app.wordsearch.gameplay.GamePlayActivity.COL";
 
     private static final StreakLineMapper STREAK_LINE_MAPPER = new StreakLineMapper();
 
@@ -60,11 +64,10 @@ public class GamePlayActivity extends FullscreenActivity {
     @BindView(R.id.finished_text) TextView mFinishedText;
 
     @BindView(R.id.loading) View mLoading;
+    @BindView(R.id.loadingText) TextView mLoadingText;
     @BindView(R.id.content_layout) View mContentLayout;
 
     @BindColor(R.color.gray) int mGrayColor;
-
-    private int mGameId;
 
     private ArrayLetterGridDataAdapter mLetterAdapter;
 
@@ -106,12 +109,18 @@ public class GamePlayActivity extends FullscreenActivity {
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(GamePlayViewModel.class);
         mViewModel.getOnTimer().observe(this, this::showDuration);
         mViewModel.getOnGameState().observe(this, this::onGameStateChanged);
-        mViewModel.getOnGameRoundLoaded().observe(this, this::onGameRoundLoaded);
         mViewModel.getOnAnswerResult().observe(this, this::onAnswerResult);
 
-        if (getIntent().getExtras() != null) {
-            mGameId = getIntent().getExtras().getInt(EXTRA_GAME_ROUND_ID);
-            mViewModel.loadGameRound(mGameId);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey(EXTRA_GAME_ROUND_ID)) {
+                int gid = extras.getInt(EXTRA_GAME_ROUND_ID);
+                mViewModel.loadGameRound(gid);
+            } else {
+                int rowCount = extras.getInt(EXTRA_ROW_COUNT);
+                int colCount = extras.getInt(EXTRA_COL_COUNT);
+                mViewModel.generateNewGameRound(rowCount, colCount);
+            }
         }
 
         if (!getPreferences().showGridLine()) {
@@ -134,6 +143,12 @@ public class GamePlayActivity extends FullscreenActivity {
     protected void onStop() {
         super.onStop();
         mViewModel.pauseGame();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mViewModel.stopGame();
     }
 
     @Override
@@ -172,15 +187,17 @@ public class GamePlayActivity extends FullscreenActivity {
     }
 
     private void onGameStateChanged(GamePlayViewModel.GameState gameState) {
-        showLoading(false);
-        if (gameState == GamePlayViewModel.GameState.GENERATING) {
-            showLoading(true);
-        } else if (gameState == GamePlayViewModel.GameState.FINISHED) {
-            showFinishGame();
-        } else if (gameState == GamePlayViewModel.GameState.PAUSED) {
+        showLoading(false, null);
+        if (gameState instanceof GamePlayViewModel.Generating) {
+            GamePlayViewModel.Generating state = (GamePlayViewModel.Generating) gameState;
+            String text = "Generating " + state.rowCount + "x" + state.colCount + " grid";
+            showLoading(true, text);
+        } else if (gameState instanceof GamePlayViewModel.Finished) {
+            showFinishGame(((GamePlayViewModel.Finished) gameState).gameRound.getInfo().getId());
+        } else if (gameState instanceof GamePlayViewModel.Paused) {
 
-        } else if (gameState == GamePlayViewModel.GameState.PLAYING) {
-
+        } else if (gameState instanceof GamePlayViewModel.Playing) {
+            onGameRoundLoaded(((GamePlayViewModel.Playing) gameState).gameRound);
         }
     }
 
@@ -207,20 +224,29 @@ public class GamePlayActivity extends FullscreenActivity {
         if (getPreferences().autoScaleGrid() || boardWidth > screenWidth) {
             float scale = (float)screenWidth / (float)boardWidth;
             mLetterBoard.scale(scale, scale);
+//            mLetterBoard.animate()
+//                    .scaleX(scale)
+//                    .scaleY(scale)
+//                    .setDuration(400)
+//                    .setInterpolator(new DecelerateInterpolator())
+//                    .start();
         }
     }
 
     private void doneLoadingContent() {
         // call tryScale() on the next render frame
-        new Handler().post(this::tryScale);
+        new Handler().postDelayed(this::tryScale, 100);
     }
 
-    private void showLoading(boolean enable) {
+    private void showLoading(boolean enable, String text) {
         if (enable) {
             mLoading.setVisibility(View.VISIBLE);
+            mLoadingText.setVisibility(View.VISIBLE);
             mContentLayout.setVisibility(View.GONE);
+            mLoadingText.setText(text);
         } else {
             mLoading.setVisibility(View.GONE);
+            mLoadingText.setVisibility(View.GONE);
             mContentLayout.setVisibility(View.VISIBLE);
         }
     }
@@ -253,9 +279,9 @@ public class GamePlayActivity extends FullscreenActivity {
         mWordsCount.setText(String.valueOf(count));
     }
 
-    private void showFinishGame() {
+    private void showFinishGame(int gameId) {
         Intent intent = new Intent(this, GameOverActivity.class);
-        intent.putExtra(GameOverActivity.EXTRA_GAME_ROUND_ID, mGameId);
+        intent.putExtra(GameOverActivity.EXTRA_GAME_ROUND_ID, gameId);
         startActivity(intent);
         finish();
 

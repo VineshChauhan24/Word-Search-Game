@@ -5,7 +5,7 @@ import com.aar.app.wordsearch.di.modules.DataSourceModule;
 import com.aar.app.wordsearch.FullscreenActivity;
 import com.aar.app.wordsearch.gameover.GameOverActivity;
 import com.aar.app.wordsearch.gameplay.GamePlayActivity;
-import com.aar.app.wordsearch.mainmenu.presentation.MainMenuActivity;
+import com.aar.app.wordsearch.mainmenu.MainMenuActivity;
 
 import javax.inject.Singleton;
 

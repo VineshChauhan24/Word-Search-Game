@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:orientation="vertical"
-    tools:context=".mainmenu.presentation.MainMenuActivity">
+    tools:context=".mainmenu.MainMenuActivity">
 
     <ImageButton
         android:id="@+id/settings_button"
