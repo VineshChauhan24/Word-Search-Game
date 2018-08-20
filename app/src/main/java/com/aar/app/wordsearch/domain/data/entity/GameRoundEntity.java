@@ -1,7 +1,7 @@
 package com.aar.app.wordsearch.domain.data.entity;
 
-import com.aar.app.wordsearch.domain.model.GameRound;
-import com.aar.app.wordsearch.domain.model.UsedWord;
+import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.UsedWord;
 
 import java.util.List;
 

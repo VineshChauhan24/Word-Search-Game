@@ -1,7 +1,7 @@
 package com.aar.app.wordsearch.gameplay.mapper;
 
 import com.aar.app.wordsearch.commons.Mapper;
-import com.aar.app.wordsearch.domain.model.UsedWord;
+import com.aar.app.wordsearch.model.UsedWord;
 import com.aar.app.wordsearch.gameplay.UsedWordViewModel;
 
 /**

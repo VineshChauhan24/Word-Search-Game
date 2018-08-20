@@ -10,8 +10,8 @@ import com.aar.app.wordsearch.commons.Timer;
 import com.aar.app.wordsearch.domain.data.mapper.GameRoundMapper;
 import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
 import com.aar.app.wordsearch.domain.data.source.WordDataSource;
-import com.aar.app.wordsearch.domain.model.GameRound;
-import com.aar.app.wordsearch.domain.model.UsedWord;
+import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.UsedWord;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;

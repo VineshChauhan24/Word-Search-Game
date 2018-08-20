@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.commons.DurationFormatter;
-import com.aar.app.wordsearch.domain.model.GameRound;
+import com.aar.app.wordsearch.model.GameRound;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

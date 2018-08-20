@@ -4,8 +4,8 @@ package com.aar.app.wordsearch.domain.data.mapper;
 import com.aar.app.wordsearch.commons.Mapper;
 import com.aar.app.wordsearch.commons.generator.StringGridGenerator;
 import com.aar.app.wordsearch.domain.data.entity.GameRoundEntity;
-import com.aar.app.wordsearch.domain.model.GameRound;
-import com.aar.app.wordsearch.domain.model.Grid;
+import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.Grid;
 
 /**
  * Created by abdularis on 08/07/17.

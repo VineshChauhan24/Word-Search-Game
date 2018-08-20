@@ -1,9 +1,7 @@
 package com.aar.app.wordsearch.gameover;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -12,7 +10,7 @@ import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
-import com.aar.app.wordsearch.domain.model.GameRoundStat;
+import com.aar.app.wordsearch.model.GameRoundStat;
 import com.aar.app.wordsearch.FullscreenActivity;
 
 import javax.inject.Inject;

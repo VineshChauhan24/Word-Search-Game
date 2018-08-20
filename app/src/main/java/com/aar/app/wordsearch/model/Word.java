@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.domain.model;
+package com.aar.app.wordsearch.model;
 
 /**
  * Created by abdularis on 08/07/17.

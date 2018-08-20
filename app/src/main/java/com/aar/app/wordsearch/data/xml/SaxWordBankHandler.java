@@ -1,6 +1,6 @@
 package com.aar.app.wordsearch.data.xml;
 
-import com.aar.app.wordsearch.domain.model.Word;
+import com.aar.app.wordsearch.model.Word;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

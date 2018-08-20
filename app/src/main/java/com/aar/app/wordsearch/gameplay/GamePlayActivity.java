@@ -18,7 +18,7 @@ import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.commons.Util;
-import com.aar.app.wordsearch.domain.model.GameRound;
+import com.aar.app.wordsearch.model.GameRound;
 import com.aar.app.wordsearch.gameplay.mapper.StreakLineMapper;
 import com.aar.app.wordsearch.gameplay.mapper.UsedWordMapper;
 import com.aar.app.wordsearch.custom.LetterBoard;

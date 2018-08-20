@@ -1,6 +1,6 @@
 package com.aar.app.wordsearch.commons.generator;
 
-import com.aar.app.wordsearch.domain.model.Grid;
+import com.aar.app.wordsearch.model.Grid;
 
 /**
  * Created by abdularis on 06/07/17.

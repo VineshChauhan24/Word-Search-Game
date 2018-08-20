@@ -1,6 +1,6 @@
 package com.aar.app.wordsearch.domain.data.source;
 
-import com.aar.app.wordsearch.domain.model.Word;
+import com.aar.app.wordsearch.model.Word;
 
 import java.util.List;
 

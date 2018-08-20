@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.aar.app.wordsearch.domain.data.source.WordDataSource;
-import com.aar.app.wordsearch.domain.model.Word;
+import com.aar.app.wordsearch.model.Word;
 
 import java.util.ArrayList;
 import java.util.List;

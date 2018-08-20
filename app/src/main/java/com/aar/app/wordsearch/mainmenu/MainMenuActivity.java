@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
-import com.aar.app.wordsearch.domain.model.GameRound;
+import com.aar.app.wordsearch.model.GameRound;
 import com.aar.app.wordsearch.FullscreenActivity;
 import com.aar.app.wordsearch.gameplay.GamePlayActivity;
 import com.aar.app.wordsearch.settings.SettingsActivity;

@@ -5,7 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
-import com.aar.app.wordsearch.domain.model.GameRoundStat;
+import com.aar.app.wordsearch.model.GameRoundStat;
 
 public class GameOverViewModel extends ViewModel {
 

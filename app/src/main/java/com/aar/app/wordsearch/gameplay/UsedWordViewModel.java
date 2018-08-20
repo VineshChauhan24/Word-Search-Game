@@ -1,6 +1,6 @@
 package com.aar.app.wordsearch.gameplay;
 
-import com.aar.app.wordsearch.domain.model.UsedWord;
+import com.aar.app.wordsearch.model.UsedWord;
 import com.aar.app.wordsearch.custom.StreakView;
 import com.aar.app.wordsearch.gameplay.mapper.StreakLineMapper;
 

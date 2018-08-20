@@ -6,10 +6,10 @@ import com.aar.app.wordsearch.commons.generator.StringListGridGenerator;
 import com.aar.app.wordsearch.domain.data.mapper.GameRoundMapper;
 import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
 import com.aar.app.wordsearch.domain.data.source.WordDataSource;
-import com.aar.app.wordsearch.domain.model.GameRound;
-import com.aar.app.wordsearch.domain.model.Grid;
-import com.aar.app.wordsearch.domain.model.UsedWord;
-import com.aar.app.wordsearch.domain.model.Word;
+import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.Grid;
+import com.aar.app.wordsearch.model.UsedWord;
+import com.aar.app.wordsearch.model.Word;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
