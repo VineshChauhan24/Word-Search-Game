@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.aar.app.wordsearch.ViewModelFactory;
-import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
-import com.aar.app.wordsearch.domain.data.source.WordDataSource;
+import com.aar.app.wordsearch.data.GameRoundDataSource;
+import com.aar.app.wordsearch.data.WordDataSource;
 import com.aar.app.wordsearch.gameover.GameOverViewModel;
 import com.aar.app.wordsearch.gameplay.GamePlayViewModel;
 import com.aar.app.wordsearch.mainmenu.MainMenuViewModel;

@@ -5,8 +5,8 @@ import android.content.Context;
 import com.aar.app.wordsearch.data.sqlite.DbHelper;
 import com.aar.app.wordsearch.data.sqlite.GameRoundSQLiteDataSource;
 import com.aar.app.wordsearch.data.xml.WordXmlDataSource;
-import com.aar.app.wordsearch.domain.data.source.GameRoundDataSource;
-import com.aar.app.wordsearch.domain.data.source.WordDataSource;
+import com.aar.app.wordsearch.data.GameRoundDataSource;
+import com.aar.app.wordsearch.data.WordDataSource;
 
 import javax.inject.Singleton;
 

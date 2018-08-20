@@ -1,9 +1,9 @@
-package com.aar.app.wordsearch.domain.data.mapper;
+package com.aar.app.wordsearch.data.mapper;
 
 
 import com.aar.app.wordsearch.commons.Mapper;
 import com.aar.app.wordsearch.commons.generator.StringGridGenerator;
-import com.aar.app.wordsearch.domain.data.entity.GameRoundEntity;
+import com.aar.app.wordsearch.data.entity.GameRoundEntity;
 import com.aar.app.wordsearch.model.GameRound;
 import com.aar.app.wordsearch.model.Grid;
 

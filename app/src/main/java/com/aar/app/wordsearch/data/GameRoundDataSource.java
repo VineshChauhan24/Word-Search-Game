@@ -1,6 +1,6 @@
-package com.aar.app.wordsearch.domain.data.source;
+package com.aar.app.wordsearch.data;
 
-import com.aar.app.wordsearch.domain.data.entity.GameRoundEntity;
+import com.aar.app.wordsearch.data.entity.GameRoundEntity;
 import com.aar.app.wordsearch.model.GameRound;
 import com.aar.app.wordsearch.model.GameRoundStat;
 import com.aar.app.wordsearch.model.UsedWord;

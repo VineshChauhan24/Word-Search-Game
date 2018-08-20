@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.domain.data.entity;
+package com.aar.app.wordsearch.data.entity;
 
 import com.aar.app.wordsearch.model.GameRound;
 import com.aar.app.wordsearch.model.UsedWord;

@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.domain.data.source;
+package com.aar.app.wordsearch.data;
 
 import com.aar.app.wordsearch.model.Word;
 

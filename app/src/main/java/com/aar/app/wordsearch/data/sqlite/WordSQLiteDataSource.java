@@ -3,7 +3,7 @@ package com.aar.app.wordsearch.data.sqlite;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.aar.app.wordsearch.domain.data.source.WordDataSource;
+import com.aar.app.wordsearch.data.WordDataSource;
 import com.aar.app.wordsearch.model.Word;
 
 import java.util.ArrayList;

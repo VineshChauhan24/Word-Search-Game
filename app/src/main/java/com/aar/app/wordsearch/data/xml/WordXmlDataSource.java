@@ -3,7 +3,7 @@ package com.aar.app.wordsearch.data.xml;
 import android.content.Context;
 import android.content.res.AssetManager;
 
-import com.aar.app.wordsearch.domain.data.source.WordDataSource;
+import com.aar.app.wordsearch.data.WordDataSource;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
