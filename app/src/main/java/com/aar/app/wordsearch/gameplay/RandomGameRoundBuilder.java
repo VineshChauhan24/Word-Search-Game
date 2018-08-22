@@ -54,7 +54,7 @@ public class RandomGameRoundBuilder {
                 gameData.getInfo().setName(name);
             }
 
-            mGameDataSource.saveGameRound(new GameDataMapper().revMap(gameData));
+            mGameDataSource.saveGameData(new GameDataMapper().revMap(gameData));
         });
 
         return gameData;

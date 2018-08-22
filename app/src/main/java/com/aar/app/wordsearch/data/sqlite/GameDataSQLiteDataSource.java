@@ -29,7 +29,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void getGameRound(int gid, GameRoundCallback callback) {
+    public void getGameData(int gid, GameRoundCallback callback) {
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
         String cols[] = {
@@ -64,7 +64,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void getGameRoundInfos(InfosCallback callback) {
+    public void getGameDataInfos(InfosCallback callback) {
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
         String cols[] = {
@@ -95,7 +95,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void getGameRoundStat(int gid, StatCallback callback) {
+    public void getGameDataStat(int gid, StatCallback callback) {
         String subQ = "(SELECT COUNT(*) FROM " + DbContract.UsedWord.TABLE_NAME + " WHERE " +
                 DbContract.UsedWord.COL_GAME_ROUND_ID + "=" + gid + ")";
         String q = "SELECT " +
@@ -123,7 +123,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void saveGameRound(GameDataEntity gameRound) {
+    public void saveGameData(GameDataEntity gameRound) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DbContract.GameRound.COL_NAME, gameRound.getInfo().getName());
@@ -152,7 +152,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void deleteGameRound(int gid) {
+    public void deleteGameData(int gid) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         String sel = DbContract.GameRound._ID + "=?";
         String selArgs[] = {String.valueOf(gid)};
@@ -164,14 +164,14 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void deleteGameRounds() {
+    public void deleteGameDatas() {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.delete(DbContract.GameRound.TABLE_NAME, null, null);
         db.delete(DbContract.UsedWord.TABLE_NAME, null, null);
     }
 
     @Override
-    public void saveGameRoundDuration(int gid, int newDuration) {
+    public void saveGameDataDuration(int gid, int newDuration) {
         SQLiteDatabase db = mHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put(DbContract.GameRound.COL_DURATION, newDuration);

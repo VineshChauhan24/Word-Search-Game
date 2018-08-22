@@ -30,19 +30,19 @@ public interface GameDataSource {
 
     }
 
-    void getGameRound(int gid, GameRoundCallback callback);
+    void getGameData(int gid, GameRoundCallback callback);
 
-    void getGameRoundInfos(InfosCallback callback);
+    void getGameDataInfos(InfosCallback callback);
 
-    void getGameRoundStat(int gid, StatCallback callback);
+    void getGameDataStat(int gid, StatCallback callback);
 
-    void saveGameRound(GameDataEntity gameRound);
+    void saveGameData(GameDataEntity gameRound);
 
-    void deleteGameRound(int gid);
+    void deleteGameData(int gid);
 
-    void deleteGameRounds();
+    void deleteGameDatas();
 
-    void saveGameRoundDuration(int gid, int newDuration);
+    void saveGameDataDuration(int gid, int newDuration);
 
     void markWordAsAnswered(UsedWord usedWord);
 }

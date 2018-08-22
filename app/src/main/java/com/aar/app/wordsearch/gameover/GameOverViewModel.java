@@ -17,11 +17,11 @@ public class GameOverViewModel extends ViewModel {
     }
 
     public void loadData(int gid) {
-        mGameDataSource.getGameRoundStat(gid, mOnGameRoundStatLoaded::setValue);
+        mGameDataSource.getGameDataStat(gid, mOnGameRoundStatLoaded::setValue);
     }
 
     public void deleteGameRound(int gid) {
-        mGameDataSource.deleteGameRound(gid);
+        mGameDataSource.deleteGameData(gid);
     }
 
     public LiveData<GameDataStatistic> getOnGameRoundStatLoaded() {

@@ -22,15 +22,15 @@ public class MainMenuViewModel extends ViewModel {
     }
 
     public void loadData() {
-        mDataSource.getGameRoundInfos(infoList -> mOnGameRoundInfoLoaded.setValue(infoList));
+        mDataSource.getGameDataInfos(infoList -> mOnGameRoundInfoLoaded.setValue(infoList));
     }
 
     public void clearAll() {
-        mDataSource.deleteGameRounds();
+        mDataSource.deleteGameDatas();
     }
 
     public void deleteGameRound(final GameData.Info info) {
-        mDataSource.deleteGameRound(info.getId());
+        mDataSource.deleteGameData(info.getId());
     }
 
     public LiveData<List<GameData.Info>> getOnGameRoundInfoLoaded() {
