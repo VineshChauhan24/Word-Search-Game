@@ -16,9 +16,11 @@ public class GameDataMapper extends Mapper<GameDataEntity, GameData> {
     public GameData map(GameDataEntity obj) {
         if (obj == null) return null;
 
-        GameData gr = new GameData();
-        gr.setInfo(obj.getInfo());
         Grid grid = new Grid(obj.getGridRowCount(), obj.getGridColCount());
+        GameData gr = new GameData();
+        gr.setId(obj.getId());
+        gr.setName(obj.getName());
+        gr.setDuration(obj.getDuration());
         gr.setGrid(grid);
 
         if (obj.getGridData() != null && obj.getGridData().length() > 0) {
@@ -35,7 +37,9 @@ public class GameDataMapper extends Mapper<GameDataEntity, GameData> {
         if (obj == null) return null;
 
         GameDataEntity ent = new GameDataEntity();
-        ent.setInfo(obj.getInfo());
+        ent.setId(obj.getId());
+        ent.setName(obj.getName());
+        ent.setDuration(obj.getDuration());
 
         if (obj.getGrid() != null) {
             ent.setGridRowCount(obj.getGrid().getRowCount());

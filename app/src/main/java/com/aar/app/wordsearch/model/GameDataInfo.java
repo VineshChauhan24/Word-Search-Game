@@ -1,33 +1,13 @@
-package com.aar.app.wordsearch.data.entity;
+package com.aar.app.wordsearch.model;
 
-import com.aar.app.wordsearch.model.GameData;
-import com.aar.app.wordsearch.model.UsedWord;
-
-import java.util.List;
-
-/**
- * Created by abdularis on 08/07/17.
- */
-
-public class GameDataEntity {
+public class GameDataInfo {
 
     private int mId;
     private String mName;
     private int mDuration;
     private int mGridRowCount;
     private int mGridColCount;
-    private String mGridData;
-    private List<UsedWord> mUsedWords;
-
-    public GameDataEntity() {
-        mId = 0;
-        mName = "";
-        mDuration = 0;
-        mGridRowCount = 0;
-        mGridColCount = 0;
-        mGridData = null;
-        mUsedWords = null;
-    }
+    private int mUsedWordsCount;
 
     public int getId() {
         return mId;
@@ -69,19 +49,11 @@ public class GameDataEntity {
         mGridColCount = gridColCount;
     }
 
-    public String getGridData() {
-        return mGridData;
+    public int getUsedWordsCount() {
+        return mUsedWordsCount;
     }
 
-    public void setGridData(String gridData) {
-        mGridData = gridData;
-    }
-
-    public List<UsedWord> getUsedWords() {
-        return mUsedWords;
-    }
-
-    public void setUsedWords(List<UsedWord> usedWords) {
-        mUsedWords = usedWords;
+    public void setUsedWordsCount(int usedWordsCount) {
+        mUsedWordsCount = usedWordsCount;
     }
 }

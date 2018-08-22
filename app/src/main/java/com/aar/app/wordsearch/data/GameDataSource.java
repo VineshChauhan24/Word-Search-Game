@@ -2,6 +2,7 @@ package com.aar.app.wordsearch.data;
 
 import com.aar.app.wordsearch.data.entity.GameDataEntity;
 import com.aar.app.wordsearch.model.GameData;
+import com.aar.app.wordsearch.model.GameDataInfo;
 import com.aar.app.wordsearch.model.GameDataStatistic;
 import com.aar.app.wordsearch.model.UsedWord;
 
@@ -21,7 +22,7 @@ public interface GameDataSource {
 
     interface InfosCallback {
 
-        void onLoaded(List<GameData.Info> infoList);
+        void onLoaded(List<GameDataInfo> infoList);
     }
 
     interface StatCallback {

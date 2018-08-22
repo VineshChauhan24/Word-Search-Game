@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.aar.app.wordsearch.data.entity.GameDataEntity;
 import com.aar.app.wordsearch.data.GameDataSource;
 import com.aar.app.wordsearch.model.GameData;
+import com.aar.app.wordsearch.model.GameDataInfo;
 import com.aar.app.wordsearch.model.GameDataStatistic;
 import com.aar.app.wordsearch.model.UsedWord;
 
@@ -46,13 +47,10 @@ public class GameDataSQLiteDataSource implements GameDataSource {
         Cursor c = db.query(DbContract.GameRound.TABLE_NAME, cols, sel, selArgs, null, null, null);
         GameDataEntity ent = null;
         if (c.moveToFirst()) {
-            GameData.Info info = new GameData.Info();
-            info.setId(c.getInt(0));
-            info.setName(c.getString(1));
-            info.setDuration(c.getInt(2));
-
             ent = new GameDataEntity();
-            ent.setInfo(info);
+            ent.setId(c.getInt(0));
+            ent.setName(c.getString(1));
+            ent.setDuration(c.getInt(2));
             ent.setGridRowCount(c.getInt(3));
             ent.setGridColCount(c.getInt(4));
             ent.setGridData(c.getString(5));
@@ -65,26 +63,31 @@ public class GameDataSQLiteDataSource implements GameDataSource {
 
     @Override
     public void getGameDataInfos(InfosCallback callback) {
+        String subQ = "(SELECT COUNT(*) FROM " + DbContract.UsedWord.TABLE_NAME + " WHERE " +
+                DbContract.UsedWord.COL_GAME_ROUND_ID + "=" + DbContract.GameRound._ID + ")";
+        String order = " ORDER BY " + DbContract.GameRound._ID + " DESC";
+        String query = "SELECT " +
+                DbContract.GameRound._ID + "," +
+                DbContract.GameRound.COL_NAME + "," +
+                DbContract.GameRound.COL_DURATION + "," +
+                DbContract.GameRound.COL_GRID_ROW_COUNT + "," +
+                DbContract.GameRound.COL_GRID_COL_COUNT + "," +
+                subQ +
+                " FROM " + DbContract.GameRound.TABLE_NAME + order;
+
         SQLiteDatabase db = mHelper.getReadableDatabase();
-
-        String cols[] = {
-                DbContract.GameRound._ID,
-                DbContract.GameRound.COL_NAME,
-                DbContract.GameRound.COL_DURATION
-        };
-        String order = DbContract.GameRound._ID + " DESC";
-
-        Cursor c = db.query(DbContract.GameRound.TABLE_NAME, cols, null, null, null, null, order);
-
-        List<GameData.Info> infoList = new ArrayList<>();
+        List<GameDataInfo> infoList = new ArrayList<>();
+        Cursor c = db.rawQuery(query, null);
         if (c.moveToFirst()) {
             while (!c.isAfterLast()) {
-
-                GameData.Info info = new GameData.Info();
-                info.setId(c.getInt(0));
-                info.setName(c.getString(1));
-                info.setDuration(c.getInt(2));
-                infoList.add(info);
+                GameDataInfo gdi = new GameDataInfo();
+                gdi.setId(c.getInt(0));
+                gdi.setName(c.getString(1));
+                gdi.setDuration(c.getInt(2));
+                gdi.setGridRowCount(c.getInt(3));
+                gdi.setGridColCount(c.getInt(4));
+                gdi.setUsedWordsCount(c.getInt(5));
+                infoList.add(gdi);
 
                 c.moveToNext();
             }
@@ -119,21 +122,20 @@ public class GameDataSQLiteDataSource implements GameDataSource {
             callback.onLoaded(stat);
         }
         c.close();
-
     }
 
     @Override
     public void saveGameData(GameDataEntity gameRound) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(DbContract.GameRound.COL_NAME, gameRound.getInfo().getName());
-        values.put(DbContract.GameRound.COL_DURATION, gameRound.getInfo().getDuration());
+        values.put(DbContract.GameRound.COL_NAME, gameRound.getName());
+        values.put(DbContract.GameRound.COL_DURATION, gameRound.getDuration());
         values.put(DbContract.GameRound.COL_GRID_ROW_COUNT, gameRound.getGridRowCount());
         values.put(DbContract.GameRound.COL_GRID_COL_COUNT, gameRound.getGridColCount());
         values.put(DbContract.GameRound.COL_GRID_DATA, gameRound.getGridData());
 
         long gid = db.insert(DbContract.GameRound.TABLE_NAME, "null", values);
-        gameRound.getInfo().setId((int) gid);
+        gameRound.setId((int) gid);
 
         for (UsedWord usedWord : gameRound.getUsedWords()) {
             values.clear();

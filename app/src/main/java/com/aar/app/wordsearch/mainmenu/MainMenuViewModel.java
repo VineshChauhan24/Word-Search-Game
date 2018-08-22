@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel;
 
 import com.aar.app.wordsearch.data.GameDataSource;
 import com.aar.app.wordsearch.model.GameData;
+import com.aar.app.wordsearch.model.GameDataInfo;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class MainMenuViewModel extends ViewModel {
 
     private GameDataSource mDataSource;
 
-    private MutableLiveData<List<GameData.Info>> mOnGameRoundInfoLoaded;
+    private MutableLiveData<List<GameDataInfo>> mOnGameRoundInfoLoaded;
 
     public MainMenuViewModel(GameDataSource gameDataSource) {
         mDataSource = gameDataSource;
@@ -29,11 +30,11 @@ public class MainMenuViewModel extends ViewModel {
         mDataSource.deleteGameDatas();
     }
 
-    public void deleteGameRound(final GameData.Info info) {
+    public void deleteGameRound(final GameDataInfo info) {
         mDataSource.deleteGameData(info.getId());
     }
 
-    public LiveData<List<GameData.Info>> getOnGameRoundInfoLoaded() {
+    public LiveData<List<GameDataInfo>> getOnGameRoundInfoLoaded() {
         return mOnGameRoundInfoLoaded;
     }
 }

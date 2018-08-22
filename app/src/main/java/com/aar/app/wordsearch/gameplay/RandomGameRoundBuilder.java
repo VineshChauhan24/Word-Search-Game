@@ -3,6 +3,7 @@ package com.aar.app.wordsearch.gameplay;
 
 import com.aar.app.wordsearch.commons.Util;
 import com.aar.app.wordsearch.commons.generator.StringListGridGenerator;
+import com.aar.app.wordsearch.data.entity.GameDataEntity;
 import com.aar.app.wordsearch.data.entity.GameDataMapper;
 import com.aar.app.wordsearch.data.GameDataSource;
 import com.aar.app.wordsearch.data.WordDataSource;
@@ -48,13 +49,15 @@ public class RandomGameRoundBuilder {
             if (name == null || name.isEmpty()) {
                 String name1 = "Puzzle " +
                         new SimpleDateFormat("HH.mm.ss", Locale.ENGLISH).format(new Date(System.currentTimeMillis()));
-                gameData.getInfo().setName(name1);
+                gameData.setName(name1);
             }
             else {
-                gameData.getInfo().setName(name);
+                gameData.setName(name);
             }
 
-            mGameDataSource.saveGameData(new GameDataMapper().revMap(gameData));
+            GameDataEntity gameDataEntity = new GameDataMapper().revMap(gameData);
+            mGameDataSource.saveGameData(gameDataEntity);
+            gameData.setId(gameDataEntity.getId());
         });
 
         return gameData;

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.model.GameData;
+import com.aar.app.wordsearch.model.GameDataInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by abdularis on 20/07/17.
  */
 
-public class GameDataInfoAdapter extends ArrayAdapter<GameData.Info> {
+public class GameDataInfoAdapter extends ArrayAdapter<GameDataInfo> {
 
     private final int mResId;
     private OnDeleteItemClickListener mDeleteItemClickListener;
@@ -50,7 +51,7 @@ public class GameDataInfoAdapter extends ArrayAdapter<GameData.Info> {
             holder = (Holder) view.getTag();
         }
 
-        GameData.Info dt = getItem(position);
+        GameDataInfo dt = getItem(position);
         if (dt != null) {
             setHolderData(holder, dt);
         }
@@ -58,7 +59,7 @@ public class GameDataInfoAdapter extends ArrayAdapter<GameData.Info> {
         return view;
     }
 
-    private void setHolderData(Holder holder, GameData.Info info) {
+    private void setHolderData(Holder holder, GameDataInfo info) {
         holder.textName.setText(info.getName());
         holder.textDuration.setText(DurationFormatter.fromInteger(info.getDuration()));
         if (holder.deleteItemClick == null) {
@@ -88,15 +89,15 @@ public class GameDataInfoAdapter extends ArrayAdapter<GameData.Info> {
 
     public interface OnDeleteItemClickListener {
 
-        void onDeleteItemClick(GameData.Info info);
+        void onDeleteItemClick(GameDataInfo info);
 
     }
 
     private class DeleteItemClick implements View.OnClickListener {
 
-        GameData.Info info;
+        GameDataInfo info;
 
-        DeleteItemClick(GameData.Info info) {
+        DeleteItemClick(GameDataInfo info) {
             this.info = info;
         }
 

@@ -83,7 +83,7 @@ public class GamePlayViewModel extends ViewModel {
         mTimer = new Timer(TIMER_TIMEOUT);
         mTimer.addOnTimeoutListener(elapsedTime -> {
             mOnTimer.setValue(mCurrentDuration++);
-            mGameDataSource.saveGameDataDuration(mCurrentGameData.getInfo().getId(), mCurrentDuration);
+            mGameDataSource.saveGameDataDuration(mCurrentGameData.getId(), mCurrentDuration);
         });
         resetLiveData();
     }
@@ -118,7 +118,7 @@ public class GamePlayViewModel extends ViewModel {
 
             mGameDataSource.getGameData(gid, gameRound -> {
                 mCurrentGameData = new GameDataMapper().map(gameRound);
-                mCurrentDuration = mCurrentGameData.getInfo().getDuration();
+                mCurrentDuration = mCurrentGameData.getDuration();
                 if (!mCurrentGameData.isFinished())
                     mTimer.start();
                 setGameState(new Playing(mCurrentGameData));

@@ -13,9 +13,9 @@ import android.widget.Spinner;
 import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
-import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.FullscreenActivity;
 import com.aar.app.wordsearch.gameplay.GamePlayActivity;
+import com.aar.app.wordsearch.model.GameDataInfo;
 import com.aar.app.wordsearch.settings.SettingsActivity;
 
 import java.util.List;
@@ -90,7 +90,7 @@ public class MainMenuActivity extends FullscreenActivity {
         mViewModel.clearAll();
     }
 
-    public void showGameInfoList(List<GameData.Info> infoList) {
+    public void showGameInfoList(List<GameDataInfo> infoList) {
         mInfoAdapter.clear();
         mInfoAdapter.addAll(infoList);
         if (infoList.size() <= 0) {
@@ -126,7 +126,7 @@ public class MainMenuActivity extends FullscreenActivity {
                 });
     }
 
-    public void deleteInfo(GameData.Info info) {
+    public void deleteInfo(GameDataInfo info) {
         mInfoAdapter.remove(info);
         if (mInfoAdapter.getCount() <= 0) {
             mLayoutSavedGame.animate()

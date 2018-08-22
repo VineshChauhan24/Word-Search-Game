@@ -193,7 +193,7 @@ public class GamePlayActivity extends FullscreenActivity {
             String text = "Generating " + state.rowCount + "x" + state.colCount + " grid";
             showLoading(true, text);
         } else if (gameState instanceof GamePlayViewModel.Finished) {
-            showFinishGame(((GamePlayViewModel.Finished) gameState).mGameData.getInfo().getId());
+            showFinishGame(((GamePlayViewModel.Finished) gameState).mGameData.getId());
         } else if (gameState instanceof GamePlayViewModel.Paused) {
 
         } else if (gameState instanceof GamePlayViewModel.Playing) {
@@ -207,7 +207,7 @@ public class GamePlayActivity extends FullscreenActivity {
         }
 
         showLetterGrid(gameData.getGrid().getArray());
-        showDuration(gameData.getInfo().getDuration());
+        showDuration(gameData.getDuration());
         showUsedWords(gameData.getUsedWords());
         showWordsCount(gameData.getUsedWords().size());
         showAnsweredWordsCount(gameData.getAnsweredWordsCount());

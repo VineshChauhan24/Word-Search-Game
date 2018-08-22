@@ -11,30 +11,46 @@ import java.util.List;
 
 public class GameData {
 
-    private Info mInfo;
+    private int mId;
+    private String mName;
+    private int mDuration;
     private Grid mGrid;
     private List<UsedWord> mUsedWords;
 
     public GameData() {
-        this(new Info(), null, new ArrayList<>());
+        this(0, "", 0, null, new ArrayList<>());
     }
 
-    public GameData(Info info) {
-        this(info, null, new ArrayList<>());
-    }
-
-    public GameData(Info info, Grid grid, List<UsedWord> usedWords) {
-        mInfo = info;
+    public GameData(int id, String name, int duration, Grid grid, List<UsedWord> usedWords) {
+        mId = id;
+        mName = name;
+        mDuration = duration;
         mGrid = grid;
         mUsedWords = usedWords;
     }
 
-    public Info getInfo() {
-        return mInfo;
+    public int getId() {
+        return mId;
     }
 
-    public void setInfo(Info info) {
-        mInfo = info;
+    public void setId(int id) {
+        mId = id;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public int getDuration() {
+        return mDuration;
+    }
+
+    public void setDuration(int duration) {
+        mDuration = duration;
     }
 
     public Grid getGrid() {
@@ -85,45 +101,5 @@ public class GameData {
 
     public void addUsedWords(List<UsedWord> usedWords) {
         mUsedWords.addAll(usedWords);
-    }
-
-    public static class Info {
-        private int mId;
-        private String mName;
-        private int mDuration;
-
-        public Info() {
-            this(-1, "", 0);
-        }
-
-        public Info(int id, String name, int duration) {
-            mId = id;
-            mName = name;
-            mDuration = duration;
-        }
-
-        public int getId() {
-            return mId;
-        }
-
-        public void setId(int id) {
-            mId = id;
-        }
-
-        public String getName() {
-            return mName;
-        }
-
-        public void setName(String name) {
-            mName = name;
-        }
-
-        public int getDuration() {
-            return mDuration;
-        }
-
-        public void setDuration(int duration) {
-            mDuration = duration;
-        }
     }
 }
