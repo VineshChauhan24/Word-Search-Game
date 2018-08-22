@@ -15,13 +15,14 @@
         <activity android:name=".gameplay.GamePlayActivity">
         </activity>
         <activity android:name=".mainmenu.MainMenuActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity android:name=".gameover.GameOverActivity">
+        </activity>
+        <activity android:name=".SplashScreenActivity" android:theme="@style/SplashScreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 
