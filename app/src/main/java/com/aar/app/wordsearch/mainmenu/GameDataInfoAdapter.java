@@ -62,6 +62,10 @@ public class GameDataInfoAdapter extends ArrayAdapter<GameDataInfo> {
     private void setHolderData(Holder holder, GameDataInfo info) {
         holder.textName.setText(info.getName());
         holder.textDuration.setText(DurationFormatter.fromInteger(info.getDuration()));
+        String desc = getContext().getString(R.string.game_data_desc);
+        desc = desc.replaceAll(":gridSize", info.getGridRowCount() + "x" + info.getGridColCount());
+        desc = desc.replaceAll(":wordCount", String.valueOf(info.getUsedWordsCount()));
+        holder.textOtherDesc.setText(desc);
         if (holder.deleteItemClick == null) {
             holder.deleteItemClick = new DeleteItemClick(info);
             holder.viewDeleteItem.setOnClickListener(holder.deleteItemClick);
@@ -71,12 +75,10 @@ public class GameDataInfoAdapter extends ArrayAdapter<GameDataInfo> {
     }
 
     class Holder {
-        @BindView(R.id.text_name)
-        TextView textName;
-        @BindView(R.id.text_duration)
-        TextView textDuration;
-        @BindView(R.id.delete_list_item)
-        View viewDeleteItem;
+        @BindView(R.id.text_name) TextView textName;
+        @BindView(R.id.text_duration) TextView textDuration;
+        @BindView(R.id.text_desc) TextView textOtherDesc;
+        @BindView(R.id.delete_list_item) View viewDeleteItem;
 
         DeleteItemClick deleteItemClick;
 
