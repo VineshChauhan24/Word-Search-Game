@@ -19,7 +19,6 @@ import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.commons.Util;
 import com.aar.app.wordsearch.model.GameData;
-import com.aar.app.wordsearch.gameplay.mapper.StreakLineMapper;
 import com.aar.app.wordsearch.custom.LetterBoard;
 import com.aar.app.wordsearch.custom.StreakView;
 import com.aar.app.wordsearch.custom.layout.FlowLayout;

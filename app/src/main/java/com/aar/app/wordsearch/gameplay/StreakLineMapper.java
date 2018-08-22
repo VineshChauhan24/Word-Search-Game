@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.gameplay.mapper;
+package com.aar.app.wordsearch.gameplay;
 
 import com.aar.app.wordsearch.commons.Mapper;
 import com.aar.app.wordsearch.model.UsedWord;
