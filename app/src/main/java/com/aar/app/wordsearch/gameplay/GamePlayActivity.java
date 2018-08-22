@@ -20,12 +20,12 @@ import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.commons.Util;
 import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.gameplay.mapper.StreakLineMapper;
-import com.aar.app.wordsearch.gameplay.mapper.UsedWordMapper;
 import com.aar.app.wordsearch.custom.LetterBoard;
 import com.aar.app.wordsearch.custom.StreakView;
 import com.aar.app.wordsearch.custom.layout.FlowLayout;
 import com.aar.app.wordsearch.gameover.GameOverActivity;
 import com.aar.app.wordsearch.FullscreenActivity;
+import com.aar.app.wordsearch.model.UsedWord;
 
 import java.util.List;
 
@@ -163,12 +163,12 @@ public class GamePlayActivity extends FullscreenActivity {
         if (answerResult.correct) {
             TextView textView = findUsedWordTextViewByUsedWordId(answerResult.usedWordId);
             if (textView != null) {
-                UsedWordViewModel uw = (UsedWordViewModel) textView.getTag();
+                UsedWord uw = (UsedWord) textView.getTag();
 
                 if (getPreferences().grayscale()) {
-                    uw.getUsedWord().getAnswerLine().color = mGrayColor;
+                    uw.getAnswerLine().color = mGrayColor;
                 }
-                textView.setBackgroundColor(uw.getStreakLine().getColor());
+                textView.setBackgroundColor(uw.getAnswerLine().color);
                 textView.setText(uw.getString());
                 textView.setTextColor(Color.WHITE);
                 textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
@@ -209,7 +209,7 @@ public class GamePlayActivity extends FullscreenActivity {
 
         showLetterGrid(gameData.getGrid().getArray());
         showDuration(gameData.getInfo().getDuration());
-        showUsedWords(new UsedWordMapper().map(gameData.getUsedWords()));
+        showUsedWords(gameData.getUsedWords());
         showWordsCount(gameData.getUsedWords().size());
         showAnsweredWordsCount(gameData.getAnsweredWordsCount());
         doneLoadingContent();
@@ -266,8 +266,8 @@ public class GamePlayActivity extends FullscreenActivity {
         mTextDuration.setText(DurationFormatter.fromInteger(duration));
     }
 
-    private void showUsedWords(List<UsedWordViewModel> usedWords) {
-        for (UsedWordViewModel uw : usedWords) {
+    private void showUsedWords(List<UsedWord> usedWords) {
+        for (UsedWord uw : usedWords) {
             mFlowLayout.addView( createUsedWordTextView(uw) );
         }
     }
@@ -295,24 +295,24 @@ public class GamePlayActivity extends FullscreenActivity {
     }
 
     //
-    private TextView createUsedWordTextView(UsedWordViewModel uw) {
+    private TextView createUsedWordTextView(UsedWord uw) {
         TextView tv = new TextView(this);
         tv.setPadding(10, 5, 10, 5);
         if (uw.isAnswered()) {
             if (getPreferences().grayscale()) {
-                uw.getUsedWord().getAnswerLine().color = mGrayColor;
+                uw.getAnswerLine().color = mGrayColor;
             }
-            tv.setBackgroundColor(uw.getStreakLine().getColor());
+            tv.setBackgroundColor(uw.getAnswerLine().color);
             tv.setText(uw.getString());
             tv.setTextColor(Color.WHITE);
             tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-            mLetterBoard.addStreakLine(uw.getStreakLine());
+            mLetterBoard.addStreakLine(STREAK_LINE_MAPPER.map(uw.getAnswerLine()));
         }
         else {
             String str = uw.getString();
             if (uw.isMystery()) {
-                int revealCount = uw.getUsedWord().getRevealCount();
+                int revealCount = uw.getRevealCount();
                 String uwString = uw.getString();
                 str = "";
                 for (int i = 0; i < uwString.length(); i++) {
@@ -335,7 +335,7 @@ public class GamePlayActivity extends FullscreenActivity {
     private TextView findUsedWordTextViewByUsedWordId(int usedWordId) {
         for (int i = 0; i < mFlowLayout.getChildCount(); i++) {
             TextView tv = (TextView) mFlowLayout.getChildAt(i);
-            UsedWordViewModel uw = (UsedWordViewModel) tv.getTag();
+            UsedWord uw = (UsedWord) tv.getTag();
             if (uw != null && uw.getId() == usedWordId) {
                 return tv;
             }
