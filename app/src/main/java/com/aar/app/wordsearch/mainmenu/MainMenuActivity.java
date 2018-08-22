@@ -56,7 +56,7 @@ public class MainMenuActivity extends FullscreenActivity {
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainMenuViewModel.class);
         mViewModel.getOnGameRoundInfoLoaded().observe(this, this::showGameInfoList);
 
-        mInfoAdapter = new GameDataInfoAdapter(this, R.layout.game_round_item);
+        mInfoAdapter = new GameDataInfoAdapter(this, R.layout.item_game_data);
         mListView.setAdapter(mInfoAdapter);
         mListView.setOnItemClickListener((parent, view, position, id) -> {
             showGameRound(mInfoAdapter.getItem(position).getId());

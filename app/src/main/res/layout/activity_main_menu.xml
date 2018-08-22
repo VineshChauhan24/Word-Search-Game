@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:background="@drawable/round_rectangle_bg"
-            tools:listitem="@layout/game_round_item"/>
+            tools:listitem="@layout/item_game_data"/>
 
     </LinearLayout>
 
