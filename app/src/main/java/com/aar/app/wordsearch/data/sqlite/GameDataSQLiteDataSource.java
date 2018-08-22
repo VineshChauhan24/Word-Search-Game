@@ -231,7 +231,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
                 usedWord.setString(str);
                 usedWord.setAnswered(lineData != null);
                 usedWord.setAnswerLine(answerLine);
-                usedWord.setMystery(Boolean.valueOf(c.getString(4)));
+                usedWord.setIsMystery(Boolean.valueOf(c.getString(4)));
                 usedWord.setRevealCount(c.getInt(5));
 
                 usedWordList.add(usedWord);

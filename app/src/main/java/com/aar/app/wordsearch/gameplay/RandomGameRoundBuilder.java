@@ -70,7 +70,7 @@ public class RandomGameRoundBuilder {
             uw.setString(str);
             uw.setAnswered(false);
             if (mysteryWordCount > 0) {
-                uw.setMystery(true);
+                uw.setIsMystery(true);
                 uw.setRevealCount(Util.getRandomIntRange(0, str.length() - 1));
                 mysteryWordCount--;
             }
