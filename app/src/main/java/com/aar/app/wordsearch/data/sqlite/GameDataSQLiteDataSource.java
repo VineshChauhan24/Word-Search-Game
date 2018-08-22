@@ -64,7 +64,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     @Override
     public void getGameDataInfos(InfosCallback callback) {
         String subQ = "(SELECT COUNT(*) FROM " + DbContract.UsedWord.TABLE_NAME + " WHERE " +
-                DbContract.UsedWord.COL_GAME_ROUND_ID + "=" + DbContract.GameRound._ID + ")";
+                DbContract.UsedWord.COL_GAME_ROUND_ID + "=" + DbContract.GameRound.TABLE_NAME + "." + DbContract.GameRound._ID + ")";
         String order = " ORDER BY " + DbContract.GameRound._ID + " DESC";
         String query = "SELECT " +
                 DbContract.GameRound._ID + "," +
