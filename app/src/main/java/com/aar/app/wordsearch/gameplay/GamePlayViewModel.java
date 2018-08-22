@@ -8,7 +8,7 @@ import android.arch.lifecycle.ViewModel;
 import com.aar.app.wordsearch.commons.SingleLiveEvent;
 import com.aar.app.wordsearch.commons.Timer;
 import com.aar.app.wordsearch.data.GameDataSource;
-import com.aar.app.wordsearch.data.mapper.GameDataMapper;
+import com.aar.app.wordsearch.data.entity.GameDataMapper;
 import com.aar.app.wordsearch.data.WordDataSource;
 import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.model.UsedWord;

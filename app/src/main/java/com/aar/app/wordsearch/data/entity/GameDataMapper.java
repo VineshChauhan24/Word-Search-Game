@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.data.mapper;
+package com.aar.app.wordsearch.data.entity;
 
 
 import com.aar.app.wordsearch.commons.Mapper;

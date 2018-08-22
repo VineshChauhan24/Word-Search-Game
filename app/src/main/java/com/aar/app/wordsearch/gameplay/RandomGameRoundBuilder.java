@@ -3,7 +3,7 @@ package com.aar.app.wordsearch.gameplay;
 
 import com.aar.app.wordsearch.commons.Util;
 import com.aar.app.wordsearch.commons.generator.StringListGridGenerator;
-import com.aar.app.wordsearch.data.mapper.GameDataMapper;
+import com.aar.app.wordsearch.data.entity.GameDataMapper;
 import com.aar.app.wordsearch.data.GameDataSource;
 import com.aar.app.wordsearch.data.WordDataSource;
 import com.aar.app.wordsearch.model.GameData;
