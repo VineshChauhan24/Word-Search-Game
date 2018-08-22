@@ -4,38 +4,18 @@ package com.aar.app.wordsearch.model;
  * Created by abdularis on 08/07/17.
  */
 
-public class UsedWord {
+public class UsedWord extends Word {
 
-    private int mId;
-    private String mString;
     private AnswerLine mAnswerLine;
     private boolean mAnswered;
     private boolean mMystery;
     private int mRevealCount;
 
     public UsedWord() {
-        mId = -1;
-        mString = "";
         mAnswerLine = null;
         mAnswered = false;
         mMystery = false;
         mRevealCount = 0;
-    }
-
-    public int getId() {
-        return mId;
-    }
-
-    public void setId(int id) {
-        mId = id;
-    }
-
-    public String getString() {
-        return mString;
-    }
-
-    public void setString(String string) {
-        mString = string;
     }
 
     public AnswerLine getAnswerLine() {
