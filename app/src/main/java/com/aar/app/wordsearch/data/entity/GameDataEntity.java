@@ -1,6 +1,6 @@
 package com.aar.app.wordsearch.data.entity;
 
-import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.model.UsedWord;
 
 import java.util.List;
@@ -9,26 +9,26 @@ import java.util.List;
  * Created by abdularis on 08/07/17.
  */
 
-public class GameRoundEntity {
+public class GameDataEntity {
 
-    private GameRound.Info mInfo;
+    private GameData.Info mInfo;
     private int mGridRowCount;
     private int mGridColCount;
     private String mGridData;
     private List<UsedWord> mUsedWords;
 
-    public GameRoundEntity() {
+    public GameDataEntity() {
         mGridRowCount = 0;
         mGridColCount = 0;
         mGridData = null;
         mUsedWords = null;
     }
 
-    public GameRound.Info getInfo() {
+    public GameData.Info getInfo() {
         return mInfo;
     }
 
-    public void setInfo(GameRound.Info info) {
+    public void setInfo(GameData.Info info) {
         mInfo = info;
     }
 

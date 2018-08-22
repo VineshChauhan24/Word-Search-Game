@@ -18,7 +18,7 @@ import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.commons.Util;
-import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.gameplay.mapper.StreakLineMapper;
 import com.aar.app.wordsearch.gameplay.mapper.UsedWordMapper;
 import com.aar.app.wordsearch.custom.LetterBoard;
@@ -194,24 +194,24 @@ public class GamePlayActivity extends FullscreenActivity {
             String text = "Generating " + state.rowCount + "x" + state.colCount + " grid";
             showLoading(true, text);
         } else if (gameState instanceof GamePlayViewModel.Finished) {
-            showFinishGame(((GamePlayViewModel.Finished) gameState).gameRound.getInfo().getId());
+            showFinishGame(((GamePlayViewModel.Finished) gameState).mGameData.getInfo().getId());
         } else if (gameState instanceof GamePlayViewModel.Paused) {
 
         } else if (gameState instanceof GamePlayViewModel.Playing) {
-            onGameRoundLoaded(((GamePlayViewModel.Playing) gameState).gameRound);
+            onGameRoundLoaded(((GamePlayViewModel.Playing) gameState).mGameData);
         }
     }
 
-    private void onGameRoundLoaded(GameRound gameRound) {
-        if (gameRound.isFinished()) {
+    private void onGameRoundLoaded(GameData gameData) {
+        if (gameData.isFinished()) {
             setGameAsAlreadyFinished();
         }
 
-        showLetterGrid(gameRound.getGrid().getArray());
-        showDuration(gameRound.getInfo().getDuration());
-        showUsedWords(new UsedWordMapper().map(gameRound.getUsedWords()));
-        showWordsCount(gameRound.getUsedWords().size());
-        showAnsweredWordsCount(gameRound.getAnsweredWordsCount());
+        showLetterGrid(gameData.getGrid().getArray());
+        showDuration(gameData.getInfo().getDuration());
+        showUsedWords(new UsedWordMapper().map(gameData.getUsedWords()));
+        showWordsCount(gameData.getUsedWords().size());
+        showAnsweredWordsCount(gameData.getAnsweredWordsCount());
         doneLoadingContent();
     }
 

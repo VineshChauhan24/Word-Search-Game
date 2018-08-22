@@ -1,8 +1,8 @@
 package com.aar.app.wordsearch.data;
 
-import com.aar.app.wordsearch.data.entity.GameRoundEntity;
-import com.aar.app.wordsearch.model.GameRound;
-import com.aar.app.wordsearch.model.GameRoundStat;
+import com.aar.app.wordsearch.data.entity.GameDataEntity;
+import com.aar.app.wordsearch.model.GameData;
+import com.aar.app.wordsearch.model.GameDataStatistic;
 import com.aar.app.wordsearch.model.UsedWord;
 
 import java.util.List;
@@ -11,22 +11,22 @@ import java.util.List;
  * Created by abdularis on 18/07/17.
  */
 
-public interface GameRoundDataSource {
+public interface GameDataSource {
 
     interface GameRoundCallback {
 
-        void onLoaded(GameRoundEntity gameRound);
+        void onLoaded(GameDataEntity gameRound);
 
     }
 
     interface InfosCallback {
 
-        void onLoaded(List<GameRound.Info> infoList);
+        void onLoaded(List<GameData.Info> infoList);
     }
 
     interface StatCallback {
 
-        void onLoaded(GameRoundStat stat);
+        void onLoaded(GameDataStatistic stat);
 
     }
 
@@ -36,7 +36,7 @@ public interface GameRoundDataSource {
 
     void getGameRoundStat(int gid, StatCallback callback);
 
-    void saveGameRound(GameRoundEntity gameRound);
+    void saveGameRound(GameDataEntity gameRound);
 
     void deleteGameRound(int gid);
 

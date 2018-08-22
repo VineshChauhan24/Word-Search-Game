@@ -9,21 +9,21 @@ import java.util.List;
  * Created by abdularis on 08/07/17.
  */
 
-public class GameRound {
+public class GameData {
 
     private Info mInfo;
     private Grid mGrid;
     private List<UsedWord> mUsedWords;
 
-    public GameRound() {
+    public GameData() {
         this(new Info(), null, new ArrayList<>());
     }
 
-    public GameRound(Info info) {
+    public GameData(Info info) {
         this(info, null, new ArrayList<>());
     }
 
-    public GameRound(Info info, Grid grid, List<UsedWord> usedWords) {
+    public GameData(Info info, Grid grid, List<UsedWord> usedWords) {
         mInfo = info;
         mGrid = grid;
         mUsedWords = usedWords;

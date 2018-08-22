@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.aar.app.wordsearch.ViewModelFactory;
-import com.aar.app.wordsearch.data.GameRoundDataSource;
+import com.aar.app.wordsearch.data.GameDataSource;
 import com.aar.app.wordsearch.data.WordDataSource;
 import com.aar.app.wordsearch.gameover.GameOverViewModel;
 import com.aar.app.wordsearch.gameplay.GamePlayViewModel;
@@ -44,12 +44,12 @@ public class AppModule {
 
     @Provides
     @Singleton
-    ViewModelFactory provideViewModelFactory(GameRoundDataSource gameRoundDataSource,
+    ViewModelFactory provideViewModelFactory(GameDataSource gameDataSource,
                                              WordDataSource wordDataSource) {
         return new ViewModelFactory(
-                new GameOverViewModel(gameRoundDataSource),
-                new GamePlayViewModel(gameRoundDataSource, wordDataSource),
-                new MainMenuViewModel(gameRoundDataSource)
+                new GameOverViewModel(gameDataSource),
+                new GamePlayViewModel(gameDataSource, wordDataSource),
+                new MainMenuViewModel(gameDataSource)
         );
     }
 }

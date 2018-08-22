@@ -4,10 +4,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.aar.app.wordsearch.data.entity.GameRoundEntity;
-import com.aar.app.wordsearch.data.GameRoundDataSource;
-import com.aar.app.wordsearch.model.GameRound;
-import com.aar.app.wordsearch.model.GameRoundStat;
+import com.aar.app.wordsearch.data.entity.GameDataEntity;
+import com.aar.app.wordsearch.data.GameDataSource;
+import com.aar.app.wordsearch.model.GameData;
+import com.aar.app.wordsearch.model.GameDataStatistic;
 import com.aar.app.wordsearch.model.UsedWord;
 
 import java.util.ArrayList;
@@ -19,12 +19,12 @@ import javax.inject.Inject;
  * Created by abdularis on 18/07/17.
  */
 
-public class GameRoundSQLiteDataSource implements GameRoundDataSource {
+public class GameDataSQLiteDataSource implements GameDataSource {
 
     private DbHelper mHelper;
 
     @Inject
-    public GameRoundSQLiteDataSource(DbHelper helper) {
+    public GameDataSQLiteDataSource(DbHelper helper) {
         mHelper = helper;
     }
 
@@ -44,14 +44,14 @@ public class GameRoundSQLiteDataSource implements GameRoundDataSource {
         String selArgs[] = {String.valueOf(gid)};
 
         Cursor c = db.query(DbContract.GameRound.TABLE_NAME, cols, sel, selArgs, null, null, null);
-        GameRoundEntity ent = null;
+        GameDataEntity ent = null;
         if (c.moveToFirst()) {
-            GameRound.Info info = new GameRound.Info();
+            GameData.Info info = new GameData.Info();
             info.setId(c.getInt(0));
             info.setName(c.getString(1));
             info.setDuration(c.getInt(2));
 
-            ent = new GameRoundEntity();
+            ent = new GameDataEntity();
             ent.setInfo(info);
             ent.setGridRowCount(c.getInt(3));
             ent.setGridColCount(c.getInt(4));
@@ -76,11 +76,11 @@ public class GameRoundSQLiteDataSource implements GameRoundDataSource {
 
         Cursor c = db.query(DbContract.GameRound.TABLE_NAME, cols, null, null, null, null, order);
 
-        List<GameRound.Info> infoList = new ArrayList<>();
+        List<GameData.Info> infoList = new ArrayList<>();
         if (c.moveToFirst()) {
             while (!c.isAfterLast()) {
 
-                GameRound.Info info = new GameRound.Info();
+                GameData.Info info = new GameData.Info();
                 info.setId(c.getInt(0));
                 info.setName(c.getString(1));
                 info.setDuration(c.getInt(2));
@@ -110,7 +110,7 @@ public class GameRoundSQLiteDataSource implements GameRoundDataSource {
         SQLiteDatabase db = mHelper.getReadableDatabase();
         Cursor c = db.rawQuery(q, null);
         if (c.moveToFirst()) {
-            GameRoundStat stat = new GameRoundStat();
+            GameDataStatistic stat = new GameDataStatistic();
             stat.setName(c.getString(0));
             stat.setDuration(c.getInt(1));
             stat.setGridRowCount(c.getInt(2));
@@ -123,7 +123,7 @@ public class GameRoundSQLiteDataSource implements GameRoundDataSource {
     }
 
     @Override
-    public void saveGameRound(GameRoundEntity gameRound) {
+    public void saveGameRound(GameDataEntity gameRound) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DbContract.GameRound.COL_NAME, gameRound.getInfo().getName());

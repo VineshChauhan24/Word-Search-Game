@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.commons.DurationFormatter;
-import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.GameData;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,12 +21,12 @@ import butterknife.ButterKnife;
  * Created by abdularis on 20/07/17.
  */
 
-public class GameRoundInfoAdapter extends ArrayAdapter<GameRound.Info> {
+public class GameDataInfoAdapter extends ArrayAdapter<GameData.Info> {
 
     private final int mResId;
     private OnDeleteItemClickListener mDeleteItemClickListener;
 
-    public GameRoundInfoAdapter(@NonNull Context context, @LayoutRes int resource) {
+    public GameDataInfoAdapter(@NonNull Context context, @LayoutRes int resource) {
         super(context, resource);
         mResId = resource;
     }
@@ -50,7 +50,7 @@ public class GameRoundInfoAdapter extends ArrayAdapter<GameRound.Info> {
             holder = (Holder) view.getTag();
         }
 
-        GameRound.Info dt = getItem(position);
+        GameData.Info dt = getItem(position);
         if (dt != null) {
             setHolderData(holder, dt);
         }
@@ -58,7 +58,7 @@ public class GameRoundInfoAdapter extends ArrayAdapter<GameRound.Info> {
         return view;
     }
 
-    private void setHolderData(Holder holder, GameRound.Info info) {
+    private void setHolderData(Holder holder, GameData.Info info) {
         holder.textName.setText(info.getName());
         holder.textDuration.setText(DurationFormatter.fromInteger(info.getDuration()));
         if (holder.deleteItemClick == null) {
@@ -88,15 +88,15 @@ public class GameRoundInfoAdapter extends ArrayAdapter<GameRound.Info> {
 
     public interface OnDeleteItemClickListener {
 
-        void onDeleteItemClick(GameRound.Info info);
+        void onDeleteItemClick(GameData.Info info);
 
     }
 
     private class DeleteItemClick implements View.OnClickListener {
 
-        GameRound.Info info;
+        GameData.Info info;
 
-        DeleteItemClick(GameRound.Info info) {
+        DeleteItemClick(GameData.Info info) {
             this.info = info;
         }
 

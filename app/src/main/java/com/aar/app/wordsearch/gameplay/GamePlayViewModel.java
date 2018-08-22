@@ -7,10 +7,10 @@ import android.arch.lifecycle.ViewModel;
 
 import com.aar.app.wordsearch.commons.SingleLiveEvent;
 import com.aar.app.wordsearch.commons.Timer;
-import com.aar.app.wordsearch.data.mapper.GameRoundMapper;
-import com.aar.app.wordsearch.data.GameRoundDataSource;
+import com.aar.app.wordsearch.data.GameDataSource;
+import com.aar.app.wordsearch.data.mapper.GameDataMapper;
 import com.aar.app.wordsearch.data.WordDataSource;
-import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.model.UsedWord;
 
 import io.reactivex.Observable;
@@ -41,18 +41,18 @@ public class GamePlayViewModel extends ViewModel {
         }
     }
     static class Finished extends GameState {
-        GameRound gameRound;
-        private Finished(GameRound gameRound) {
-            this.gameRound = gameRound;
+        GameData mGameData;
+        private Finished(GameData gameData) {
+            this.mGameData = gameData;
         }
     }
     static class Paused extends GameState {
         private Paused() {}
     }
     static class Playing extends GameState {
-        GameRound gameRound;
-        private Playing(GameRound gameRound) {
-            this.gameRound = gameRound;
+        GameData mGameData;
+        private Playing(GameData gameData) {
+            this.mGameData = gameData;
         }
     }
 
@@ -65,9 +65,9 @@ public class GamePlayViewModel extends ViewModel {
         }
     }
 
-    private GameRoundDataSource mGameRoundDataSource;
+    private GameDataSource mGameDataSource;
     private RandomGameRoundBuilder mGameRoundBuilder;
-    private GameRound mCurrentGameRound;
+    private GameData mCurrentGameData;
     private Timer mTimer;
     private int mCurrentDuration;
 
@@ -76,14 +76,14 @@ public class GamePlayViewModel extends ViewModel {
     private MutableLiveData<GameState> mOnGameState;
     private SingleLiveEvent<AnswerResult> mOnAnswerResult;
 
-    public GamePlayViewModel(GameRoundDataSource gameRoundDataSource, WordDataSource wordDataSource) {
-        mGameRoundDataSource = gameRoundDataSource;
-        mGameRoundBuilder = new RandomGameRoundBuilder(mGameRoundDataSource, wordDataSource);
+    public GamePlayViewModel(GameDataSource gameDataSource, WordDataSource wordDataSource) {
+        mGameDataSource = gameDataSource;
+        mGameRoundBuilder = new RandomGameRoundBuilder(mGameDataSource, wordDataSource);
 
         mTimer = new Timer(TIMER_TIMEOUT);
         mTimer.addOnTimeoutListener(elapsedTime -> {
             mOnTimer.setValue(mCurrentDuration++);
-            mGameRoundDataSource.saveGameRoundDuration(mCurrentGameRound.getInfo().getId(), mCurrentDuration);
+            mGameDataSource.saveGameRoundDuration(mCurrentGameData.getInfo().getId(), mCurrentDuration);
         });
         resetLiveData();
     }
@@ -95,7 +95,7 @@ public class GamePlayViewModel extends ViewModel {
     }
 
     public void stopGame() {
-        mCurrentGameRound = null;
+        mCurrentGameData = null;
         mTimer.stop();
         resetLiveData();
     }
@@ -108,7 +108,7 @@ public class GamePlayViewModel extends ViewModel {
     public void resumeGame() {
         if (mCurrentState instanceof Paused) {
             mTimer.start();
-            setGameState(new Playing(mCurrentGameRound));
+            setGameState(new Playing(mCurrentGameData));
         }
     }
 
@@ -116,12 +116,12 @@ public class GamePlayViewModel extends ViewModel {
         if (!(mCurrentState instanceof Generating)) {
             setGameState(new Loading(gid));
 
-            mGameRoundDataSource.getGameRound(gid, gameRound -> {
-                mCurrentGameRound = new GameRoundMapper().map(gameRound);
-                mCurrentDuration = mCurrentGameRound.getInfo().getDuration();
-                if (!mCurrentGameRound.isFinished())
+            mGameDataSource.getGameRound(gid, gameRound -> {
+                mCurrentGameData = new GameDataMapper().map(gameRound);
+                mCurrentDuration = mCurrentGameData.getInfo().getDuration();
+                if (!mCurrentGameData.isFinished())
                     mTimer.start();
-                setGameState(new Playing(mCurrentGameRound));
+                setGameState(new Playing(mCurrentGameData));
             });
         }
     }
@@ -131,8 +131,8 @@ public class GamePlayViewModel extends ViewModel {
         if (!(mCurrentState instanceof Generating)) {
             setGameState(new Generating(rowCount, colCount, "Play me"));
 
-            Observable.create((ObservableOnSubscribe<GameRound>) emitter -> {
-                GameRound gr =
+            Observable.create((ObservableOnSubscribe<GameData>) emitter -> {
+                GameData gr =
                         mGameRoundBuilder.createNewGameRound(rowCount, colCount, "Play me");
                 emitter.onNext(gr);
                 emitter.onComplete();
@@ -141,21 +141,21 @@ public class GamePlayViewModel extends ViewModel {
                     .subscribe(gameRound -> {
                         mCurrentDuration = 0;
                         mTimer.start();
-                        mCurrentGameRound = gameRound;
-                        setGameState(new Playing(mCurrentGameRound));
+                        mCurrentGameData = gameRound;
+                        setGameState(new Playing(mCurrentGameData));
                     });
         }
     }
 
     public void answerWord(String answerStr, UsedWord.AnswerLine answerLine, boolean reverseMatching) {
-        UsedWord correctWord = mCurrentGameRound.markWordAsAnswered(answerStr, answerLine, reverseMatching);
+        UsedWord correctWord = mCurrentGameData.markWordAsAnswered(answerStr, answerLine, reverseMatching);
 
         boolean correct = correctWord != null;
         mOnAnswerResult.setValue(new AnswerResult(correct, correctWord != null ? correctWord.getId() : -1));
         if (correct) {
-            mGameRoundDataSource.markWordAsAnswered(correctWord);
-            if (mCurrentGameRound.isFinished()) {
-                setGameState(new Finished(mCurrentGameRound));
+            mGameDataSource.markWordAsAnswered(correctWord);
+            if (mCurrentGameData.isFinished()) {
+                setGameState(new Finished(mCurrentGameData));
             }
         }
     }

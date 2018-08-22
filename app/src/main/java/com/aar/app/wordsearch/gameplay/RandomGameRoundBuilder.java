@@ -3,10 +3,10 @@ package com.aar.app.wordsearch.gameplay;
 
 import com.aar.app.wordsearch.commons.Util;
 import com.aar.app.wordsearch.commons.generator.StringListGridGenerator;
-import com.aar.app.wordsearch.data.mapper.GameRoundMapper;
-import com.aar.app.wordsearch.data.GameRoundDataSource;
+import com.aar.app.wordsearch.data.mapper.GameDataMapper;
+import com.aar.app.wordsearch.data.GameDataSource;
 import com.aar.app.wordsearch.data.WordDataSource;
-import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.model.Grid;
 import com.aar.app.wordsearch.model.UsedWord;
 import com.aar.app.wordsearch.model.Word;
@@ -24,16 +24,16 @@ import java.util.Locale;
 
 public class RandomGameRoundBuilder {
 
-    private GameRoundDataSource mGameRoundDataSource;
+    private GameDataSource mGameDataSource;
     private WordDataSource mWordDataSource;
 
-    public RandomGameRoundBuilder(GameRoundDataSource gameRoundDataSource, WordDataSource wordDataSource) {
-        mGameRoundDataSource = gameRoundDataSource;
+    public RandomGameRoundBuilder(GameDataSource gameDataSource, WordDataSource wordDataSource) {
+        mGameDataSource = gameDataSource;
         mWordDataSource = wordDataSource;
     }
 
-    public GameRound createNewGameRound(final int rowCount, final int colCount, final String name) {
-        final GameRound gameRound = new GameRound();
+    public GameData createNewGameRound(final int rowCount, final int colCount, final String name) {
+        final GameData gameData = new GameData();
 
         mWordDataSource.getWords(words -> {
             Util.randomizeList(words);
@@ -43,21 +43,21 @@ public class RandomGameRoundBuilder {
             List<String> usedStrings =
                     new StringListGridGenerator().setGrid(getStringListFromWord(words, 100, maxCharCount), grid.getArray());
 
-            gameRound.addUsedWords(buildUsedWordFromString(usedStrings));
-            gameRound.setGrid(grid);
+            gameData.addUsedWords(buildUsedWordFromString(usedStrings));
+            gameData.setGrid(grid);
             if (name == null || name.isEmpty()) {
                 String name1 = "Puzzle " +
                         new SimpleDateFormat("HH.mm.ss", Locale.ENGLISH).format(new Date(System.currentTimeMillis()));
-                gameRound.getInfo().setName(name1);
+                gameData.getInfo().setName(name1);
             }
             else {
-                gameRound.getInfo().setName(name);
+                gameData.getInfo().setName(name);
             }
 
-            mGameRoundDataSource.saveGameRound(new GameRoundMapper().revMap(gameRound));
+            mGameDataSource.saveGameRound(new GameDataMapper().revMap(gameData));
         });
 
-        return gameRound;
+        return gameData;
     }
 
     private List<UsedWord> buildUsedWordFromString(List<String> strings) {

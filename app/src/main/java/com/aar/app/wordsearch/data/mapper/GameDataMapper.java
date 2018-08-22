@@ -3,20 +3,20 @@ package com.aar.app.wordsearch.data.mapper;
 
 import com.aar.app.wordsearch.commons.Mapper;
 import com.aar.app.wordsearch.commons.generator.StringGridGenerator;
-import com.aar.app.wordsearch.data.entity.GameRoundEntity;
-import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.data.entity.GameDataEntity;
+import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.model.Grid;
 
 /**
  * Created by abdularis on 08/07/17.
  */
 
-public class GameRoundMapper extends Mapper<GameRoundEntity, GameRound> {
+public class GameDataMapper extends Mapper<GameDataEntity, GameData> {
     @Override
-    public GameRound map(GameRoundEntity obj) {
+    public GameData map(GameDataEntity obj) {
         if (obj == null) return null;
 
-        GameRound gr = new GameRound();
+        GameData gr = new GameData();
         gr.setInfo(obj.getInfo());
         Grid grid = new Grid(obj.getGridRowCount(), obj.getGridColCount());
         gr.setGrid(grid);
@@ -31,10 +31,10 @@ public class GameRoundMapper extends Mapper<GameRoundEntity, GameRound> {
     }
 
     @Override
-    public GameRoundEntity revMap(GameRound obj) {
+    public GameDataEntity revMap(GameData obj) {
         if (obj == null) return null;
 
-        GameRoundEntity ent = new GameRoundEntity();
+        GameDataEntity ent = new GameDataEntity();
         ent.setInfo(obj.getInfo());
 
         if (obj.getGrid() != null) {

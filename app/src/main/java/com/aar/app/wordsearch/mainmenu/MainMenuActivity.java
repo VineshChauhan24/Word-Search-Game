@@ -13,7 +13,7 @@ import android.widget.Spinner;
 import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
-import com.aar.app.wordsearch.model.GameRound;
+import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.FullscreenActivity;
 import com.aar.app.wordsearch.gameplay.GamePlayActivity;
 import com.aar.app.wordsearch.settings.SettingsActivity;
@@ -43,7 +43,7 @@ public class MainMenuActivity extends FullscreenActivity {
     @Inject
     ViewModelFactory mViewModelFactory;
     MainMenuViewModel mViewModel;
-    GameRoundInfoAdapter mInfoAdapter;
+    GameDataInfoAdapter mInfoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class MainMenuActivity extends FullscreenActivity {
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainMenuViewModel.class);
         mViewModel.getOnGameRoundInfoLoaded().observe(this, this::showGameInfoList);
 
-        mInfoAdapter = new GameRoundInfoAdapter(this, R.layout.game_round_item);
+        mInfoAdapter = new GameDataInfoAdapter(this, R.layout.game_round_item);
         mListView.setAdapter(mInfoAdapter);
         mListView.setOnItemClickListener((parent, view, position, id) -> {
             showGameRound(mInfoAdapter.getItem(position).getId());
@@ -90,7 +90,7 @@ public class MainMenuActivity extends FullscreenActivity {
         mViewModel.clearAll();
     }
 
-    public void showGameInfoList(List<GameRound.Info> infoList) {
+    public void showGameInfoList(List<GameData.Info> infoList) {
         mInfoAdapter.clear();
         mInfoAdapter.addAll(infoList);
         if (infoList.size() <= 0) {
@@ -126,7 +126,7 @@ public class MainMenuActivity extends FullscreenActivity {
                 });
     }
 
-    public void deleteInfo(GameRound.Info info) {
+    public void deleteInfo(GameData.Info info) {
         mInfoAdapter.remove(info);
         if (mInfoAdapter.getCount() <= 0) {
             mLayoutSavedGame.animate()

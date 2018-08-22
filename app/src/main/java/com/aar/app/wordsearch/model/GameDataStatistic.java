@@ -4,7 +4,7 @@ package com.aar.app.wordsearch.model;
  * Created by abdularis on 24/07/17.
  */
 
-public class GameRoundStat {
+public class GameDataStatistic {
 
     private String mName;
     private int mDuration;
@@ -12,12 +12,12 @@ public class GameRoundStat {
     private int mGridRowCount;
     private int mGridColCount;
 
-    public GameRoundStat() {
+    public GameDataStatistic() {
         this("", 0, 0, 0, 0);
     }
 
-    public GameRoundStat(String name, int duration, int usedWordCount,
-                         int gridRowCount, int gridColCount) {
+    public GameDataStatistic(String name, int duration, int usedWordCount,
+                             int gridRowCount, int gridColCount) {
         mName = name;
         mDuration = duration;
         mUsedWordCount = usedWordCount;

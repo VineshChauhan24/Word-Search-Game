@@ -10,7 +10,7 @@ import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
-import com.aar.app.wordsearch.model.GameRoundStat;
+import com.aar.app.wordsearch.model.GameDataStatistic;
 import com.aar.app.wordsearch.FullscreenActivity;
 
 import javax.inject.Inject;
@@ -70,7 +70,7 @@ public class GameOverActivity extends FullscreenActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    public void showGameStat(GameRoundStat stat) {
+    public void showGameStat(GameDataStatistic stat) {
         String strGridSize = stat.getGridRowCount() + " x " + stat.getGridColCount();
 
         String str = getString(R.string.finish_text);
