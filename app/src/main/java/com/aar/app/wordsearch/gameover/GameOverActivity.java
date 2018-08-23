@@ -10,7 +10,7 @@ import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
-import com.aar.app.wordsearch.model.GameDataStatistic;
+import com.aar.app.wordsearch.model.GameDataInfo;
 import com.aar.app.wordsearch.FullscreenActivity;
 
 import javax.inject.Inject;
@@ -41,7 +41,7 @@ public class GameOverActivity extends FullscreenActivity {
         ((WordSearchApp) getApplication()).getAppComponent().inject(this);
 
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(GameOverViewModel.class);
-        mViewModel.getOnGameRoundStatLoaded().observe(this, this::showGameStat);
+        mViewModel.getOnGameDataInfoLoaded().observe(this, this::showGameStat);
 
         if (getIntent().getExtras() != null) {
             mGameId = getIntent().getExtras().getInt(EXTRA_GAME_ROUND_ID);
@@ -70,13 +70,13 @@ public class GameOverActivity extends FullscreenActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
-    public void showGameStat(GameDataStatistic stat) {
-        String strGridSize = stat.getGridRowCount() + " x " + stat.getGridColCount();
+    public void showGameStat(GameDataInfo info) {
+        String strGridSize = info.getGridRowCount() + " x " + info.getGridColCount();
 
         String str = getString(R.string.finish_text);
         str = str.replaceAll(":gridSize", strGridSize);
-        str = str.replaceAll(":uwCount", String.valueOf(stat.getUsedWordCount()));
-        str = str.replaceAll(":duration", DurationFormatter.fromInteger(stat.getDuration()));
+        str = str.replaceAll(":uwCount", String.valueOf(info.getUsedWordsCount()));
+        str = str.replaceAll(":duration", DurationFormatter.fromInteger(info.getDuration()));
 
         mGameStatText.setText(str);
     }

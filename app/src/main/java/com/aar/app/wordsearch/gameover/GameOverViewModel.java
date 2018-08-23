@@ -5,26 +5,26 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.aar.app.wordsearch.data.GameDataSource;
-import com.aar.app.wordsearch.model.GameDataStatistic;
+import com.aar.app.wordsearch.model.GameDataInfo;
 
 public class GameOverViewModel extends ViewModel {
 
     private GameDataSource mGameDataSource;
-    private MutableLiveData<GameDataStatistic> mOnGameRoundStatLoaded = new MutableLiveData<>();
+    private MutableLiveData<GameDataInfo> mOnGameDataInfoLoaded = new MutableLiveData<>();
 
     public GameOverViewModel(GameDataSource gameDataSource) {
         mGameDataSource = gameDataSource;
     }
 
     public void loadData(int gid) {
-        mGameDataSource.getGameDataStat(gid, mOnGameRoundStatLoaded::setValue);
+        mGameDataSource.getGameDataInfo(gid, mOnGameDataInfoLoaded::setValue);
     }
 
     public void deleteGameRound(int gid) {
         mGameDataSource.deleteGameData(gid);
     }
 
-    public LiveData<GameDataStatistic> getOnGameRoundStatLoaded() {
-        return mOnGameRoundStatLoaded;
+    public LiveData<GameDataInfo> getOnGameDataInfoLoaded() {
+        return mOnGameDataInfoLoaded;
     }
 }

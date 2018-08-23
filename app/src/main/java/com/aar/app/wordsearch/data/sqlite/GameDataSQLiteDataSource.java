@@ -6,9 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.aar.app.wordsearch.data.entity.GameDataEntity;
 import com.aar.app.wordsearch.data.GameDataSource;
-import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.model.GameDataInfo;
-import com.aar.app.wordsearch.model.GameDataStatistic;
 import com.aar.app.wordsearch.model.UsedWord;
 
 import java.util.ArrayList;
@@ -63,32 +61,12 @@ public class GameDataSQLiteDataSource implements GameDataSource {
 
     @Override
     public void getGameDataInfos(InfosCallback callback) {
-        String subQ = "(SELECT COUNT(*) FROM " + DbContract.UsedWord.TABLE_NAME + " WHERE " +
-                DbContract.UsedWord.COL_GAME_ROUND_ID + "=" + DbContract.GameRound.TABLE_NAME + "." + DbContract.GameRound._ID + ")";
-        String order = " ORDER BY " + DbContract.GameRound._ID + " DESC";
-        String query = "SELECT " +
-                DbContract.GameRound._ID + "," +
-                DbContract.GameRound.COL_NAME + "," +
-                DbContract.GameRound.COL_DURATION + "," +
-                DbContract.GameRound.COL_GRID_ROW_COUNT + "," +
-                DbContract.GameRound.COL_GRID_COL_COUNT + "," +
-                subQ +
-                " FROM " + DbContract.GameRound.TABLE_NAME + order;
-
         SQLiteDatabase db = mHelper.getReadableDatabase();
         List<GameDataInfo> infoList = new ArrayList<>();
-        Cursor c = db.rawQuery(query, null);
+        Cursor c = db.rawQuery(getGameDataInfoQuery(-1), null);
         if (c.moveToFirst()) {
             while (!c.isAfterLast()) {
-                GameDataInfo gdi = new GameDataInfo();
-                gdi.setId(c.getInt(0));
-                gdi.setName(c.getString(1));
-                gdi.setDuration(c.getInt(2));
-                gdi.setGridRowCount(c.getInt(3));
-                gdi.setGridColCount(c.getInt(4));
-                gdi.setUsedWordsCount(c.getInt(5));
-                infoList.add(gdi);
-
+                infoList.add(getGameDataInfoFromCursor(c));
                 c.moveToNext();
             }
         }
@@ -98,28 +76,12 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void getGameDataStat(int gid, StatCallback callback) {
-        String subQ = "(SELECT COUNT(*) FROM " + DbContract.UsedWord.TABLE_NAME + " WHERE " +
-                DbContract.UsedWord.COL_GAME_ROUND_ID + "=" + gid + ")";
-        String q = "SELECT " +
-                DbContract.GameRound.COL_NAME + "," +
-                DbContract.GameRound.COL_DURATION + "," +
-                DbContract.GameRound.COL_GRID_ROW_COUNT + "," +
-                DbContract.GameRound.COL_GRID_COL_COUNT + "," +
-                subQ +
-                " FROM " + DbContract.GameRound.TABLE_NAME + " WHERE " + DbContract.GameRound._ID +
-                "=" + gid;
-
+    public void getGameDataInfo(int gid, StatCallback callback) {
         SQLiteDatabase db = mHelper.getReadableDatabase();
-        Cursor c = db.rawQuery(q, null);
+        Cursor c = db.rawQuery(getGameDataInfoQuery(gid), null);
         if (c.moveToFirst()) {
-            GameDataStatistic stat = new GameDataStatistic();
-            stat.setName(c.getString(0));
-            stat.setDuration(c.getInt(1));
-            stat.setGridRowCount(c.getInt(2));
-            stat.setGridColCount(c.getInt(3));
-            stat.setUsedWordCount(c.getInt(4));
-            callback.onLoaded(stat);
+            GameDataInfo gameData = getGameDataInfoFromCursor(c);
+            callback.onLoaded(gameData);
         }
         c.close();
     }
@@ -195,6 +157,37 @@ public class GameDataSQLiteDataSource implements GameDataSource {
         String whereArgs[] = {String.valueOf(usedWord.getId())};
 
         db.update(DbContract.UsedWord.TABLE_NAME, values, where, whereArgs);
+    }
+
+    private String getGameDataInfoQuery(int gid) {
+        String subQ = "(SELECT COUNT(*) FROM " + DbContract.UsedWord.TABLE_NAME + " WHERE " +
+                DbContract.UsedWord.COL_GAME_ROUND_ID + "=" + DbContract.GameRound.TABLE_NAME + "." + DbContract.GameRound._ID + ")";
+        String order = " ORDER BY " + DbContract.GameRound._ID + " DESC";
+        if (gid > 0) {
+            subQ = "(SELECT COUNT(*) FROM " + DbContract.UsedWord.TABLE_NAME + " WHERE " +
+                    DbContract.UsedWord.COL_GAME_ROUND_ID + "=" + gid + ")";
+            order = " WHERE " + DbContract.UsedWord._ID + "=" + gid;
+        }
+
+        return "SELECT " +
+                DbContract.GameRound._ID + "," +
+                DbContract.GameRound.COL_NAME + "," +
+                DbContract.GameRound.COL_DURATION + "," +
+                DbContract.GameRound.COL_GRID_ROW_COUNT + "," +
+                DbContract.GameRound.COL_GRID_COL_COUNT + "," +
+                subQ +
+                " FROM " + DbContract.GameRound.TABLE_NAME + order;
+    }
+
+    private GameDataInfo getGameDataInfoFromCursor(Cursor c) {
+        GameDataInfo gdi = new GameDataInfo();
+        gdi.setId(c.getInt(0));
+        gdi.setName(c.getString(1));
+        gdi.setDuration(c.getInt(2));
+        gdi.setGridRowCount(c.getInt(3));
+        gdi.setGridColCount(c.getInt(4));
+        gdi.setUsedWordsCount(c.getInt(5));
+        return gdi;
     }
 
     private List<UsedWord> getUsedWords(int gid) {
