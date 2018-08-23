@@ -10,12 +10,6 @@ import java.util.List;
 
 public interface WordDataSource {
 
-    interface Callback {
-
-        void onWordsLoaded(List<Word> words);
-
-    }
-
-    void getWords(Callback callback);
+    List<Word> getWords();
 
 }

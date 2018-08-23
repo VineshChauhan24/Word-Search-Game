@@ -25,7 +25,7 @@ public class WordSQLiteDataSource implements WordDataSource {
     }
 
     @Override
-    public void getWords(Callback callback) {
+    public List<Word> getWords() {
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
         String cols[] = {
@@ -46,6 +46,6 @@ public class WordSQLiteDataSource implements WordDataSource {
         }
 
         c.close();
-        callback.onWordsLoaded(wordList);
+        return wordList;
     }
 }

@@ -12,6 +12,9 @@ import com.aar.app.wordsearch.data.entity.GameDataMapper;
 import com.aar.app.wordsearch.data.WordDataSource;
 import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.model.UsedWord;
+import com.aar.app.wordsearch.model.Word;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
@@ -66,7 +69,8 @@ public class GamePlayViewModel extends ViewModel {
     }
 
     private GameDataSource mGameDataSource;
-    private RandomGameRoundBuilder mGameRoundBuilder;
+    private WordDataSource mWordDataSource;
+    private GameDataCreator mGameDataCreator;
     private GameData mCurrentGameData;
     private Timer mTimer;
     private int mCurrentDuration;
@@ -78,7 +82,8 @@ public class GamePlayViewModel extends ViewModel {
 
     public GamePlayViewModel(GameDataSource gameDataSource, WordDataSource wordDataSource) {
         mGameDataSource = gameDataSource;
-        mGameRoundBuilder = new RandomGameRoundBuilder(mGameDataSource, wordDataSource);
+        mWordDataSource = wordDataSource;
+        mGameDataCreator = new GameDataCreator();
 
         mTimer = new Timer(TIMER_TIMEOUT);
         mTimer.addOnTimeoutListener(elapsedTime -> {
@@ -132,8 +137,10 @@ public class GamePlayViewModel extends ViewModel {
             setGameState(new Generating(rowCount, colCount, "Play me"));
 
             Observable.create((ObservableOnSubscribe<GameData>) emitter -> {
-                GameData gr =
-                        mGameRoundBuilder.createNewGameRound(rowCount, colCount, "Play me");
+                List<Word> wordList = mWordDataSource.getWords();
+                GameData gr = mGameDataCreator.newGameData(wordList, rowCount, colCount, "Play me");
+                long gid = mGameDataSource.saveGameData(new GameDataMapper().revMap(gr));
+                gr.setId((int) gid);
                 emitter.onNext(gr);
                 emitter.onComplete();
             }).subscribeOn(Schedulers.computation())

@@ -35,7 +35,7 @@ public interface GameDataSource {
 
     void getGameDataInfo(int gid, StatCallback callback);
 
-    void saveGameData(GameDataEntity gameRound);
+    long saveGameData(GameDataEntity gameRound);
 
     void deleteGameData(int gid);
 

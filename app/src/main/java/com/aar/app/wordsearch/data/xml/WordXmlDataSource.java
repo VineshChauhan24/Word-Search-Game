@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.res.AssetManager;
 
 import com.aar.app.wordsearch.data.WordDataSource;
+import com.aar.app.wordsearch.model.Word;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.xml.parsers.SAXParserFactory;
@@ -29,18 +32,18 @@ public class WordXmlDataSource implements WordDataSource {
     }
 
     @Override
-    public void getWords(Callback callback) {
+    public List<Word> getWords() {
         try {
             XMLReader reader = SAXParserFactory.newInstance().newSAXParser().getXMLReader();
             SaxWordBankHandler wordBankHandler = new SaxWordBankHandler();
             reader.setContentHandler(wordBankHandler);
             reader.parse(getXmlInputSource());
 
-            // return result
-            callback.onWordsLoaded(wordBankHandler.getWords());
+            return wordBankHandler.getWords();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return new ArrayList<>();
     }
 
     private InputSource getXmlInputSource() throws IOException {

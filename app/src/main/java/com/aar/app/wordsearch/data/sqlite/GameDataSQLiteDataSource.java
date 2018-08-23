@@ -87,7 +87,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void saveGameData(GameDataEntity gameRound) {
+    public long saveGameData(GameDataEntity gameRound) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(DbContract.GameRound.COL_NAME, gameRound.getName());
@@ -113,6 +113,8 @@ public class GameDataSQLiteDataSource implements GameDataSource {
             long insertedId = db.insert(DbContract.UsedWord.TABLE_NAME, "null", values);
             usedWord.setId((int) insertedId);
         }
+
+        return gid;
     }
 
     @Override

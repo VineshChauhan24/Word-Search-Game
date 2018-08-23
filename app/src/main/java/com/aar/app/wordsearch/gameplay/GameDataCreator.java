@@ -23,43 +23,32 @@ import java.util.Locale;
  * Created by abdularis on 20/07/17.
  */
 
-public class RandomGameRoundBuilder {
+public class GameDataCreator {
 
-    private GameDataSource mGameDataSource;
-    private WordDataSource mWordDataSource;
-
-    public RandomGameRoundBuilder(GameDataSource gameDataSource, WordDataSource wordDataSource) {
-        mGameDataSource = gameDataSource;
-        mWordDataSource = wordDataSource;
-    }
-
-    public GameData createNewGameRound(final int rowCount, final int colCount, final String name) {
+    public GameData newGameData(final List<Word> words,
+                                final int rowCount, final int colCount,
+                                final String name) {
         final GameData gameData = new GameData();
 
-        mWordDataSource.getWords(words -> {
-            Util.randomizeList(words);
+        Util.randomizeList(words);
 
-            Grid grid = new Grid(rowCount, colCount);
-            int maxCharCount = Math.min(rowCount, colCount);
-            List<String> usedStrings =
-                    new StringListGridGenerator().setGrid(getStringListFromWord(words, 100, maxCharCount), grid.getArray());
+        Grid grid = new Grid(rowCount, colCount);
+        int maxCharCount = Math.min(rowCount, colCount);
+        List<String> usedStrings =
+                new StringListGridGenerator()
+                        .setGrid(getStringListFromWord(words, 100, maxCharCount), grid.getArray());
 
-            gameData.addUsedWords(buildUsedWordFromString(usedStrings));
-            gameData.setGrid(grid);
-            if (name == null || name.isEmpty()) {
-                String name1 = "Puzzle " +
-                        new SimpleDateFormat("HH.mm.ss", Locale.ENGLISH).format(new Date(System.currentTimeMillis()));
-                gameData.setName(name1);
-            }
-            else {
-                gameData.setName(name);
-            }
-
-            GameDataEntity gameDataEntity = new GameDataMapper().revMap(gameData);
-            mGameDataSource.saveGameData(gameDataEntity);
-            gameData.setId(gameDataEntity.getId());
-        });
-
+        gameData.addUsedWords(buildUsedWordFromString(usedStrings));
+        gameData.setGrid(grid);
+        if (name == null || name.isEmpty()) {
+            String name1 = "Puzzle " +
+                    new SimpleDateFormat("HH.mm.ss", Locale.ENGLISH)
+                            .format(new Date(System.currentTimeMillis()));
+            gameData.setName(name1);
+        }
+        else {
+            gameData.setName(name);
+        }
         return gameData;
     }
 
