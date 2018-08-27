@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.data.GameDataSource;
+import com.aar.app.wordsearch.data.GameThemeRepository;
 import com.aar.app.wordsearch.data.WordDataSource;
 import com.aar.app.wordsearch.gameover.GameOverViewModel;
 import com.aar.app.wordsearch.gameplay.GamePlayViewModel;
@@ -49,7 +50,7 @@ public class AppModule {
         return new ViewModelFactory(
                 new GameOverViewModel(gameDataSource),
                 new GamePlayViewModel(gameDataSource, wordDataSource),
-                new MainMenuViewModel(gameDataSource)
+                new MainMenuViewModel(gameDataSource, new GameThemeRepository())
         );
     }
 }

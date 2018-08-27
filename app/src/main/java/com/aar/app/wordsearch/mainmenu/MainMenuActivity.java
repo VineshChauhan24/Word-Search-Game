@@ -1,21 +1,26 @@
 package com.aar.app.wordsearch.mainmenu;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.widget.ListView;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.FullscreenActivity;
+import com.aar.app.wordsearch.easyadapter.CompositeData;
 import com.aar.app.wordsearch.gameplay.GamePlayActivity;
+import com.aar.app.wordsearch.mainmenu.items.GameDataAdapter;
 import com.aar.app.wordsearch.model.GameDataInfo;
+import com.aar.app.wordsearch.model.GameTheme;
+import com.aar.app.wordsearch.easyadapter.CompositeAdapterDelegate;
+import com.aar.app.wordsearch.easyadapter.MultiTypeAdapter;
 import com.aar.app.wordsearch.settings.SettingsActivity;
 
 import java.util.List;
@@ -29,13 +34,12 @@ import butterknife.OnClick;
 
 public class MainMenuActivity extends FullscreenActivity {
 
-    @BindView(R.id.game_round_list)
-    ListView mListView;
-    @BindView(R.id.game_template_spinner)
-    Spinner mGameTempSpinner;
+    private static final int RV_ITEM_GAME_THEME = 1111;
+    private static final int RV_ITEM_GAME_DATA = 1112;
+    private static final int RV_ITEM_GAME_DATA_LIST = 1113;
 
-    @BindView(R.id.layout_saved_game)
-    View mLayoutSavedGame;
+    @BindView(R.id.rv) RecyclerView mRv;
+    @BindView(R.id.game_template_spinner) Spinner mGridSizeSpinner;
 
     @BindArray(R.array.game_round_dimension_values)
     int[] mGameRoundDimVals;
@@ -43,7 +47,7 @@ public class MainMenuActivity extends FullscreenActivity {
     @Inject
     ViewModelFactory mViewModelFactory;
     MainMenuViewModel mViewModel;
-    GameDataInfoAdapter mInfoAdapter;
+    MultiTypeAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,97 +59,68 @@ public class MainMenuActivity extends FullscreenActivity {
 
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainMenuViewModel.class);
         mViewModel.getOnGameRoundInfoLoaded().observe(this, this::showGameInfoList);
+        mViewModel.getOnGameThemeLoaded().observe(this, this::showGameThemeList);
 
-        mInfoAdapter = new GameDataInfoAdapter(this, R.layout.item_game_data);
-        mListView.setAdapter(mInfoAdapter);
-        mListView.setOnItemClickListener((parent, view, position, id) -> {
-            showGameRound(mInfoAdapter.getItem(position).getId());
+        GameDataAdapter gameDataAdapter = new GameDataAdapter();
+        gameDataAdapter.setOnClickListener(new GameDataAdapter.OnClickListener() {
+            @Override
+            public void onClick(GameDataInfo gameDataInfo) {
+                Intent intent = new Intent(MainMenuActivity.this, GamePlayActivity.class);
+                intent.putExtra(GamePlayActivity.EXTRA_GAME_ROUND_ID, gameDataInfo.getId());
+                startActivity(intent);
+
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+
+            @Override
+            public void onDeleteClick(GameDataInfo gameDataInfo) {
+                mViewModel.deleteGameRound(gameDataInfo);
+                mAdapter.notifyItemChanged(0);
+            }
         });
+        CompositeAdapterDelegate gameDataListDelegate = new CompositeAdapterDelegate(R.layout.item_game_data_list);
+        gameDataListDelegate.addDelegate(gameDataAdapter);
 
-        mInfoAdapter.setOnDeleteItemClickListener(info -> {
-            deleteInfo(info);
-            mViewModel.deleteGameRound(info);
-        });
-    }
+        mAdapter = new MultiTypeAdapter();
+        mAdapter.addDelegate(gameDataListDelegate);
+        mAdapter.addDelegate(
+                GameTheme.class,
+                R.layout.item_game_theme,
+                (model, holder) -> holder.<TextView>find(R.id.textThemeName).setText(model.getName()),
+                (model, view) -> Toast.makeText(MainMenuActivity.this, model.getName(), Toast.LENGTH_SHORT).show()
+        );
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        mRv.setAdapter(mAdapter);
+        mRv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        mRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
         mViewModel.loadData();
     }
 
-    @OnClick(R.id.new_game_btn)
-    public void onNewGameClick() {
-        int dim = mGameRoundDimVals[ mGameTempSpinner.getSelectedItemPosition() ];
-        Intent intent = new Intent(this, GamePlayActivity.class);
-        intent.putExtra(GamePlayActivity.EXTRA_ROW_COUNT, dim);
-        intent.putExtra(GamePlayActivity.EXTRA_COL_COUNT, dim);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    }
-
-    @OnClick(R.id.clear_all_btn)
-    public void onClearClick() {
-        clearInfoList();
-        mViewModel.clearAll();
-    }
-
     public void showGameInfoList(List<GameDataInfo> infoList) {
-        mInfoAdapter.clear();
-        mInfoAdapter.addAll(infoList);
-        if (infoList.size() <= 0) {
-            mLayoutSavedGame.setVisibility(View.INVISIBLE);
-        } else {
-            mLayoutSavedGame.setVisibility(View.VISIBLE);
-        }
+        mAdapter.add(new CompositeData<>(infoList));
+        mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1);
     }
 
-    public void showGameRound(int gid) {
-        Intent intent = new Intent(this, GamePlayActivity.class);
-        intent.putExtra(GamePlayActivity.EXTRA_GAME_ROUND_ID, gid);
-        startActivity(intent);
-
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-    }
-
-    public void clearInfoList() {
-        final float initXPos = mLayoutSavedGame.getX();
-        mLayoutSavedGame.animate()
-                .alpha(0.0f)
-                .translationX(-mLayoutSavedGame.getWidth())
-                .setInterpolator(new AccelerateInterpolator(2.0f))
-                .setDuration(250)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mLayoutSavedGame.setVisibility(View.INVISIBLE);
-                        mLayoutSavedGame.setX(initXPos);
-                        mLayoutSavedGame.setAlpha(1.0f);
-                        mInfoAdapter.clear();
-                    }
-                });
-    }
-
-    public void deleteInfo(GameDataInfo info) {
-        mInfoAdapter.remove(info);
-        if (mInfoAdapter.getCount() <= 0) {
-            mLayoutSavedGame.animate()
-                    .alpha(0.0f)
-                    .setDuration(150)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mLayoutSavedGame.setVisibility(View.INVISIBLE);
-                            mLayoutSavedGame.setAlpha(1.0f);
-                        }
-                    });
-        }
+    public void showGameThemeList(List<GameTheme> gameThemes) {
+        mAdapter.addAll(gameThemes);
+        mAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.settings_button)
     public void onSettingsClick() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.new_game_btn)
+    public void onNewGameClick() {
+        int dim = mGameRoundDimVals[ mGridSizeSpinner.getSelectedItemPosition() ];
+        Intent intent = new Intent(MainMenuActivity.this, GamePlayActivity.class);
+        intent.putExtra(GamePlayActivity.EXTRA_ROW_COUNT, dim);
+        intent.putExtra(GamePlayActivity.EXTRA_COL_COUNT, dim);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
 }
