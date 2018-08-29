@@ -58,31 +58,10 @@ public class MainMenuActivity extends FullscreenActivity {
         ((WordSearchApp) getApplication()).getAppComponent().inject(this);
 
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainMenuViewModel.class);
-        mViewModel.getOnGameRoundInfoLoaded().observe(this, this::showGameInfoList);
         mViewModel.getOnGameThemeLoaded().observe(this, this::showGameThemeList);
 
-        GameDataAdapter gameDataAdapter = new GameDataAdapter();
-        gameDataAdapter.setOnClickListener(new GameDataAdapter.OnClickListener() {
-            @Override
-            public void onClick(GameDataInfo gameDataInfo) {
-                Intent intent = new Intent(MainMenuActivity.this, GamePlayActivity.class);
-                intent.putExtra(GamePlayActivity.EXTRA_GAME_ROUND_ID, gameDataInfo.getId());
-                startActivity(intent);
-
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-            }
-
-            @Override
-            public void onDeleteClick(GameDataInfo gameDataInfo) {
-                mViewModel.deleteGameRound(gameDataInfo);
-                mAdapter.notifyItemChanged(0);
-            }
-        });
-        CompositeAdapterDelegate gameDataListDelegate = new CompositeAdapterDelegate(R.layout.item_game_data_list);
-        gameDataListDelegate.addDelegate(gameDataAdapter);
 
         mAdapter = new MultiTypeAdapter();
-        mAdapter.addDelegate(gameDataListDelegate);
         mAdapter.addDelegate(
                 GameTheme.class,
                 R.layout.item_game_theme,
@@ -95,11 +74,6 @@ public class MainMenuActivity extends FullscreenActivity {
         mRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         mViewModel.loadData();
-    }
-
-    public void showGameInfoList(List<GameDataInfo> infoList) {
-        mAdapter.add(new CompositeData<>(infoList));
-        mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1);
     }
 
     public void showGameThemeList(List<GameTheme> gameThemes) {
