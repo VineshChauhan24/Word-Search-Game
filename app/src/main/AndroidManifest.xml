@@ -10,17 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".settings.SettingsActivity"
+            android:name="com.aar.app.wordsearch.features.settings.SettingsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".gameplay.GamePlayActivity">
+        <activity android:name="com.aar.app.wordsearch.features.gameplay.GamePlayActivity">
         </activity>
-        <activity android:name=".mainmenu.MainMenuActivity">
+        <activity android:name="com.aar.app.wordsearch.features.mainmenu.MainMenuActivity">
         </activity>
-        <activity android:name=".gameover.GameOverActivity">
+        <activity android:name="com.aar.app.wordsearch.features.gameover.GameOverActivity">
         </activity>
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".features.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

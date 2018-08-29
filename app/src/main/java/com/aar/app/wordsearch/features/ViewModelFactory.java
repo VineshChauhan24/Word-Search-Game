@@ -1,12 +1,12 @@
-package com.aar.app.wordsearch;
+package com.aar.app.wordsearch.features;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
-import com.aar.app.wordsearch.gameover.GameOverViewModel;
-import com.aar.app.wordsearch.gameplay.GamePlayViewModel;
-import com.aar.app.wordsearch.mainmenu.MainMenuViewModel;
+import com.aar.app.wordsearch.features.gameover.GameOverViewModel;
+import com.aar.app.wordsearch.features.gameplay.GamePlayViewModel;
+import com.aar.app.wordsearch.features.mainmenu.MainMenuViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 

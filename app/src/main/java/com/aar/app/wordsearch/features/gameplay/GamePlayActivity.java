@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.gameplay;
+package com.aar.app.wordsearch.features.gameplay;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -13,8 +13,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aar.app.wordsearch.R;
-import com.aar.app.wordsearch.SoundPlayer;
-import com.aar.app.wordsearch.ViewModelFactory;
+import com.aar.app.wordsearch.features.SoundPlayer;
+import com.aar.app.wordsearch.features.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.commons.Util;
@@ -22,8 +22,8 @@ import com.aar.app.wordsearch.model.GameData;
 import com.aar.app.wordsearch.custom.LetterBoard;
 import com.aar.app.wordsearch.custom.StreakView;
 import com.aar.app.wordsearch.custom.layout.FlowLayout;
-import com.aar.app.wordsearch.gameover.GameOverActivity;
-import com.aar.app.wordsearch.FullscreenActivity;
+import com.aar.app.wordsearch.features.gameover.GameOverActivity;
+import com.aar.app.wordsearch.features.FullscreenActivity;
 import com.aar.app.wordsearch.model.UsedWord;
 
 import java.util.List;
@@ -37,11 +37,11 @@ import butterknife.ButterKnife;
 public class GamePlayActivity extends FullscreenActivity {
 
     public static final String EXTRA_GAME_ROUND_ID =
-            "com.aar.app.wordsearch.gameplay.GamePlayActivity.ID";
+            "com.aar.app.wordsearch.features.gameplay.GamePlayActivity.ID";
     public static final String EXTRA_ROW_COUNT =
-            "com.aar.app.wordsearch.gameplay.GamePlayActivity.ROW";
+            "com.aar.app.wordsearch.features.gameplay.GamePlayActivity.ROW";
     public static final String EXTRA_COL_COUNT =
-            "com.aar.app.wordsearch.gameplay.GamePlayActivity.COL";
+            "com.aar.app.wordsearch.features.gameplay.GamePlayActivity.COL";
 
     private static final StreakLineMapper STREAK_LINE_MAPPER = new StreakLineMapper();
 

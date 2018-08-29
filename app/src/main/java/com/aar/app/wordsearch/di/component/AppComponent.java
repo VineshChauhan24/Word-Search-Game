@@ -2,10 +2,10 @@ package com.aar.app.wordsearch.di.component;
 
 import com.aar.app.wordsearch.di.modules.AppModule;
 import com.aar.app.wordsearch.di.modules.DataSourceModule;
-import com.aar.app.wordsearch.FullscreenActivity;
-import com.aar.app.wordsearch.gameover.GameOverActivity;
-import com.aar.app.wordsearch.gameplay.GamePlayActivity;
-import com.aar.app.wordsearch.mainmenu.MainMenuActivity;
+import com.aar.app.wordsearch.features.FullscreenActivity;
+import com.aar.app.wordsearch.features.gameover.GameOverActivity;
+import com.aar.app.wordsearch.features.gameplay.GamePlayActivity;
+import com.aar.app.wordsearch.features.mainmenu.MainMenuActivity;
 
 import javax.inject.Singleton;
 

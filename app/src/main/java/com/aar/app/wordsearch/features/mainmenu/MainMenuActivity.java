@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.mainmenu;
+package com.aar.app.wordsearch.features.mainmenu;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -11,17 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aar.app.wordsearch.R;
-import com.aar.app.wordsearch.ViewModelFactory;
+import com.aar.app.wordsearch.features.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
-import com.aar.app.wordsearch.FullscreenActivity;
+import com.aar.app.wordsearch.features.FullscreenActivity;
 import com.aar.app.wordsearch.easyadapter.CompositeData;
-import com.aar.app.wordsearch.gameplay.GamePlayActivity;
-import com.aar.app.wordsearch.mainmenu.items.GameDataAdapter;
+import com.aar.app.wordsearch.features.gameplay.GamePlayActivity;
+import com.aar.app.wordsearch.features.mainmenu.items.GameDataAdapter;
 import com.aar.app.wordsearch.model.GameDataInfo;
 import com.aar.app.wordsearch.model.GameTheme;
 import com.aar.app.wordsearch.easyadapter.CompositeAdapterDelegate;
 import com.aar.app.wordsearch.easyadapter.MultiTypeAdapter;
-import com.aar.app.wordsearch.settings.SettingsActivity;
+import com.aar.app.wordsearch.features.settings.SettingsActivity;
 
 import java.util.List;
 

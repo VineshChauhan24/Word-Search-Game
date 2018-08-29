@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch;
+package com.aar.app.wordsearch.features;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.aar.app.wordsearch.settings.Preferences;
+import com.aar.app.wordsearch.WordSearchApp;
+import com.aar.app.wordsearch.features.settings.Preferences;
 
 import javax.inject.Inject;
 

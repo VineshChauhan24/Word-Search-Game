@@ -1,11 +1,11 @@
-package com.aar.app.wordsearch;
+package com.aar.app.wordsearch.features;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.aar.app.wordsearch.mainmenu.MainMenuActivity;
+import com.aar.app.wordsearch.features.mainmenu.MainMenuActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
     @Override

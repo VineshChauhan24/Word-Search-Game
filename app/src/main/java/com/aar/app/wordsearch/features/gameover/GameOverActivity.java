@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.gameover;
+package com.aar.app.wordsearch.features.gameover;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.aar.app.wordsearch.R;
-import com.aar.app.wordsearch.ViewModelFactory;
+import com.aar.app.wordsearch.features.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.commons.DurationFormatter;
 import com.aar.app.wordsearch.model.GameDataInfo;
-import com.aar.app.wordsearch.FullscreenActivity;
+import com.aar.app.wordsearch.features.FullscreenActivity;
 
 import javax.inject.Inject;
 

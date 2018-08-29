@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.settings;
+package com.aar.app.wordsearch.features.settings;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.mainmenu;
+package com.aar.app.wordsearch.features.mainmenu;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;

@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.gameover;
+package com.aar.app.wordsearch.features.gameover;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".gameplay.GamePlayActivity">
+    tools:context="com.aar.app.wordsearch.features.gameplay.GamePlayActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

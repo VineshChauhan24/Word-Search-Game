@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch;
+package com.aar.app.wordsearch.features;
 
 import android.content.Context;
 import android.media.AudioManager;
@@ -6,7 +6,7 @@ import android.media.SoundPool;
 import android.util.SparseIntArray;
 
 import com.aar.app.wordsearch.R;
-import com.aar.app.wordsearch.settings.Preferences;
+import com.aar.app.wordsearch.features.settings.Preferences;
 
 import javax.inject.Inject;
 
