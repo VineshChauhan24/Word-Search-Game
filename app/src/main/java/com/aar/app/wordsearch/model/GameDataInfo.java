@@ -56,4 +56,17 @@ public class GameDataInfo {
     public void setUsedWordsCount(int usedWordsCount) {
         mUsedWordsCount = usedWordsCount;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof GameDataInfo)) return false;
+        GameDataInfo o2 = (GameDataInfo) obj;
+        return mId == o2.mId &&
+                mName.equals(o2.mName) &&
+                mDuration == o2.mDuration &&
+                mGridColCount == o2.mGridColCount &&
+                mGridRowCount == o2.mGridRowCount &&
+                mUsedWordsCount == o2.mUsedWordsCount;
+    }
 }
