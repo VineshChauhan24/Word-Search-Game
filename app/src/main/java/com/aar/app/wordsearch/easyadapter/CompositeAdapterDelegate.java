@@ -5,6 +5,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,8 @@ public class CompositeAdapterDelegate extends AdapterDelegate<CompositeData, Com
             }
             adapter = new MultiTypeAdapter();
             recyclerView.setAdapter(adapter);
+
+            Log.d("RVIN", "new adapter");
         }
     }
 }
