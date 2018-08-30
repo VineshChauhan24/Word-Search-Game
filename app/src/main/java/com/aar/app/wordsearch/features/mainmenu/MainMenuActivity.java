@@ -3,7 +3,7 @@ package com.aar.app.wordsearch.features.mainmenu;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Spinner;
@@ -14,12 +14,9 @@ import com.aar.app.wordsearch.R;
 import com.aar.app.wordsearch.features.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.features.FullscreenActivity;
-import com.aar.app.wordsearch.easyadapter.CompositeData;
+import com.aar.app.wordsearch.features.gamehistory.GameHistoryActivity;
 import com.aar.app.wordsearch.features.gameplay.GamePlayActivity;
-import com.aar.app.wordsearch.features.mainmenu.items.GameDataAdapter;
-import com.aar.app.wordsearch.model.GameDataInfo;
 import com.aar.app.wordsearch.model.GameTheme;
-import com.aar.app.wordsearch.easyadapter.CompositeAdapterDelegate;
 import com.aar.app.wordsearch.easyadapter.MultiTypeAdapter;
 import com.aar.app.wordsearch.features.settings.SettingsActivity;
 
@@ -68,17 +65,26 @@ public class MainMenuActivity extends FullscreenActivity {
                 (model, holder) -> holder.<TextView>find(R.id.textThemeName).setText(model.getName()),
                 (model, view) -> Toast.makeText(MainMenuActivity.this, model.getName(), Toast.LENGTH_SHORT).show()
         );
+        mAdapter.addDelegate(
+                HistoryItem.class,
+                R.layout.item_histories,
+                (model, holder) -> {},
+                (model, view) -> {
+                    Intent i = new Intent(MainMenuActivity.this, GameHistoryActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                }
+        );
 
         mRv.setAdapter(mAdapter);
-        mRv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         mViewModel.loadData();
     }
 
     public void showGameThemeList(List<GameTheme> gameThemes) {
-        mAdapter.addAll(gameThemes);
-        mAdapter.notifyDataSetChanged();
+        mAdapter.setItems(gameThemes);
+        mAdapter.insertAt(0, new HistoryItem());
     }
 
     @OnClick(R.id.settings_button)

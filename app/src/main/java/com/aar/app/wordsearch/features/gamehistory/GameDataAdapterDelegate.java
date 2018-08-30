@@ -1,4 +1,4 @@
-package com.aar.app.wordsearch.features.mainmenu.items;
+package com.aar.app.wordsearch.features.gamehistory;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -15,17 +15,17 @@ import com.aar.app.wordsearch.easyadapter.AdapterDelegate;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GameDataAdapter extends AdapterDelegate<GameDataInfo, GameDataAdapter.ViewHolder> {
+public class GameDataAdapterDelegate extends AdapterDelegate<GameDataInfo, GameDataAdapterDelegate.ViewHolder> {
 
     private OnClickListener mListener;
 
-    public GameDataAdapter() {
+    public GameDataAdapterDelegate() {
         super(GameDataInfo.class);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_game_data, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_game_data_history, parent, false);
         return new ViewHolder(v);
     }
 
