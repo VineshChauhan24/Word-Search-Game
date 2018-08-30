@@ -69,6 +69,10 @@ public class MultiTypeAdapter extends RecyclerView.Adapter {
         mData.addAll(models);
     }
 
+    public <T> void insertAt(int index, T model) {
+        mData.add(index, model);
+    }
+
     public <T> void replaceAt(int index, T model) {
         if (mData.size() > 0) {
             mData.set(index, model);
@@ -85,9 +89,9 @@ public class MultiTypeAdapter extends RecyclerView.Adapter {
     public <T> void setItems(List<T> models) {
         mCallback.set(mData, (List<Object>) models);
         DiffUtil.DiffResult result = DiffUtil.calculateDiff(mCallback);
+        result.dispatchUpdatesTo(this);
         mData.clear();
         mData.addAll(models);
-        result.dispatchUpdatesTo(this);
     }
 
     public void clear() {
@@ -135,12 +139,12 @@ public class MultiTypeAdapter extends RecyclerView.Adapter {
 
         @Override
         public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-            return true;
+            return oldList.get(oldItemPosition).equals(newList.get(newItemPosition));
         }
 
         @Override
         public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-            return oldList.get(oldItemPosition).equals(newList.get(newItemPosition));
+            return true;
         }
     }
 }
