@@ -51,7 +51,7 @@ public class AppModule {
         return new ViewModelFactory(
                 new GameOverViewModel(gameDataSource),
                 new GamePlayViewModel(gameDataSource, wordDataSource),
-                new MainMenuViewModel(gameDataSource, new GameThemeRepository()),
+                new MainMenuViewModel(new GameThemeRepository()),
                 new GameHistoryViewModel(gameDataSource)
         );
     }

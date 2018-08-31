@@ -31,10 +31,6 @@ import butterknife.OnClick;
 
 public class MainMenuActivity extends FullscreenActivity {
 
-    private static final int RV_ITEM_GAME_THEME = 1111;
-    private static final int RV_ITEM_GAME_DATA = 1112;
-    private static final int RV_ITEM_GAME_DATA_LIST = 1113;
-
     @BindView(R.id.rv) RecyclerView mRv;
     @BindView(R.id.game_template_spinner) Spinner mGridSizeSpinner;
 

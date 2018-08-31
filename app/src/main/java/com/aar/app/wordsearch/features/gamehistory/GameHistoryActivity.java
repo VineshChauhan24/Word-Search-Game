@@ -2,7 +2,6 @@ package com.aar.app.wordsearch.features.gamehistory;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +14,6 @@ import com.aar.app.wordsearch.easyadapter.MultiTypeAdapter;
 import com.aar.app.wordsearch.features.FullscreenActivity;
 import com.aar.app.wordsearch.features.ViewModelFactory;
 import com.aar.app.wordsearch.features.gameplay.GamePlayActivity;
-import com.aar.app.wordsearch.features.mainmenu.MainMenuActivity;
 import com.aar.app.wordsearch.model.GameDataInfo;
 
 import java.util.List;
