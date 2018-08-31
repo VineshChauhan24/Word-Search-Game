@@ -59,12 +59,6 @@ public class GameHistoryActivity extends FullscreenActivity {
         mViewModel.loadGameHistory();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-    }
-
     @OnClick(R.id.btnClear)
     public void onButtonClearClick() {
         mViewModel.clear();
@@ -89,8 +83,6 @@ public class GameHistoryActivity extends FullscreenActivity {
                 Intent intent = new Intent(GameHistoryActivity.this, GamePlayActivity.class);
                 intent.putExtra(GamePlayActivity.EXTRA_GAME_ROUND_ID, gameDataInfo.getId());
                 startActivity(intent);
-
-                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
             }
 
             @Override

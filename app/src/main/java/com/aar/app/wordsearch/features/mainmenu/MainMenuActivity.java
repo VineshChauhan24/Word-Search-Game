@@ -72,7 +72,6 @@ public class MainMenuActivity extends FullscreenActivity {
                 (model, view) -> {
                     Intent i = new Intent(MainMenuActivity.this, GameHistoryActivity.class);
                     startActivity(i);
-                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 }
         );
 
@@ -100,7 +99,6 @@ public class MainMenuActivity extends FullscreenActivity {
         intent.putExtra(GamePlayActivity.EXTRA_ROW_COUNT, dim);
         intent.putExtra(GamePlayActivity.EXTRA_COL_COUNT, dim);
         startActivity(intent);
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
 }

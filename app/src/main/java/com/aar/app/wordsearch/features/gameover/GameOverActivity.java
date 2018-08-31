@@ -51,7 +51,7 @@ public class GameOverActivity extends FullscreenActivity {
 
     @OnClick(R.id.main_menu_btn)
     public void onMainMenuClick() {
-        goToMainMenu();
+        onBackPressed();
     }
 
     @Override
@@ -66,8 +66,6 @@ public class GameOverActivity extends FullscreenActivity {
         }
         NavUtils.navigateUpTo(this, new Intent());
         finish();
-
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 
     public void showGameStat(GameDataInfo info) {

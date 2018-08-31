@@ -151,13 +151,6 @@ public class GamePlayActivity extends FullscreenActivity {
         mViewModel.stopGame();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
-    }
-
     private void onAnswerResult(GamePlayViewModel.AnswerResult answerResult) {
         if (answerResult.correct) {
             TextView textView = findUsedWordTextViewByUsedWordId(answerResult.usedWordId);
@@ -284,8 +277,6 @@ public class GamePlayActivity extends FullscreenActivity {
         intent.putExtra(GameOverActivity.EXTRA_GAME_ROUND_ID, gameId);
         startActivity(intent);
         finish();
-
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
     private void setGameAsAlreadyFinished() {
