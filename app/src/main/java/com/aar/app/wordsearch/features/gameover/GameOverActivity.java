@@ -1,8 +1,8 @@
 package com.aar.app.wordsearch.features.gameover;
 
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
+import androidx.core.app.NavUtils;
 import android.os.Bundle;
 import android.widget.TextView;
 

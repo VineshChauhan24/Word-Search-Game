@@ -2,7 +2,7 @@ package com.aar.app.wordsearch.features.gameplay;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
-import android.arch.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;

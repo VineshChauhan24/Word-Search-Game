@@ -1,8 +1,8 @@
 package com.aar.app.wordsearch.features.gamehistory;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.aar.app.wordsearch.data.GameDataSource;
 import com.aar.app.wordsearch.model.GameDataInfo;
