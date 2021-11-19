@@ -1,5 +1,6 @@
 package com.aar.app.wordsearch.features.mainmenu;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aar.app.wordsearch.R;
+import com.aar.app.wordsearch.data.entity.MenuItem;
+import com.aar.app.wordsearch.easyadapter.MenuItemAdapter;
 import com.aar.app.wordsearch.features.ViewModelFactory;
 import com.aar.app.wordsearch.WordSearchApp;
 import com.aar.app.wordsearch.features.FullscreenActivity;
@@ -20,7 +23,9 @@ import com.aar.app.wordsearch.model.GameTheme;
 import com.aar.app.wordsearch.easyadapter.MultiTypeAdapter;
 import com.aar.app.wordsearch.features.settings.SettingsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -31,8 +36,7 @@ import butterknife.OnClick;
 
 public class MainMenuActivity extends FullscreenActivity {
 
-    @BindView(R.id.rv) RecyclerView mRv;
-    @BindView(R.id.game_template_spinner) Spinner mGridSizeSpinner;
+    @BindView(R.id.list) RecyclerView mRv;
 
     @BindArray(R.array.game_round_dimension_values)
     int[] mGameRoundDimVals;
@@ -40,7 +44,7 @@ public class MainMenuActivity extends FullscreenActivity {
     @Inject
     ViewModelFactory mViewModelFactory;
     MainMenuViewModel mViewModel;
-    MultiTypeAdapter mAdapter;
+    MenuItemAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,35 +55,40 @@ public class MainMenuActivity extends FullscreenActivity {
         ((WordSearchApp) getApplication()).getAppComponent().inject(this);
 
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MainMenuViewModel.class);
-        mViewModel.getOnGameThemeLoaded().observe(this, this::showGameThemeList);
+        // mViewModel.getOnGameThemeLoaded().observe(this, this::showGameThemeList);
 
-
-        mAdapter = new MultiTypeAdapter();
-        mAdapter.addDelegate(
-                GameTheme.class,
-                R.layout.item_game_theme,
-                (model, holder) -> holder.<TextView>find(R.id.textThemeName).setText(model.getName()),
-                (model, view) -> Toast.makeText(MainMenuActivity.this, model.getName(), Toast.LENGTH_SHORT).show()
-        );
-        mAdapter.addDelegate(
-                HistoryItem.class,
-                R.layout.item_histories,
-                (model, holder) -> {},
-                (model, view) -> {
-                    Intent i = new Intent(MainMenuActivity.this, GameHistoryActivity.class);
-                    startActivity(i);
-                }
-        );
+        mAdapter = new MenuItemAdapter(new MenuItemAdapter.OnClickListener() {
+            @Override
+            public void onClick(@NonNull MenuItem menuItem) {
+                newGame();
+            }
+        });
 
         mRv.setAdapter(mAdapter);
         mRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
+        mAdapter.submitList(dummyList());
         mViewModel.loadData();
     }
 
-    public void showGameThemeList(List<GameTheme> gameThemes) {
-        mAdapter.setItems(gameThemes);
-        mAdapter.insertAt(0, new HistoryItem());
+    public List<MenuItem> dummyList(){
+
+        String [] colors = new String[]{
+                "#17DEEE",
+                "#FF4162",
+                "#F2E50B",
+                "#21B20C",
+                "#FF7F50",
+                "#fdc675",
+                "#d3fda1",
+                "#96e3a5",
+                "#41bec2"
+        };
+
+        List<MenuItem> dummy = new ArrayList<>();
+        for(int i= 0; i < colors.length;i++){
+            dummy.add(new MenuItem(i, "Item" + i, colors[i]));
+        }
+        return dummy;
     }
 
     @OnClick(R.id.settings_button)
@@ -88,9 +97,9 @@ public class MainMenuActivity extends FullscreenActivity {
         startActivity(intent);
     }
 
-    @OnClick(R.id.new_game_btn)
-    public void onNewGameClick() {
-        int dim = mGameRoundDimVals[ mGridSizeSpinner.getSelectedItemPosition() ];
+
+    public void newGame() {
+        int dim = mGameRoundDimVals[(int) (Math.random()*mGameRoundDimVals.length)];
         Intent intent = new Intent(MainMenuActivity.this, GamePlayActivity.class);
         intent.putExtra(GamePlayActivity.EXTRA_ROW_COUNT, dim);
         intent.putExtra(GamePlayActivity.EXTRA_COL_COUNT, dim);

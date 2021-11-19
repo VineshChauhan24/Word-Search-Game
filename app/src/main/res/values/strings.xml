@@ -34,5 +34,8 @@
     <string name="pref_grayscale">grayscale</string>
     <string name="grayscale">Grayscale</string>
     <string name="game_data_desc">:gridSize Grid, :wordCount Words</string>
+    <string name="_00_00">00:00</string>
+    <string name="word_count">%1$d/%2$d</string>
+    <string name="round_d_d">"Round %1$d/%2$d  "</string>
 
 </resources>

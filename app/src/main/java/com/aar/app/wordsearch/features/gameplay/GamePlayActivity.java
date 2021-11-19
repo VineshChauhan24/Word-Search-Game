@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -55,13 +56,9 @@ public class GamePlayActivity extends FullscreenActivity {
     @BindView(R.id.letter_board) LetterBoard mLetterBoard;
     @BindView(R.id.flow_layout) FlowLayout mFlowLayout;
 
-    @BindView(R.id.text_sel_layout) View mTextSelLayout;
     @BindView(R.id.text_selection) TextView mTextSelection;
 
-    @BindView(R.id.answered_text_count) TextView mAnsweredTextCount;
-    @BindView(R.id.words_count) TextView mWordsCount;
-
-    @BindView(R.id.finished_text) TextView mFinishedText;
+    @BindView(R.id.found_words_count) TextView mFoundWordCount;
 
     @BindView(R.id.loading) View mLoading;
     @BindView(R.id.loadingText) TextView mLoadingText;
@@ -85,7 +82,7 @@ public class GamePlayActivity extends FullscreenActivity {
             @Override
             public void onSelectionBegin(StreakView.StreakLine streakLine, String str) {
                 streakLine.setColor(Util.getRandomColorWithAlpha(170));
-                mTextSelLayout.setVisibility(View.VISIBLE);
+                mTextSelection.setVisibility(View.VISIBLE);
                 mTextSelection.setText(str);
             }
 
@@ -101,8 +98,7 @@ public class GamePlayActivity extends FullscreenActivity {
             @Override
             public void onSelectionEnd(StreakView.StreakLine streakLine, String str) {
                 mViewModel.answerWord(str, STREAK_LINE_MAPPER.revMap(streakLine), getPreferences().reverseMatching());
-                mTextSelLayout.setVisibility(View.GONE);
-                mTextSelection.setText(str);
+                mTextSelection.setText("");
             }
         });
 
@@ -130,7 +126,6 @@ public class GamePlayActivity extends FullscreenActivity {
         }
 
         mLetterBoard.getStreakView().setSnapToGrid(getPreferences().getSnapToGrid());
-        mFinishedText.setVisibility(View.GONE);
     }
 
     @Override
@@ -203,7 +198,7 @@ public class GamePlayActivity extends FullscreenActivity {
         showDuration(gameData.getDuration());
         showUsedWords(gameData.getUsedWords());
         showWordsCount(gameData.getUsedWords().size());
-        showAnsweredWordsCount(gameData.getAnsweredWordsCount());
+        showAnsweredWordsCount(gameData.getUsedWords().size(),gameData.getAnsweredWordsCount());
         doneLoadingContent();
     }
 
@@ -264,12 +259,12 @@ public class GamePlayActivity extends FullscreenActivity {
         }
     }
 
-    private void showAnsweredWordsCount(int count) {
-        mAnsweredTextCount.setText(String.valueOf(count));
+    private void showAnsweredWordsCount(int wordCount, int foundWords) {
+       mFoundWordCount.setText( getString(R.string.word_count, foundWords , wordCount));
     }
 
     private void showWordsCount(int count) {
-        mWordsCount.setText(String.valueOf(count));
+        mFoundWordCount.setText( getString(R.string.word_count, 0 , count));
     }
 
     private void showFinishGame(int gameId) {
@@ -281,7 +276,6 @@ public class GamePlayActivity extends FullscreenActivity {
 
     private void setGameAsAlreadyFinished() {
         mLetterBoard.getStreakView().setInteractive(false);
-        mFinishedText.setVisibility(View.VISIBLE);
     }
 
     //
@@ -294,9 +288,7 @@ public class GamePlayActivity extends FullscreenActivity {
             }
             tv.setBackgroundColor(uw.getAnswerLine().color);
             tv.setText(uw.getString());
-            tv.setTextColor(Color.WHITE);
             tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
             mLetterBoard.addStreakLine(STREAK_LINE_MAPPER.map(uw.getAnswerLine()));
         }
         else {
@@ -318,6 +310,8 @@ public class GamePlayActivity extends FullscreenActivity {
             tv.setText(str);
         }
 
+        tv.setTextColor(Color.WHITE);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
         tv.setTag(uw);
         return tv;
     }
