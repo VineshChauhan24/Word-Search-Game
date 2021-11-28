@@ -23,10 +23,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/main_menu_btn"
         android:layout_centerHorizontal="true"
-        android:layout_margin="18dp"
-        android:textSize="8pt"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:text="Finish"
         android:textAlignment="center"
-        android:text="Finish"/>
+        android:textSize="8pt" />
 
 
     <TextView
@@ -34,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/game_stat_text"
         android:layout_centerHorizontal="true"
+        android:text="@string/congratulations"
         android:textSize="11pt"
-        android:textStyle="bold"
-        android:text="@string/congratulations"/>
+        android:textStyle="bold" />
 </RelativeLayout>

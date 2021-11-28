@@ -17,7 +17,7 @@
         android:id="@+id/category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="36sp"
+        android:textSize="28sp"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/h_guideline"
         app:layout_constraintEnd_toStartOf="@+id/v_guideline"
@@ -29,7 +29,7 @@
         android:id="@+id/progress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="36sp"
+        android:textSize="32sp"
         android:gravity="center"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.65" />
+        app:layout_constraintGuide_percent="0.75" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h_guideline"

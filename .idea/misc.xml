@@ -4,7 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.29333333333333333" />
+        <entry key="app/src/main/res/drawable-hdpi/round_rectangle_bg.xml" value="0.166" />
+        <entry key="app/src/main/res/drawable/bg_item_simple.xml" value="0.2145" />
+        <entry key="app/src/main/res/drawable/bg_splash.xml" value="0.2145" />
         <entry key="app/src/main/res/drawable/ic_chevron_right.xml" value="0.1135" />
+        <entry key="app/src/main/res/drawable/ic_tada.xml" value="0.2235" />
+        <entry key="app/src/main/res/drawable/round_corner_background.xml" value="0.166" />
         <entry key="app/src/main/res/font/montserrat.xml" value="0.42552083333333335" />
         <entry key="app/src/main/res/layout/activity_game_history.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/activity_game_over.xml" value="0.2015625" />
@@ -16,6 +21,7 @@
         <entry key="app/src/main/res/layout/item_histories.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/partial_new_game_buttons.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/sample_menu_item.xml" value="0.2015625" />
+        <entry key="app/src/main/res/layout/view_game_end_dialog.xml" value="0.27999999999999997" />
         <entry key="app/src/main/res/layout/view_menu_item.xml" value="0.2015625" />
       </map>
     </option>
