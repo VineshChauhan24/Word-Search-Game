@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "757197087612",
+    "project_id": "word-search-puzzle-3abf3",
+    "storage_bucket": "word-search-puzzle-3abf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757197087612:android:acd102f12ce8e7155c7af9",
+        "android_client_info": {
+          "package_name": "ke.choxxy.wordsearch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757197087612-uhi4r9bmf7srtqv2ukfjc55h17bf45rg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkCQpQ0YBXJaW2Dyg9rUCUzGruubgHYWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757197087612-uhi4r9bmf7srtqv2ukfjc55h17bf45rg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -77,13 +77,7 @@ public class MainMenuActivity extends FullscreenActivity {
                 "#41bec2"
         };
 
-        String [] games = new String[]{
-                "Classic Game",
-                "Time Trial",
-                "Hidden Letters",
-                "Blind Fold",
-                "Questions Game"
-        };
+        String [] games = getResources().getStringArray(R.array.game_modes);
 
         List<MenuItem> dummy = new ArrayList<>();
         for(int i= 0; i < games.length;i++){

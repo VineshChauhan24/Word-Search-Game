@@ -18,8 +18,6 @@ public class StringListGridGenerator extends GridGenerator<List<String>, List<St
 
     @Override
     public List<String> setGrid(List<String> dataInput, char[][] grid) {
-//        Util.sortByLength(dataInput);
-
         List<String> usedStrings = new ArrayList<>();
         int usedCount;
         for (int i = 0; i < MIN_GRID_ITERATION_ATTEMPT; i++) {
@@ -53,7 +51,6 @@ public class StringListGridGenerator extends GridGenerator<List<String>, List<St
     private boolean tryPlaceWord(String word, char gridArr[][]) {
         Direction startDir = getRandomDirection();
         Direction currDir = startDir;
-
         int row;
         int col;
         int startRow;

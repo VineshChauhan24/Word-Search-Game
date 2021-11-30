@@ -14,6 +14,13 @@
         <item>12</item>
     </integer-array>
 
+    <string-array name="game_modes">
+        <item>Classic Game</item>
+        <item>Time Trial</item>
+        <item>Hidden Letters</item>
+        <item>Blind Fold</item>
+        <item>Questions Game</item>
+    </string-array>
 
     <string-array name="snap_to_grid_type_prefs">
         <item>Always Snap</item>

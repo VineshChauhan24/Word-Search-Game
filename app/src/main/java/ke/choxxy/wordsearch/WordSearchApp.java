@@ -2,6 +2,8 @@ package ke.choxxy.wordsearch;
 
 import android.app.Application;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import ke.choxxy.wordsearch.di.component.AppComponent;
 import ke.choxxy.wordsearch.di.component.DaggerAppComponent;
 import ke.choxxy.wordsearch.di.modules.AppModule;
@@ -13,6 +15,7 @@ import ke.choxxy.wordsearch.di.modules.AppModule;
 public class WordSearchApp extends Application {
 
     AppComponent mAppComponent;
+
 
     @Override
     public void onCreate() {
