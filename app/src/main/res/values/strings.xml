@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Word Search Classic</string>
+    <string name="app_name">Word Search</string>
     <string name="new_game_loading_text">Generating game data…</string>
     <string name="summary_about">Word search game is a puzzle game, where the player try to find words in a grid of letters in horizontal, vertical and diagonal direction.</string>
     <string name="finished">Finished!</string>
@@ -17,7 +17,7 @@
     <string name="about">About</string>
     <string name="saved_game">Saved game data</string>
     <string name="enable_sound">Enable Sound</string>
-    <string name="about_credit">Developer: Abdul Aris R.</string>
+    <string name="about_credit">Developer: Joshua Achoka from Abdul Aris R. Game </string>
     <string name="delete_finish">Delete Finish</string>
     <string name="enable_fullscreen">Fullscreen</string>
     <string name="auto_scale_grid">Auto Scale Grid</string>

@@ -12,7 +12,7 @@ public class GameDataEntity {
 
     private int mId;
     private String mName;
-    private int mDuration;
+    private long mDuration;
     private int mGridRowCount;
     private int mGridColCount;
     private String mGridData;
@@ -44,11 +44,11 @@ public class GameDataEntity {
         mName = name;
     }
 
-    public int getDuration() {
+    public long getDuration() {
         return mDuration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(long duration) {
         mDuration = duration;
     }
 

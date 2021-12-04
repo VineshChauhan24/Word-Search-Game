@@ -15,17 +15,17 @@
             android:value="true" />
 
         <activity
-            android:name=".features.settings.SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".features.gameplay.GamePlayActivity">
+        <activity android:name="ke.choxxy.wordsearch.gameplay.GamePlayActivity">
         </activity>
-        <activity android:name=".features.mainmenu.MainMenuActivity">
+        <activity android:name="ke.choxxy.wordsearch.mainmenu.MainMenuActivity">
         </activity>
-        <activity android:name=".features.gameover.GameOverActivity">
+        <activity android:name="ke.choxxy.wordsearch.gameover.GameOverActivity">
         </activity>
         <activity
-            android:name=".features.SplashScreenActivity"
+            android:name=".SplashScreenActivity"
             android:theme="@style/SplashScreenTheme"
             android:exported="true">
             <intent-filter>
@@ -34,7 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".features.gamehistory.GameHistoryActivity">
+        <activity android:name=".gamehistory.GameHistoryActivity">
         </activity>
     </application>
 

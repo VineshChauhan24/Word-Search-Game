@@ -4,17 +4,20 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.google.firebase.appdistribution'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 31
-    buildToolsVersion = '30.0.3'
+    buildToolsVersion = '31.0.0'
 
     defaultConfig {
         applicationId "ke.choxxy.wordsearch"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 31
         versionCode 1
-        versionName "1.0"
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -60,11 +63,25 @@ dependencies {
     implementation 'com.github.abdularis:CircularImageView:v1.2'
     testImplementation 'junit:junit:4.13.2'
 
+    // extensions
+    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    kapt "com.google.dagger:hilt-compiler:2.38.1"
 
-    implementation 'com.google.dagger:dagger:2.38.1'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.38.1'
     implementation 'com.akexorcist:round-corner-progress-bar:2.1.2'
+
+    //serialization
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
+
+    //data store
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
 
 }

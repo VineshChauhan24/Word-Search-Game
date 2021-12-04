@@ -41,7 +41,7 @@ public interface GameDataSource {
 
     void deleteGameDatas();
 
-    void saveGameDataDuration(int gid, int newDuration);
+    void saveGameDataDuration(int gid, long newDuration);
 
     void markWordAsAnswered(UsedWord usedWord);
 }

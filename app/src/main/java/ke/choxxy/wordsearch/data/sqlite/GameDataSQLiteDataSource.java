@@ -137,7 +137,7 @@ public class GameDataSQLiteDataSource implements GameDataSource {
     }
 
     @Override
-    public void saveGameDataDuration(int gid, int newDuration) {
+    public void saveGameDataDuration(int gid, long newDuration) {
         SQLiteDatabase db = mHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put(DbContract.GameRound.COL_DURATION, newDuration);

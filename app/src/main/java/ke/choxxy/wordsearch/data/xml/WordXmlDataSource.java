@@ -3,6 +3,7 @@ package ke.choxxy.wordsearch.data.xml;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import ke.choxxy.wordsearch.data.WordDataSource;
 import ke.choxxy.wordsearch.model.Word;
 
@@ -27,7 +28,7 @@ public class WordXmlDataSource implements WordDataSource {
     private AssetManager mAssetManager;
 
     @Inject
-    public WordXmlDataSource(Context context) {
+    public WordXmlDataSource(@ApplicationContext  Context context) {
         mAssetManager = context.getAssets();
     }
 

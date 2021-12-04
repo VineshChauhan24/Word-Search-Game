@@ -22,6 +22,14 @@
         <item>Questions Game</item>
     </string-array>
 
+    <string-array name="menu_colors">
+        <item>#4184f1</item>
+        <item>#FF4162</item>
+        <item>#ffa72c</item>
+        <item>#21B20C</item>
+        <item>#FF7F50</item>
+    </string-array>
+
     <string-array name="snap_to_grid_type_prefs">
         <item>Always Snap</item>
         <item>Start and End</item>

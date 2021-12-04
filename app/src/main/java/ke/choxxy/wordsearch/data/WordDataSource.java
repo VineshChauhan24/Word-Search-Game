@@ -9,7 +9,5 @@ import java.util.List;
  */
 
 public interface WordDataSource {
-
     List<Word> getWords();
-
 }

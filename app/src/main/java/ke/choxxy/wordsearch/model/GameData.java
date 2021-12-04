@@ -13,7 +13,8 @@ public class GameData {
 
     private int mId;
     private String mName;
-    private int mDuration;
+    private long mDuration;
+    private int level;
     private Grid mGrid;
     private List<UsedWord> mUsedWords;
 
@@ -45,11 +46,11 @@ public class GameData {
         mName = name;
     }
 
-    public int getDuration() {
+    public long getDuration() {
         return mDuration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(long duration) {
         mDuration = duration;
     }
 
