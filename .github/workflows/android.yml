@@ -18,7 +18,7 @@ jobs:
      
       - name: Build debug
         if: github.ref != 'refs/heads/main'
-        run: ./gradlew assembleDevDebug
+        run: ./gradlew assembleDebug
         
       - name: Firebase App Distribute
         if: github.ref == 'refs/heads/main'
