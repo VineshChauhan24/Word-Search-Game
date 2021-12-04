@@ -8,3 +8,6 @@
 /captures
 .externalNativeBuild
 /assets/
+.idea/
+.idea/gradle.xml
+.idea/misc.xml
