@@ -182,7 +182,7 @@ public class GamePlayViewModel extends ViewModel {
 
             Observable.create((ObservableOnSubscribe<GameData>) emitter -> {
                 List<Word> wordList = mWordDataSource.getWords();
-                GameData gr = mGameDataCreator.newGameData(wordList, rowCount, colCount, "Play me");
+                GameData gr = mGameDataCreator.newGameData(wordList, rowCount, colCount,game.getType(), "Play me");
                 long gid = mGameDataSource.saveGameData(new GameDataMapper().revMap(gr));
                 gr.setId((int) gid);
                 emitter.onNext(gr);

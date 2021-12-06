@@ -12,9 +12,6 @@ import android.view.View
 import android.view.View.GONE
 import android.widget.TextView
 import androidx.activity.viewModels
-import butterknife.BindColor
-import butterknife.BindView
-import butterknife.ButterKnife
 import dagger.hilt.android.AndroidEntryPoint
 import ke.choxxy.wordsearch.FullscreenActivity
 import ke.choxxy.wordsearch.R
@@ -22,13 +19,10 @@ import ke.choxxy.wordsearch.SoundPlayer
 import ke.choxxy.wordsearch.commons.DurationFormatter
 import ke.choxxy.wordsearch.commons.Util
 import ke.choxxy.wordsearch.commons.viewBinding
-import ke.choxxy.wordsearch.custom.LetterBoard
 import ke.choxxy.wordsearch.custom.LetterBoard.OnLetterSelectionListener
 import ke.choxxy.wordsearch.custom.StreakView.StreakLine
-import ke.choxxy.wordsearch.custom.layout.FlowLayout
 import ke.choxxy.wordsearch.data.entity.Game
 import ke.choxxy.wordsearch.data.entity.GameType
-import ke.choxxy.wordsearch.databinding.ActivityGameOverBinding
 import ke.choxxy.wordsearch.databinding.ActivityGamePlayBinding
 import ke.choxxy.wordsearch.gameover.GameoverDialog
 import ke.choxxy.wordsearch.gameover.GameoverDialog.Companion.newInstance
@@ -158,10 +152,10 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
                 anim.setTarget(textView)
                 anim.start()
             }
-            mSoundPlayer!!.play(SoundPlayer.Sound.Correct)
+            mSoundPlayer.play(SoundPlayer.Sound.Correct)
         } else {
             binding.letterBoard.popStreakLine()
-            mSoundPlayer!!.play(SoundPlayer.Sound.Wrong)
+            mSoundPlayer.play(SoundPlayer.Sound.Wrong)
         }
     }
 
@@ -209,12 +203,6 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
         if (preferences.autoScaleGrid() || boardWidth > screenWidth) {
             val scale = screenWidth.toFloat() / boardWidth.toFloat()
             binding.letterBoard.scale(scale, scale)
-            //            mLetterBoard.animate()
-//                    .scaleX(scale)
-//                    .scaleY(scale)
-//                    .setDuration(400)
-//                    .setInterpolator(new DecelerateInterpolator())
-//                    .start();
         }
     }
 
@@ -246,7 +234,7 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
     }
 
     private fun showDuration(duration: Long) {
-       binding.textDuration.text = DurationFormatter.fromInteger(duration)
+        binding.textDuration.text = DurationFormatter.fromInteger(duration)
     }
 
     private fun showUsedWords(usedWords: List<UsedWord>) {
@@ -298,9 +286,9 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
                 var revealCount = uw.revealCount
                 val uwString = uw.string
                 str = ""
-                for (i in 0 until uwString.length) {
+                for (element in uwString) {
                     if (revealCount > 0) {
-                        str += uwString[i]
+                        str += element
                         revealCount--
                     } else {
                         str += " _"

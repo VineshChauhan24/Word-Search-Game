@@ -1,13 +1,11 @@
 package ke.choxxy.wordsearch.gamehistory
 
-import ke.choxxy.wordsearch.data.GameDataSource
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.MutableLiveData
-import ke.choxxy.wordsearch.model.GameDataInfo
-import ke.choxxy.wordsearch.data.GameDataSource.InfosCallback
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ke.choxxy.wordsearch.data.sqlite.GameDataSQLiteDataSource
+import ke.choxxy.wordsearch.model.GameDataInfo
 import java.util.ArrayList
 import javax.inject.Inject
 
@@ -36,5 +34,4 @@ class GameHistoryViewModel @Inject constructor(private val mGameDataSource: Game
 
     val onGameDataInfoLoaded: LiveData<List<GameDataInfo>>
         get() = mOnGameDataInfoLoaded
-
 }

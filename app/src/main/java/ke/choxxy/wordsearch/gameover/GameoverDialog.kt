@@ -4,7 +4,11 @@ import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import ke.choxxy.wordsearch.R
 import ke.choxxy.wordsearch.databinding.ViewGameEndDialogBinding
@@ -18,7 +22,7 @@ class GameoverDialog : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = ViewGameEndDialogBinding.inflate(inflater, container, false)
 
         binding?.next?.setOnClickListener {

@@ -3,6 +3,7 @@ package ke.choxxy.wordsearch.gameplay;
 
 import ke.choxxy.wordsearch.commons.Util;
 import ke.choxxy.wordsearch.commons.generator.StringListGridGenerator;
+import ke.choxxy.wordsearch.data.entity.GameType;
 import ke.choxxy.wordsearch.model.GameData;
 import ke.choxxy.wordsearch.model.Grid;
 import ke.choxxy.wordsearch.model.UsedWord;
@@ -23,7 +24,7 @@ public class GameDataCreator {
 
     public GameData newGameData(final List<Word> words,
                                 final int rowCount, final int colCount,
-                                final String name) {
+                                GameType gameType, final String name) {
         final GameData gameData = new GameData();
 
         Util.randomizeList(words);
@@ -34,7 +35,7 @@ public class GameDataCreator {
                 new StringListGridGenerator()
                         .setGrid(getStringListFromWord(words, 100, maxCharCount), grid.getArray());
 
-        gameData.addUsedWords(buildUsedWordFromString(usedStrings));
+        gameData.addUsedWords(buildUsedWordFromString(usedStrings,gameType ));
         gameData.setGrid(grid);
         if (name == null || name.isEmpty()) {
             String name1 = "Puzzle " +
@@ -48,9 +49,14 @@ public class GameDataCreator {
         return gameData;
     }
 
-    private List<UsedWord> buildUsedWordFromString(List<String> strings) {
-        int mysteryWordCount = Util.getRandomIntRange(strings.size() / 2, strings.size());
+    private List<UsedWord> buildUsedWordFromString(List<String> strings, GameType gameType) {
+        int mysteryWordCount = 0;
+
+        if(gameType == GameType.HIDDEN_LETTERS)
+         mysteryWordCount = Util.getRandomIntRange(strings.size() / 2, strings.size());
+
         List<UsedWord> usedWords = new ArrayList<>();
+
         for (int i = 0; i < strings.size(); i++) {
             String str = strings.get(i);
 

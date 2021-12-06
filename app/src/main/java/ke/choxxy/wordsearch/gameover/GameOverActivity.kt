@@ -1,22 +1,16 @@
 package ke.choxxy.wordsearch.gameover
 
+import android.content.Intent
+import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.core.app.NavUtils
 import dagger.hilt.android.AndroidEntryPoint
 import ke.choxxy.wordsearch.FullscreenActivity
-import butterknife.BindView
 import ke.choxxy.wordsearch.R
-import android.widget.TextView
-import ke.choxxy.wordsearch.gameover.GameOverViewModel
-import android.os.Bundle
-import butterknife.ButterKnife
-import ke.choxxy.wordsearch.model.GameDataInfo
-import ke.choxxy.wordsearch.gameover.GameOverActivity
-import butterknife.OnClick
-import androidx.core.app.NavUtils
-import android.content.Intent
-import androidx.activity.viewModels
 import ke.choxxy.wordsearch.commons.DurationFormatter
 import ke.choxxy.wordsearch.commons.viewBinding
 import ke.choxxy.wordsearch.databinding.ActivityGameOverBinding
+import ke.choxxy.wordsearch.model.GameDataInfo
 
 @AndroidEntryPoint
 class GameOverActivity : FullscreenActivity() {
@@ -28,7 +22,6 @@ class GameOverActivity : FullscreenActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_over)
-        ButterKnife.bind(this)
         mViewModel.onGameDataInfoLoaded.observe(this) { info: GameDataInfo -> showGameStat(info) }
         if (intent.extras != null) {
             mGameId = intent.extras!!.getInt(EXTRA_GAME_ROUND_ID)

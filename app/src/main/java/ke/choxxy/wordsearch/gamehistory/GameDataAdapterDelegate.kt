@@ -1,70 +1,50 @@
 package ke.choxxy.wordsearch.gamehistory
 
-import ke.choxxy.wordsearch.easyadapter.AdapterDelegate
-import ke.choxxy.wordsearch.model.GameDataInfo
-import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import ke.choxxy.wordsearch.R
 import ke.choxxy.wordsearch.commons.DurationFormatter
-import androidx.recyclerview.widget.RecyclerView
-import butterknife.BindView
-import android.widget.TextView
-import butterknife.ButterKnife
+import ke.choxxy.wordsearch.databinding.ItemGameDataHistoryBinding
+import ke.choxxy.wordsearch.easyadapter.AdapterDelegate
+import ke.choxxy.wordsearch.model.GameDataInfo
 
-class GameDataAdapterDelegate : AdapterDelegate<GameDataInfo, GameDataAdapterDelegate.ViewHolder>(
+class GameDataAdapterDelegate(var mListener: OnClickListener) : AdapterDelegate<GameDataInfo, GameDataAdapterDelegate.ViewHolder>(
     GameDataInfo::class.java
 ) {
-    private var mListener: OnClickListener? = null
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
-        val v = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_game_data_history, parent, false)
-        return ViewHolder(v)
+        val binding = ItemGameDataHistoryBinding.inflate(LayoutInflater.from(parent.context),
+        parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(model: GameDataInfo, holder: ViewHolder) {
-        holder.textName!!.text = model.name
-        holder.textDuration!!.text = DurationFormatter.fromInteger(model.duration.toLong())
-        var desc = holder.itemView.context.getString(R.string.game_data_desc)
-        desc = desc.replace(
-            ":gridSize".toRegex(),
-            model.gridRowCount.toString() + "x" + model.gridColCount
-        )
-        desc = desc.replace(":wordCount".toRegex(), model.usedWordsCount.toString())
-        holder.textOtherDesc!!.text = desc
-        holder.itemView.setOnClickListener { v: View? ->
-            if (mListener != null) {
-                mListener!!.onClick(model)
-            }
-        }
-        holder.viewDeleteItem!!.setOnClickListener { v: View? ->
-            if (mListener != null) {
-                mListener!!.onDeleteClick(model)
-            }
-        }
+        holder.bind(model)
     }
 
-    fun setOnClickListener(listener: OnClickListener?) {
-        mListener = listener
-    }
+    inner class ViewHolder(private val binding: ItemGameDataHistoryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-    class ViewHolder internal constructor(itemView: View?) : RecyclerView.ViewHolder(
-        itemView!!
-    ) {
-        @BindView(R.id.text_name)
-        var textName: TextView? = null
+        fun bind(model: GameDataInfo){
 
-        @BindView(R.id.text_duration)
-        var textDuration: TextView? = null
+            binding.textName.text = model.name
+            binding.textDuration.text = DurationFormatter.fromInteger(model.duration.toLong())
+            var desc = itemView.context.getString(R.string.game_data_desc)
+            desc = desc.replace(
+                ":gridSize".toRegex(),
+                model.gridRowCount.toString() + "x" + model.gridColCount
+            )
+            desc = desc.replace(":wordCount".toRegex(), model.usedWordsCount.toString())
+            binding.textDesc.text = desc
+            itemView.setOnClickListener {
+                    mListener.onClick(model)
+            }
+            binding.deleteListItem.setOnClickListener {
+                    mListener.onDeleteClick(model)
+            }
 
-        @BindView(R.id.text_desc)
-        var textOtherDesc: TextView? = null
-
-        @BindView(R.id.delete_list_item)
-        var viewDeleteItem: View? = null
-
-        init {
-            ButterKnife.bind(this, itemView!!)
         }
     }
 

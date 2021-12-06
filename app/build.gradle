@@ -18,7 +18,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 31
         versionCode 1
-        versionName "2.0"
+        versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -69,8 +69,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
 
-    implementation 'com.jakewharton:butterknife:10.2.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
     implementation "com.google.dagger:hilt-android:2.38.1"
     kapt "com.google.dagger:hilt-compiler:2.38.1"
 
@@ -78,9 +76,6 @@ dependencies {
 
     //serialization
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
-
-    //data store
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     //coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"

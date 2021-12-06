@@ -9,7 +9,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import ke.choxxy.wordsearch.ViewModelFactory
-import ke.choxxy.wordsearch.data.GameDataSource
 import ke.choxxy.wordsearch.data.GameThemeRepository
 import ke.choxxy.wordsearch.data.WordDataSource
 import ke.choxxy.wordsearch.data.sqlite.DbHelper

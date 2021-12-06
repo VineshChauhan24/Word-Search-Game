@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import butterknife.ButterKnife
 import ke.choxxy.wordsearch.FullscreenActivity
 import ke.choxxy.wordsearch.R
 import ke.choxxy.wordsearch.commons.viewBinding
@@ -23,7 +22,6 @@ class GameHistoryActivity : FullscreenActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_history)
-        ButterKnife.bind(this)
         initRecyclerView()
         mViewModel.onGameDataInfoLoaded.observe(this) { gameDataInfos: List<GameDataInfo> ->
             onGameDataInfoLoaded(
@@ -53,19 +51,18 @@ class GameHistoryActivity : FullscreenActivity() {
     }
 
     private fun initRecyclerView() {
-        val gameDataAdapterDelegate = GameDataAdapterDelegate()
-        gameDataAdapterDelegate.setOnClickListener(object :
-            GameDataAdapterDelegate.OnClickListener {
-            override fun onClick(gameDataInfo: GameDataInfo) {
-                val intent = Intent(this@GameHistoryActivity, GamePlayActivity::class.java)
-                intent.putExtra(GamePlayActivity.EXTRA_GAME_ROUND_ID, gameDataInfo.id)
-                startActivity(intent)
-            }
+        val gameDataAdapterDelegate = GameDataAdapterDelegate(object :
+                GameDataAdapterDelegate.OnClickListener {
+                override fun onClick(gameDataInfo: GameDataInfo) {
+                    val intent = Intent(this@GameHistoryActivity, GamePlayActivity::class.java)
+                    intent.putExtra(GamePlayActivity.EXTRA_GAME_ROUND_ID, gameDataInfo.id)
+                    startActivity(intent)
+                }
 
-            override fun onDeleteClick(gameDataInfo: GameDataInfo) {
+                override fun onDeleteClick(gameDataInfo: GameDataInfo) {
                     mViewModel.deleteGameData(gameDataInfo)
-            }
-        })
+                }
+            })
         mAdapter = MultiTypeAdapter()
         mAdapter.addDelegate(gameDataAdapterDelegate)
         binding.recyclerView.adapter = mAdapter
