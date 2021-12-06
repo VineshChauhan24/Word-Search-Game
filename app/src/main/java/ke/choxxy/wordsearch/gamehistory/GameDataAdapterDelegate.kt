@@ -1,9 +1,7 @@
 package ke.choxxy.wordsearch.gamehistory
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ke.choxxy.wordsearch.R
 import ke.choxxy.wordsearch.commons.DurationFormatter
@@ -15,8 +13,10 @@ class GameDataAdapterDelegate(var mListener: OnClickListener) : AdapterDelegate<
     GameDataInfo::class.java
 ) {
     override fun onCreateViewHolder(parent: ViewGroup): ViewHolder {
-        val binding = ItemGameDataHistoryBinding.inflate(LayoutInflater.from(parent.context),
-        parent, false)
+        val binding = ItemGameDataHistoryBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent, false
+        )
         return ViewHolder(binding)
     }
 
@@ -27,7 +27,7 @@ class GameDataAdapterDelegate(var mListener: OnClickListener) : AdapterDelegate<
     inner class ViewHolder(private val binding: ItemGameDataHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(model: GameDataInfo){
+        fun bind(model: GameDataInfo) {
 
             binding.textName.text = model.name
             binding.textDuration.text = DurationFormatter.fromInteger(model.duration.toLong())
@@ -39,12 +39,11 @@ class GameDataAdapterDelegate(var mListener: OnClickListener) : AdapterDelegate<
             desc = desc.replace(":wordCount".toRegex(), model.usedWordsCount.toString())
             binding.textDesc.text = desc
             itemView.setOnClickListener {
-                    mListener.onClick(model)
+                mListener.onClick(model)
             }
             binding.deleteListItem.setOnClickListener {
-                    mListener.onDeleteClick(model)
+                mListener.onDeleteClick(model)
             }
-
         }
     }
 

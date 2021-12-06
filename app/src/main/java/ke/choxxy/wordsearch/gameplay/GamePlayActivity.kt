@@ -119,6 +119,8 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
         if (game.type == GameType.BLIND_FOLD) {
             binding.flowLayout.visibility = GONE
         }
+
+        binding.gameType.text = game.type.type
     }
 
     override fun onStart() {

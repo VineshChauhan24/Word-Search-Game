@@ -9,3 +9,6 @@
 .externalNativeBuild
 /assets/
 /sc/
+.idea/
+.idea/gradle.xml
+.idea/misc.xml
