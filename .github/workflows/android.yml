@@ -27,7 +27,7 @@ jobs:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
 
       - name: Build and distribute release
-        if: github.ref != 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
