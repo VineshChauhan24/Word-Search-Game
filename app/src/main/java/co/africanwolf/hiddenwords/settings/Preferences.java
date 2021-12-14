@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import dagger.hilt.android.qualifiers.ApplicationContext;
-import co.africanwolf.hiddenwords.wordsearch.R;
+import co.africanwolf.hiddenwords.R;
 import co.africanwolf.hiddenwords.custom.StreakView;
 
 import javax.inject.Inject;

@@ -3,11 +3,6 @@ package co.africanwolf.hiddenwords.di
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import co.africanwolf.hiddenwords.ViewModelFactory
 import co.africanwolf.hiddenwords.data.GameThemeRepository
 import co.africanwolf.hiddenwords.data.WordDataSource
@@ -17,6 +12,11 @@ import co.africanwolf.hiddenwords.gamehistory.GameHistoryViewModel
 import co.africanwolf.hiddenwords.gameover.GameOverViewModel
 import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel
 import co.africanwolf.hiddenwords.mainmenu.MainMenuViewModel
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module

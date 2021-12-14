@@ -6,12 +6,12 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.africanwolf.hiddenwords.FullscreenActivity
-import co.africanwolf.hiddenwords.wordsearch.R
 import co.africanwolf.hiddenwords.commons.viewBinding
-import co.africanwolf.hiddenwords.wordsearch.databinding.ActivityGameHistoryBinding
 import co.africanwolf.hiddenwords.easyadapter.MultiTypeAdapter
 import co.africanwolf.hiddenwords.gameplay.GamePlayActivity
 import co.africanwolf.hiddenwords.model.GameDataInfo
+import co.africanwolf.hiddenwords.R
+import co.africanwolf.hiddenwords.databinding.ActivityGameHistoryBinding
 
 class GameHistoryActivity : FullscreenActivity() {
 

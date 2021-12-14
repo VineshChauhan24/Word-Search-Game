@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import co.africanwolf.hiddenwords.data.entity.Game
-import co.africanwolf.hiddenwords.wordsearch.databinding.ViewMenuItemBinding
+import co.africanwolf.hiddenwords.databinding.ViewMenuItemBinding
 
 class MenuItemAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Game, MenuItemAdapter.MyViewHolder>(MyDiffUtil) {

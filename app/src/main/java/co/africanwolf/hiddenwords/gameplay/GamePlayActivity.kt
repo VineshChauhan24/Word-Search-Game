@@ -12,9 +12,8 @@ import android.view.View
 import android.view.View.GONE
 import android.widget.TextView
 import androidx.activity.viewModels
-import dagger.hilt.android.AndroidEntryPoint
 import co.africanwolf.hiddenwords.FullscreenActivity
-import co.africanwolf.hiddenwords.wordsearch.R
+import co.africanwolf.hiddenwords.R
 import co.africanwolf.hiddenwords.SoundPlayer
 import co.africanwolf.hiddenwords.commons.DurationFormatter
 import co.africanwolf.hiddenwords.commons.Util
@@ -23,7 +22,7 @@ import co.africanwolf.hiddenwords.custom.LetterBoard.OnLetterSelectionListener
 import co.africanwolf.hiddenwords.custom.StreakView.StreakLine
 import co.africanwolf.hiddenwords.data.entity.Game
 import co.africanwolf.hiddenwords.data.entity.GameType
-import co.africanwolf.hiddenwords.wordsearch.databinding.ActivityGamePlayBinding
+import co.africanwolf.hiddenwords.databinding.ActivityGamePlayBinding
 import co.africanwolf.hiddenwords.gameover.GameoverDialog
 import co.africanwolf.hiddenwords.gameover.GameoverDialog.Companion.newInstance
 import co.africanwolf.hiddenwords.gameover.GameoverDialog.GameOverDialogInputListener
@@ -36,6 +35,7 @@ import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Update
 import co.africanwolf.hiddenwords.mainmenu.MainMenuActivity
 import co.africanwolf.hiddenwords.model.GameData
 import co.africanwolf.hiddenwords.model.UsedWord
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 

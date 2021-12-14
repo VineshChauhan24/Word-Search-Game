@@ -3,11 +3,11 @@ package co.africanwolf.hiddenwords.gamehistory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import co.africanwolf.hiddenwords.wordsearch.R
 import co.africanwolf.hiddenwords.commons.DurationFormatter
-import co.africanwolf.hiddenwords.wordsearch.databinding.ItemGameDataHistoryBinding
 import co.africanwolf.hiddenwords.easyadapter.AdapterDelegate
 import co.africanwolf.hiddenwords.model.GameDataInfo
+import co.africanwolf.hiddenwords.R
+import co.africanwolf.hiddenwords.databinding.ItemGameDataHistoryBinding
 
 class GameDataAdapterDelegate(var mListener: OnClickListener) : AdapterDelegate<GameDataInfo, GameDataAdapterDelegate.ViewHolder>(
     GameDataInfo::class.java

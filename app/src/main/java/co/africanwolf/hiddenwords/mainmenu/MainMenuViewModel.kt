@@ -3,9 +3,9 @@ package co.africanwolf.hiddenwords.mainmenu
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import co.africanwolf.hiddenwords.data.GameThemeRepository
 import co.africanwolf.hiddenwords.model.GameTheme
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel

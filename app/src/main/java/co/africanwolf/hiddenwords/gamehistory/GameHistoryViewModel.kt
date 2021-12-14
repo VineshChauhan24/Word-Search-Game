@@ -3,9 +3,9 @@ package co.africanwolf.hiddenwords.gamehistory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import co.africanwolf.hiddenwords.data.sqlite.GameDataSQLiteDataSource
 import co.africanwolf.hiddenwords.model.GameDataInfo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.ArrayList
 import javax.inject.Inject
 

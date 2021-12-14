@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import co.africanwolf.hiddenwords.wordsearch.R;
+import co.africanwolf.hiddenwords.R;
 import co.africanwolf.hiddenwords.commons.GridIndex;
 import co.africanwolf.hiddenwords.commons.math.Vec2;
 

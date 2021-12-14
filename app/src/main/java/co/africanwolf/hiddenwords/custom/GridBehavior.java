@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import co.africanwolf.hiddenwords.wordsearch.R;
+import co.africanwolf.hiddenwords.R;
 
 /**
  * Created by abdularis on 22/06/17.

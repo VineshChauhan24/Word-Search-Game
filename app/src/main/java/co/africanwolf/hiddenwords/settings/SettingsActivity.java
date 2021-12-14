@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import android.view.MenuItem;
 
-import co.africanwolf.hiddenwords.wordsearch.R;
+import co.africanwolf.hiddenwords.R;
 
 /**
  * Created by abdularis on 21/07/17.

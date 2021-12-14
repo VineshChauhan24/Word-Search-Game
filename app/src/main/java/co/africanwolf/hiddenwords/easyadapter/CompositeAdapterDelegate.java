@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import co.africanwolf.hiddenwords.wordsearch.R;
+import co.africanwolf.hiddenwords.R;
 
 import java.util.ArrayList;
 import java.util.List;

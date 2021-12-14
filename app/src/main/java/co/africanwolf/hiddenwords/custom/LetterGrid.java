@@ -9,7 +9,7 @@ import android.graphics.Rect;
 import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 
-import co.africanwolf.hiddenwords.wordsearch.R;
+import co.africanwolf.hiddenwords.R;
 
 import java.util.Observable;
 import java.util.Observer;

@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import co.africanwolf.hiddenwords.wordsearch.R
-import co.africanwolf.hiddenwords.wordsearch.databinding.ViewGameEndDialogBinding
+import co.africanwolf.hiddenwords.R
+import co.africanwolf.hiddenwords.databinding.ViewGameEndDialogBinding
 import java.lang.ClassCastException
 
 class GameoverDialog : DialogFragment() {
