@@ -10,35 +10,66 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: "org.jlleitschuh.gradle.ktlint"
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion = '31.0.0'
+
+    def keystoreProperties = new Properties()
+    def keystorePropertiesFile = rootProject.file('key.properties')
+    if (keystorePropertiesFile.exists()) {
+        // when building locally, use signing properties from key.properties
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    } else {
+        // add check to enable local build
+        if(keystoreProperties.getProperty("storeFile") != null) {
+            // when building CI server, use signing properties from environment variables
+            keystoreProperties.setProperty('storePassword', System.getenv('STORE_PASSWORD'))
+            keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD'))
+            keystoreProperties.setProperty('keyAlias', System.getenv('KEY_ALIAS'))
+            keystoreProperties.setProperty('storeFile', System.getenv('KEY_STORE_PATH'))
+        }
+    }
+
+    compileSdk 31
 
     defaultConfig {
-        applicationId "ke.choxxy.wordsearch"
-        minSdkVersion 24
-        targetSdkVersion 31
+        applicationId "co.africanwolf.hiddenwords"
+        minSdk 24
+        targetSdk 31
         versionCode 1
-        versionName "3.0"
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    signingConfigs {
+        release {
+            if(keystoreProperties.getProperty("storeFile") != null) {
+                storePassword keystoreProperties['storePassword']
+                keyPassword keystoreProperties['keyPassword']
+                keyAlias keystoreProperties['keyAlias']
+                storeFile file(keystoreProperties['storeFile'])
+            }
+            v2SigningEnabled true
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
             firebaseAppDistribution {
-                releaseNotes=""
-                testers="jorh.choxxy@gmail.com"
+                releaseNotes = ""
+                testers = "jorh.choxxy@gmail.com"
             }
         }
 
-        debug{
+        debug {
             minifyEnabled false
         }
     }
 
-        buildFeatures {
-            viewBinding = true
-        }
 
 }
 

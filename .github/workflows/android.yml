@@ -19,9 +19,19 @@ jobs:
       - name: Build debug
         if: github.ref != 'refs/heads/main'
         run: ./gradlew assembleDebug
-        
-      - name: Firebase App Distribute
-        if: github.ref == 'refs/heads/main'
+
+      - name: Set up private files
+        run: |
+          echo $SIGNING_KEY | base64 -di > app/key.jks
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+
+      - name: Build and distribute release
+        if: github.ref != 'refs/heads/main'
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ALIAS }}
+          KEY_STORE_PATH: key.jks
         run: ./gradlew assembleRelease appDistributionUploadRelease

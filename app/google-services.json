@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:757197087612:android:acd102f12ce8e7155c7af9",
+        "mobilesdk_app_id": "1:757197087612:android:87684ea648a3dd685c7af9",
         "android_client_info": {
-          "package_name": "ke.choxxy.wordsearch"
+          "package_name": "co.africanwolf.hiddenwords"
         }
       },
       "oauth_client": [

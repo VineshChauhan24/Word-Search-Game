@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ke.choxxy.wordsearch">
+          package="co.africanwolf.hiddenwords">
 
     <application
         android:name=".WordSearchApp"
@@ -18,11 +18,11 @@
             android:name=".settings.SettingsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name="ke.choxxy.wordsearch.gameplay.GamePlayActivity">
+        <activity android:name=".gameplay.GamePlayActivity">
         </activity>
-        <activity android:name="ke.choxxy.wordsearch.mainmenu.MainMenuActivity">
+        <activity android:name=".mainmenu.MainMenuActivity">
         </activity>
-        <activity android:name="ke.choxxy.wordsearch.gameover.GameOverActivity">
+        <activity android:name=".gameover.GameOverActivity">
         </activity>
         <activity
             android:name=".SplashScreenActivity"
