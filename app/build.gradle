@@ -18,7 +18,7 @@ android {
         keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
     } else {
         // add check to enable local build
-        if(keystoreProperties.getProperty("storeFile") != null) {
+        if(System.getenv('KEY_STORE_PATH') != null) {
             // when building CI server, use signing properties from environment variables
             keystoreProperties.setProperty('storePassword', System.getenv('STORE_PASSWORD'))
             keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD'))

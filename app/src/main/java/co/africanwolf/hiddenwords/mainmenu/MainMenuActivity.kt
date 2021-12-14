@@ -5,13 +5,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import co.africanwolf.hiddenwords.FullscreenActivity
+import co.africanwolf.hiddenwords.R
 import co.africanwolf.hiddenwords.data.entity.Game
 import co.africanwolf.hiddenwords.data.entity.GameType
+import co.africanwolf.hiddenwords.databinding.ActivityMainMenuBinding
 import co.africanwolf.hiddenwords.easyadapter.MenuItemAdapter
 import co.africanwolf.hiddenwords.gameplay.GamePlayActivity
 import co.africanwolf.hiddenwords.settings.SettingsActivity
-import co.africanwolf.hiddenwords.R
-import co.africanwolf.hiddenwords.databinding.ActivityMainMenuBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.json.Json
 

@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.app.NavUtils
 import co.africanwolf.hiddenwords.FullscreenActivity
+import co.africanwolf.hiddenwords.R
 import co.africanwolf.hiddenwords.commons.DurationFormatter
 import co.africanwolf.hiddenwords.commons.viewBinding
-import co.africanwolf.hiddenwords.model.GameDataInfo
-import co.africanwolf.hiddenwords.R
 import co.africanwolf.hiddenwords.databinding.ActivityGameOverBinding
+import co.africanwolf.hiddenwords.model.GameDataInfo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
