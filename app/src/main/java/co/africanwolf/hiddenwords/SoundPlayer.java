@@ -10,10 +10,6 @@ import co.africanwolf.hiddenwords.settings.Preferences;
 
 import javax.inject.Inject;
 
-/**
- * Created by abdularis on 22/07/17.
- */
-
 public class SoundPlayer {
 
     public enum Sound {

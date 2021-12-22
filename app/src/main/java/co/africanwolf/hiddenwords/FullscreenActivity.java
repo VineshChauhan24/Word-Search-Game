@@ -13,12 +13,6 @@ import co.africanwolf.hiddenwords.settings.Preferences;
 
 import javax.inject.Inject;
 
-/**
- * Created by abdularis on 21/04/17.
- *
- * Extend this class to make a fullscreen activity
- */
-
 @SuppressLint("Registered")
 @AndroidEntryPoint
 public class FullscreenActivity extends AppCompatActivity {

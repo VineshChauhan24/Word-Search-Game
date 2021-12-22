@@ -4,19 +4,26 @@ import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import co.africanwolf.hiddenwords.R
+import co.africanwolf.hiddenwords.commons.DurationFormatter
 import co.africanwolf.hiddenwords.databinding.ViewGameEndDialogBinding
-import java.lang.ClassCastException
+import co.africanwolf.hiddenwords.model.GameDataInfo
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GameoverDialog : DialogFragment() {
     private var binding: ViewGameEndDialogBinding? = null
+    private var mGameId: Int = 0
     var onInputListener: GameOverDialogInputListener? = null
+    private val mViewModel: GameOverViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mGameId = requireArguments().getInt(GameOverActivity.EXTRA_GAME_ROUND_ID)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +47,16 @@ class GameoverDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mViewModel.loadData(mGameId)
+        mViewModel.onGameDataInfoLoaded.observe(this) { info: GameDataInfo -> showGameStat(info) }
+    }
+
+    private fun showGameStat(info: GameDataInfo) {
+        binding?.message?.text = getString(
+            R.string.finish_text, info.usedWordsCount,
+            DurationFormatter.fromInteger(info.duration.toLong())
+        )
     }
 
     override fun getTheme(): Int {

@@ -12,9 +12,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by abdularis on 30/07/17.
- */
 public class AppCompatPreferenceActivity extends PreferenceActivity {
 
     private AppCompatDelegate mAppCompatDelegate;

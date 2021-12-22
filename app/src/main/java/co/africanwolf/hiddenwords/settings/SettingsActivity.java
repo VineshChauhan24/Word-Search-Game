@@ -7,10 +7,6 @@ import android.view.MenuItem;
 
 import co.africanwolf.hiddenwords.R;
 
-/**
- * Created by abdularis on 21/07/17.
- */
-
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
     @Override

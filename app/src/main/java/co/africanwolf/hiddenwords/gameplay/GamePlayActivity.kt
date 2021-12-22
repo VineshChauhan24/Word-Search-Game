@@ -26,12 +26,7 @@ import co.africanwolf.hiddenwords.databinding.ActivityGamePlayBinding
 import co.africanwolf.hiddenwords.gameover.GameoverDialog
 import co.africanwolf.hiddenwords.gameover.GameoverDialog.Companion.newInstance
 import co.africanwolf.hiddenwords.gameover.GameoverDialog.GameOverDialogInputListener
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.AnswerResult
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.GameState
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Generating
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Paused
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Playing
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Update
+import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.*
 import co.africanwolf.hiddenwords.mainmenu.MainMenuActivity
 import co.africanwolf.hiddenwords.model.GameData
 import co.africanwolf.hiddenwords.model.UsedWord
@@ -81,6 +76,10 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
                 binding.textSelection.text = ""
             }
         })
+
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
 
         mViewModel.onTimer.observe(this) { duration: Long -> showDuration(duration) }
         mViewModel.onGameState.observe(this) { gameState: GameState ->
@@ -240,6 +239,8 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
     }
 
     private fun showUsedWords(usedWords: List<UsedWord>) {
+        binding.flowLayout.removeAllViews()
+
         for (uw in usedWords) {
             binding.flowLayout.addView(createUsedWordTextView(uw))
         }
