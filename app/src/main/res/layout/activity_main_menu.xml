@@ -32,7 +32,7 @@
         android:contentDescription="@string/app_name"
         android:scaleType="centerInside"
         android:src="@drawable/logo"
-        android:text="Word Search Puzzles"
+        android:text="@string/hidden_words"
         android:textSize="42sp"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"

@@ -320,8 +320,8 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_tada" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/Google-Noto-Emoji-Activities-52707-party-popper.svg" />
+                            <entry key="outputName" value="ic_hidden_word" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/assets/hidden-word.svg" />
                           </map>
                         </option>
                       </PersistentState>

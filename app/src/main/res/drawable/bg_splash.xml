@@ -5,6 +5,6 @@
     </item>
     <item android:drawable="@drawable/bg"/>
     <item>
-        <bitmap android:src="@drawable/logo" android:gravity="center"/>
+        <bitmap android:src="@drawable/hidden_words" android:gravity="center"/>
     </item>
 </layer-list>

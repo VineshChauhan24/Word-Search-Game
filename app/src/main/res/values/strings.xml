@@ -39,5 +39,6 @@
     <string name="round_d_d">"Round %1$d/%2$d  "</string>
     <string name="puzzle_solved">Puzzle Solved!</string>
     <string name="next_puzzle">Next Puzzle</string>
+    <string name="hidden_words">Hidden Words</string>
 
 </resources>
