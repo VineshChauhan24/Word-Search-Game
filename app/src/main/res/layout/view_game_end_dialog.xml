@@ -56,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="Level 1"
                 android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
@@ -68,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_24_dp"
             android:layout_marginEnd="@dimen/_24_dp"
+            android:layout_marginTop="@dimen/_24_dp"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/_4_dp"
             android:text="@string/finish_text"
@@ -88,6 +90,7 @@
             android:layout_marginEnd="@dimen/_24_dp"
             android:gravity="center"
             android:text="1/5"
+            android:visibility="gone"
             android:textColor="@color/colorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -99,6 +102,7 @@
         <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="24dp"
             android:layout_marginStart="36dp"
             android:layout_marginTop="@dimen/_4_dp"
@@ -124,6 +128,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/main_menu"
+        android:visibility="gone"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="0dp"
         android:layout_height="0dp"

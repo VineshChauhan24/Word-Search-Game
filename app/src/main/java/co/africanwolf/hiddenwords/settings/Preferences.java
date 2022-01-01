@@ -9,10 +9,6 @@ import co.africanwolf.hiddenwords.custom.StreakView;
 
 import javax.inject.Inject;
 
-/**
- * Created by abdularis on 19/07/17.
- */
-
 public class Preferences {
     private static String KEY_SHOW_GRID_LINE;
     private static String KEY_SNAP_TO_GRID;

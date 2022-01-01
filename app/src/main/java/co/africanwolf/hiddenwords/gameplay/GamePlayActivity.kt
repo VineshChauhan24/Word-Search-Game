@@ -26,12 +26,6 @@ import co.africanwolf.hiddenwords.databinding.ActivityGamePlayBinding
 import co.africanwolf.hiddenwords.gameover.GameoverDialog
 import co.africanwolf.hiddenwords.gameover.GameoverDialog.Companion.newInstance
 import co.africanwolf.hiddenwords.gameover.GameoverDialog.GameOverDialogInputListener
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.AnswerResult
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.GameState
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Generating
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Paused
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Playing
-import co.africanwolf.hiddenwords.gameplay.GamePlayViewModel.Update
 import co.africanwolf.hiddenwords.mainmenu.MainMenuActivity
 import co.africanwolf.hiddenwords.model.GameData
 import co.africanwolf.hiddenwords.model.UsedWord
@@ -82,13 +76,17 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
             }
         })
 
+        binding.backButton.setOnClickListener {
+            onBackPressed()
+        }
+
         mViewModel.onTimer.observe(this) { duration: Long -> showDuration(duration) }
-        mViewModel.onGameState.observe(this) { gameState: GameState ->
+        mViewModel.onGameState.observe(this) { gameState: GamePlayViewModel.GameState ->
             onGameStateChanged(
                 gameState
             )
         }
-        mViewModel.onAnswerResult.observe(this) { answerResult: AnswerResult ->
+        mViewModel.onAnswerResult.observe(this) { answerResult: GamePlayViewModel.AnswerResult ->
             onAnswerResult(
                 answerResult
             )
@@ -138,7 +136,7 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
         mViewModel.stopGame()
     }
 
-    private fun onAnswerResult(answerResult: AnswerResult) {
+    private fun onAnswerResult(answerResult: GamePlayViewModel.AnswerResult) {
         if (answerResult.correct) {
             val textView = findUsedWordTextViewByUsedWordId(answerResult.usedWordId)
             if (textView != null) {
@@ -161,19 +159,19 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
         }
     }
 
-    private fun onGameStateChanged(gameState: GameState) {
+    private fun onGameStateChanged(gameState: GamePlayViewModel.GameState) {
         showLoading(false, null)
-        if (gameState is Generating) {
+        if (gameState is GamePlayViewModel.Generating) {
             val state = gameState
             val text = "Generating " + state.rowCount + "x" + state.colCount + " grid"
             showLoading(true, text)
             refresh()
         } else if (gameState is GamePlayViewModel.Finished) {
             showFinishGame(gameState.mGameData.id)
-        } else if (gameState is Paused) {
-        } else if (gameState is Playing) {
+        } else if (gameState is GamePlayViewModel.Paused) {
+        } else if (gameState is GamePlayViewModel.Playing) {
             onGameRoundLoaded(gameState.mGameData)
-        } else if (gameState is Update) {
+        } else if (gameState is GamePlayViewModel.Update) {
             showAnsweredWordsCount(gameState.mGameData)
         }
     }
@@ -240,6 +238,8 @@ class GamePlayActivity : FullscreenActivity(), GameOverDialogInputListener {
     }
 
     private fun showUsedWords(usedWords: List<UsedWord>) {
+        binding.flowLayout.removeAllViews()
+
         for (uw in usedWords) {
             binding.flowLayout.addView(createUsedWordTextView(uw))
         }

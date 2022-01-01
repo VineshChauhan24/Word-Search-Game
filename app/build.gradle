@@ -18,7 +18,7 @@ android {
         keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
     } else {
         // add check to enable local build
-        if(System.getenv('KEY_STORE_PATH') != null) {
+        if (System.getenv('KEY_STORE_PATH') != null) {
             // when building CI server, use signing properties from environment variables
             keystoreProperties.setProperty('storePassword', System.getenv('STORE_PASSWORD'))
             keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD'))
@@ -33,8 +33,8 @@ android {
         applicationId "co.africanwolf.hiddenwords"
         minSdk 24
         targetSdk 31
-        versionCode 2
-        versionName "2.0"
+        versionCode 3
+        versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -44,7 +44,7 @@ android {
 
     signingConfigs {
         release {
-            if(keystoreProperties.getProperty("storeFile") != null) {
+            if (keystoreProperties.getProperty("storeFile") != null) {
                 storePassword keystoreProperties['storePassword']
                 keyPassword keystoreProperties['keyPassword']
                 keyAlias keystoreProperties['keyAlias']
@@ -106,9 +106,12 @@ dependencies {
     implementation 'com.akexorcist:round-corner-progress-bar:2.1.2'
 
     //serialization
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
 
     //coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 
+    // splash screen
+    implementation 'androidx.core:core-splashscreen:1.0.0-alpha02'
 }
+

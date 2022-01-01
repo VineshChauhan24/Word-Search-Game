@@ -1,9 +1,5 @@
 package co.africanwolf.hiddenwords.model;
 
-/**
- * Created by abdularis on 08/07/17.
- */
-
 public class Word {
 
     private int mId;

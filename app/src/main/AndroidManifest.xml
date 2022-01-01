@@ -4,11 +4,10 @@
 
     <application
         android:name=".WordSearchApp"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/App.SplashScreenTheme">
 
         <meta-data
             android:name="firebase_performance_logcat_enabled"
@@ -18,21 +17,17 @@
             android:name=".settings.SettingsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".gameplay.GamePlayActivity">
+        <activity android:name=".gameplay.GamePlayActivity" android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".mainmenu.MainMenuActivity">
-        </activity>
-        <activity android:name=".gameover.GameOverActivity">
-        </activity>
-        <activity
-            android:name=".SplashScreenActivity"
-            android:theme="@style/SplashScreenTheme"
+        <activity android:name=".mainmenu.MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".gameover.GameOverActivity">
         </activity>
         <activity android:name=".gamehistory.GameHistoryActivity">
         </activity>

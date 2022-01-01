@@ -40,5 +40,6 @@
     <string name="puzzle_solved">Puzzle Solved!</string>
     <string name="next_puzzle">Next Puzzle</string>
     <string name="hidden_words">Hidden Words</string>
+    <string name="version_1_0">version 1.0</string>
 
 </resources>
