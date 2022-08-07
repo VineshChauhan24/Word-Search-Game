@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.paperplanes.wordsearch">
+          package="co.africanwolf.hiddenwords">
 
     <application
         android:name=".WordSearchApp"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".presentation.ui.activity.SettingsActivity"
+        android:theme="@style/App.SplashScreenTheme">
+
+        <meta-data
+            android:name="firebase_performance_logcat_enabled"
+            android:value="true" />
+
+        <activity
+            android:name=".settings.SettingsActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".presentation.ui.activity.GamePlayActivity">
+        <activity android:name=".gameplay.GamePlayActivity" android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".presentation.ui.activity.MainMenuActivity">
+        <activity android:name=".mainmenu.MainMenuActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.ui.activity.FinishActivity">
+        <activity android:name=".gameover.GameOverActivity">
+        </activity>
+        <activity android:name=".gamehistory.GameHistoryActivity">
         </activity>
     </application>
 

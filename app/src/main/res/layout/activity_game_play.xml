@@ -1,168 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context="com.paperplanes.wordsearch.presentation.ui.activity.GamePlayActivity">
+    tools:context=".gameplay.GamePlayActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="@color/colorPrimary">
+        android:layout_height="56dp">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/game_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_16_sp" />
 
         <TextView
             android:id="@+id/text_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:text="@string/_00_00"
+            android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:textSize="8pt"
-            android:text="00:00"/>
+            android:textSize="@dimen/_16_sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/finished_text"
+            android:id="@+id/found_words_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="16dp"
+            android:text="@string/word_count"
             android:textColor="@android:color/white"
-            android:textSize="10pt"
-            android:text="@string/finished"/>
+            android:textStyle="bold"
+            android:textSize="@dimen/_16_sp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true">
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/answered_text_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="8pt"
-                android:textColor="@android:color/white"
-                android:text="1"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="8pt"
-                android:textColor="@android:color/white"
-                android:text="/"/>
-
-            <TextView
-                android:id="@+id/words_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="8pt"
-                android:textColor="@android:color/white"
-                android:text="1"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/text_sel_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/text_duration"
-            android:visibility="gone"
-            android:gravity="center"
-            android:background="@color/selTextBgColor">
-
-            <TextView
-                android:id="@+id/text_selection"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="10pt"
-                android:text="SEL TEXT"/>
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/text_selection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        tools:text="SEL TEXT" />
 
 
     <FrameLayout
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/loading"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            />
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:id="@+id/loadingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/content_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
             android:orientation="vertical">
 
-            <com.paperplanes.wordsearch.presentation.custom.LetterBoard
+            <co.africanwolf.hiddenwords.custom.LetterBoard
                 android:id="@+id/letter_board"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"
                 android:layout_gravity="center"
-                app:gridLineVisibility="true"
-                app:gridWidth="31dp"
-                app:gridHeight="31dp"
+                android:background="@android:color/white"
                 app:gridColumnCount="10"
+                app:gridHeight="31dp"
+                app:gridLineVisibility="true"
                 app:gridRowCount="10"
-                app:letterSize="10pt"
+                app:gridWidth="31dp"
                 app:letterColor="@android:color/black"
+                app:letterSize="14sp"
                 app:lineColor="@color/colorAccent"
-                app:snapToGrid="START_END"/>
+                app:snapToGrid="START_END" />
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#dfdfdf"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
+                android:padding="8dp">
 
-                <com.paperplanes.wordsearch.presentation.custom.layout.FlowLayout
+                <co.africanwolf.hiddenwords.custom.layout.FlowLayout
                     android:id="@+id/flow_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:horizontalSpacing="5dp">
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@color/colorAccent"-->
-                        <!--android:text="test... comp"/>-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@color/colorAccent"-->
-                        <!--android:text="test... comp"/>-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@color/colorAccent"-->
-                        <!--android:text="test... comp"/>-->
-
-                    <!--<TextView-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:background="@color/colorAccent"-->
-                        <!--android:text="test... comp"/>-->
-
-
-                </com.paperplanes.wordsearch.presentation.custom.layout.FlowLayout>
+                    app:horizontalSpacing="5dp"/>
 
             </ScrollView>
 

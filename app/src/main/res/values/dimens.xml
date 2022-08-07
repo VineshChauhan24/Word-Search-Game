@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="clear_btn_size">30dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="_16_sp">16sp</dimen>
+    <dimen name="_18_sp">18sp</dimen>
+    <dimen name="_16_dp">16dp</dimen>
+    <dimen name="_20_sp">20sp</dimen>
+    <dimen name="_4_dp">4dp</dimen>
+    <dimen name="_8_dp">8dp</dimen>
+    <dimen name="_48_dp">48dp</dimen>
+    <dimen name="_56_dp">56dp</dimen>
+    <dimen name="_64_dp">64dp</dimen>
+    <dimen name="_24_dp">24dp</dimen>
+    <dimen name="_6_dp">6dp</dimen>
+
 </resources>

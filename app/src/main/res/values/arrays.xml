@@ -2,10 +2,10 @@
 <resources>
 
     <string-array name="game_round_dimensions">
-        <item>5 x 5 Grid</item>
-        <item>8 x 8 Grid</item>
-        <item>10 x 10 Grid</item>
-        <item>12 x 12 Grid</item>
+        <item>5 x 5</item>
+        <item>8 x 8</item>
+        <item>10 x 10</item>
+        <item>12 x 12</item>
     </string-array>
     <integer-array name="game_round_dimension_values">
         <item>5</item>
@@ -14,6 +14,21 @@
         <item>12</item>
     </integer-array>
 
+    <string-array name="game_modes">
+        <item>Classic Game</item>
+        <item>Time Trial</item>
+        <item>Hidden Letters</item>
+        <item>Blind Fold</item>
+        <item>Questions Game</item>
+    </string-array>
+
+    <string-array name="menu_colors">
+        <item>#4184f1</item>
+        <item>#FF4162</item>
+        <item>#ffa72c</item>
+        <item>#21B20C</item>
+        <item>#FF7F50</item>
+    </string-array>
 
     <string-array name="snap_to_grid_type_prefs">
         <item>Always Snap</item>
